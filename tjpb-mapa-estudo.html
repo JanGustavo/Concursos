@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1e293b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Mapa mental de Português, RLM e TI para o TJPB: assuntos, pré-requisitos e conexões.">
+<title>TJPB · Mapa mental de estudos</title>
+<script>
+try { document.documentElement.dataset.theme = localStorage.getItem('tjpb-theme') === 'light' ? 'light' : 'dark'; } catch {}
+</script>
+<style>
+:root{--ink:#192c3b;--muted:#647582;--paper:#f6f8fa;--line:#dce4eb;--pt:#7850bc;--pt-bg:#f4effc;--rl:#b67515;--rl-bg:#fff7e8;--ti:#157e79;--ti-bg:#eaf6f4;--shadow:0 7px 22px #1d354309;--accent:#153b50;--surface:#fff;--surface-soft:#f3f6f8;--surface-tabs:#e9eef2;--divider:#edf1f4;--close-bg:#ffffffdc;--on-solid:#fff;--on-accent:#fff;--link:#156d9c;--cross:#305970;--dot:#93a6b329;--pt-solid:#7850bc;--rl-solid:#b67515;--ti-solid:#157e79;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 'Segoe UI',system-ui,sans-serif}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #2b88b8;outline-offset:4px}a{color:var(--link)}header{padding:26px 38px 20px;background:var(--surface);border-bottom:1px solid var(--line)}.top{display:flex;justify-content:space-between;align-items:center;gap:24px;max-width:1520px;margin:auto}.eyebrow{font-size:11px;font-weight:750;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}h1{font-size:29px;letter-spacing:-.045em;line-height:1.2;margin:6px 0 7px}header p{margin:0;color:var(--muted);font-size:14px}.exam{display:flex;gap:22px;flex-shrink:0}.exam div{padding-left:18px;border-left:1px solid var(--line)}.exam strong{display:block;font-size:19px}.exam span{font-size:11px;color:var(--muted)}.toolbar{max-width:1520px;margin:0 auto;padding:18px 30px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.views{display:flex;gap:6px;background:var(--surface-tabs);padding:4px;border-radius:10px}.view{border:0;background:transparent;padding:8px 15px;color:var(--muted);border-radius:7px;font-size:13px;font-weight:650}.view[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 2px 5px #1933420b}.hint{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.hint i{width:7px;height:7px;border-radius:50%;background:#177d78}.map-area{max-width:1540px;margin:0 auto;padding:0 30px 20px;position:relative;isolation:isolate}.map-area:before{content:'';position:absolute;inset:0;z-index:-2;background-image:radial-gradient(var(--dot) .8px,transparent .8px);background-size:17px 17px;mask-image:linear-gradient(transparent,#000 12%,#000 90%,transparent)}.root{width:max-content;max-width:95%;margin:5px auto 38px;padding:13px 34px;border-radius:15px;color:var(--on-solid);background:var(--accent);text-align:center;box-shadow:0 8px 23px #16384b16;position:relative;z-index:2}.root small{display:block;font-size:10px;font-weight:650;letter-spacing:.14em;color:#bad3df;text-transform:uppercase}.root strong{display:block;font-size:18px;margin-top:3px;letter-spacing:-.025em}.wires{position:absolute;inset:0;width:100%;height:100%;z-index:-1;overflow:visible;pointer-events:none}.wire{fill:none;stroke-width:1.5;opacity:.5}.wire.cross{stroke-width:2.3;stroke-dasharray:5 5;opacity:.8}.layout{display:grid;grid-template-columns:1fr 1fr 2.65fr;gap:28px;align-items:start}.branch{--solid:var(--ti-solid);--color:var(--ti);--tint:var(--ti-bg);min-width:0}.branch.pt{--solid:var(--pt-solid);--color:var(--pt);--tint:var(--pt-bg)}.branch.rl{--solid:var(--rl-solid);--color:var(--rl);--tint:var(--rl-bg)}.subject{background:var(--solid);color:var(--on-solid);border-radius:11px;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative}.subject strong{font-size:15px;letter-spacing:-.015em}.subject .qty{font-weight:700;font-size:17px;line-height:1.1;text-align:right}.subject .qty span{display:block;font-size:9px;font-weight:500;opacity:.84}.subject .subject-sub{display:block;font-size:10px;opacity:.8;margin-top:2px}.node-list{padding:26px 0 0 15px;display:grid;gap:14px}.node{width:100%;border:1px solid var(--line);border-left:3px solid var(--color);background:var(--surface);border-radius:9px;padding:12px 10px 12px 12px;text-align:left;position:relative;box-shadow:var(--shadow);min-height:96px;transition:box-shadow .15s,transform .15s,opacity .2s}.node:hover{transform:translateY(-2px);box-shadow:0 9px 22px #1d354317}.node .num{font-size:10px;font-weight:700;color:var(--color);margin-bottom:4px;display:block;letter-spacing:.06em}.node strong{display:block;font-size:13px;line-height:1.3;letter-spacing:-.01em;padding-right:6px}.node small{display:block;color:var(--muted);font-size:10.5px;line-height:1.4;margin-top:6px}.node .more{position:absolute;right:8px;top:9px;color:var(--muted);font-size:13px}.node.dim{opacity:.23}.node.active-path{border-color:var(--color);background:var(--tint);box-shadow:0 0 0 2px var(--tint)}.ti-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:20px}.group-label{color:var(--color);font-size:10px;font-weight:750;letter-spacing:.075em;text-transform:uppercase;padding-left:4px;min-height:29px;display:flex;align-items:center}.ti-groups .node-list{padding-top:14px;padding-left:10px;gap:12px}.ti-groups .node{min-height:106px;padding-left:10px}.study-note{margin:16px 0 0;padding-left:16px;max-width:230px;color:var(--muted);font-size:11px}.study-note strong{color:var(--color)}.routes{max-width:1480px;margin:0 auto 24px;padding:18px 24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}.routes-title{font-size:12px;font-weight:700}.route-buttons{display:flex;gap:8px;flex-wrap:wrap}.route{border:1px solid var(--line);background:var(--surface);border-radius:7px;font-size:12px;padding:7px 11px;color:var(--ink)}.route[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-solid)}.route-desc{flex-basis:100%;font-size:12px;color:var(--muted);margin:0;min-height:18px}.route-desc strong{color:var(--ink)}.bottom{max-width:1480px;margin:0 auto 25px;padding:0 2px;display:flex;justify-content:space-between;gap:15px;font-size:11px;color:var(--muted);flex-wrap:wrap}.bottom a{color:var(--muted)}.research{max-width:1100px;margin:20px auto 60px;padding:0 25px}.research h2{font-size:26px;letter-spacing:-.03em}.research details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:12px 0;padding:17px 22px}.research summary{font-weight:650;cursor:pointer}.research li{margin:9px 0}.research p{color:var(--muted);font-size:13px}.research a{margin-right:5px}.text-small{font-size:12px}.quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:25px 0}.stat{padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.stat strong{display:block;font-size:28px;letter-spacing:-.05em}.stat span{font-size:12px;color:var(--muted)}dialog{padding:0;border:0;border-radius:18px;max-width:670px;width:calc(100% - 32px);max-height:86dvh;box-shadow:0 24px 90px #1026383b;color:var(--ink)}dialog::backdrop{background:#1731446e;backdrop-filter:blur(3px)}.detail-head{padding:26px 30px 22px;background:var(--tint);border-bottom:1px solid var(--line);position:relative}.detail-head .eyebrow{color:var(--color);padding-right:28px}.detail-head h2{font-size:25px;line-height:1.2;letter-spacing:-.035em;margin:10px 0 7px}.detail-head p{margin:0;font-size:13px;color:var(--muted)}.close{position:absolute;right:17px;top:17px;width:32px;height:32px;border:1px solid var(--line);background:var(--close-bg);border-radius:50%;font-size:20px;line-height:1}.detail-body{padding:25px 30px}.detail-body h3{font-size:11px;letter-spacing:.09em;text-transform:uppercase;margin:0 0 13px;color:var(--muted)}.syllabus{padding:0;list-style:none;margin:0 0 26px}.syllabus li{padding:10px 0 10px 17px;border-bottom:1px solid var(--divider);position:relative;font-size:14px}.syllabus li:before{content:'';width:5px;height:5px;background:var(--color);border-radius:50%;position:absolute;left:0;top:19px}.concept-link{padding:14px 16px;background:var(--surface-soft);border-radius:8px;font-size:13px;margin:0 0 24px}.related{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}.related button{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 10px;border-radius:6px;font-size:12px}.legend{display:flex;gap:20px;font-size:11px;color:var(--muted);padding:0 2px}.legend span{display:flex;gap:6px;align-items:center}.legend i{width:20px;height:0;border-top:1.5px solid #8b9aa5}.legend i.dashed{border-top-style:dashed}.screen-note{display:none}[hidden]{display:none!important}
+@media(min-width:1600px){.map-area{padding-top:15px}.node{min-height:108px}.ti-groups .node{min-height:118px}}
+@media(max-width:1100px){header{padding:22px 25px}.exam{gap:14px}.layout{gap:20px;grid-template-columns:1fr 1fr 2.5fr}.node{padding:11px 8px;min-height:102px}.node strong{font-size:12px}.node small{font-size:10px}.ti-groups{gap:9px}.ti-groups .node{min-height:120px;padding:10px 7px}.subject{padding:11px}.subject strong{font-size:13px}.group-label{font-size:9px}.map-area{padding-inline:20px}.toolbar{padding-inline:20px}.routes,.bottom{margin-left:20px;margin-right:20px}}
+@media(max-width:900px){.layout{grid-template-columns:1fr 1fr;gap:30px}.branch.ti{grid-column:1/-1}.pt .node-list,.rl .node-list{grid-template-columns:1fr 1fr;gap:10px}.ti-groups{gap:22px}.node,.ti-groups .node{min-height:101px}.node strong{font-size:13px}.node small{font-size:11px}.root{margin-bottom:30px}.exam div:first-child{display:none}.study-note{max-width:100%;font-size:11px}.group-label{font-size:11px}.routes{gap:12px}.subject strong{font-size:15px}}
+@media(max-width:560px){header{padding:20px}.top{display:block}h1{font-size:25px}.exam{margin-top:20px;gap:25px}.exam div{padding-left:0;border:0}.exam div:first-child{display:block}.exam strong{font-size:16px}.toolbar{padding:15px 16px;gap:12px}.view{padding:8px 12px}.hint{font-size:11px}.map-area{padding:0 16px 16px}.root{padding:13px 18px;margin-top:7px}.root strong{font-size:16px}.layout{grid-template-columns:1fr;gap:28px}.branch.ti{grid-column:auto}.node-list{padding-top:18px}.ti-groups{grid-template-columns:1fr;gap:20px}.ti-groups .node-list{grid-template-columns:1fr 1fr;gap:10px}.ti-groups .node{min-height:113px}.group-label{min-height:25px}.routes{margin-inline:16px;padding:16px}.bottom{margin-inline:16px;display:block}.bottom .legend{margin-bottom:15px;flex-wrap:wrap;gap:10px}.detail-head,.detail-body{padding:22px}.quick-stats{grid-template-columns:1fr}.research{padding:0 16px}.research details{padding:16px}.research h2{font-size:23px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{header{padding:10px}.toolbar,.routes,.hint,dialog{display:none!important}.map-area{padding:5px}.layout{grid-template-columns:1fr 1fr 2.65fr!important}.branch.ti{grid-column:auto!important}.node{break-inside:avoid;box-shadow:none}.ti-groups{grid-template-columns:repeat(3,1fr)!important;gap:8px}.pt .node-list,.rl .node-list,.ti-groups .node-list{grid-template-columns:1fr!important}.root,.subject{print-color-adjust:exact;-webkit-print-color-adjust:exact}.bottom{padding:10px}}
+
+/* Study launcher: one scoped lesson per syllabus item. */
+.study-context{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 20px;padding:12px 14px;border:1px solid var(--line);border-radius:9px;background:var(--surface-soft)}
+.study-context label{font-size:12px;font-weight:650}.study-context select{font:inherit;font-size:12px;padding:7px 28px 7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.study-context p{font-size:11px;color:var(--muted);margin:0;flex-basis:100%}
+.syllabus li.study-item{display:flex;align-items:flex-start;gap:14px;justify-content:space-between;padding:13px 0 13px 17px}
+.study-practice{font-size:10px;color:var(--link);text-decoration:underline;text-underline-offset:3px;text-align:right;max-width:220px}
+.study-pending{font-size:10px;color:var(--muted);font-style:italic}
+.gran-links small.gran-warn{color:#b45309}
+.prog{margin-left:8px;font-weight:750;font-size:10px;padding:1px 6px;border-radius:9px;color:#fff;letter-spacing:0}
+.p-ok{background:#1b7f4b}.p-mid{background:#88600f}.p-low{background:#b3261e}.p-none{background:#6b7c88}
+.progress-card{margin:0 0 23px;border:1px solid var(--line);border-radius:10px;background:var(--surface-soft);padding:13px 15px;font-size:13px}
+.progress-card h4{margin:0 0 6px;font-size:13px}.progress-card small{color:var(--muted);font-size:11px}
+.progress-card ul{margin:6px 0 0;padding-left:18px}.progress-card li{font-size:12px}
+.progress-warn{color:#b45309;font-weight:650;margin:8px 0 0;font-size:12px}
+.gran-extract{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.gran-extract button{background:transparent;border:1px solid var(--color);color:var(--color);border-radius:7px;padding:8px 11px;font-size:12px;font-weight:650}
+.study-label{flex:1;min-width:0}.study-actions{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;padding-top:1px}
+.study-app{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:7px 10px;border:1px solid var(--color);background:var(--color);color:var(--on-solid)!important;border-radius:7px;text-decoration:none;font-size:11px;font-weight:650;white-space:nowrap}
+.study-app:hover{filter:brightness(.94)}.study-preview-button{background:transparent;border:0;color:var(--muted);font-size:10px;padding:3px 0;text-decoration:underline;text-underline-offset:3px}
+.study-launch{background:var(--surface-soft);border:1px solid var(--line);border-radius:10px;padding:17px;margin:0 0 25px}
+.study-launch h3{margin:0 0 7px;color:var(--ink);font-size:12px;letter-spacing:0;text-transform:none}
+.study-launch .study-topic{font-size:12px;color:var(--muted);margin:0 0 12px}
+.study-launch textarea{resize:vertical;width:100%;min-height:230px;max-height:380px;border:1px solid var(--line);border-radius:7px;padding:12px;font:12px/1.55 'Segoe UI',system-ui,sans-serif;color:var(--ink);background:var(--surface)}
+.study-launch .launch-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px}
+.study-secondary{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);text-decoration:none;font:12px 'Segoe UI',system-ui,sans-serif;padding:8px 10px}
+.study-status{font-size:11px;color:var(--muted);margin:12px 0 0;min-height:17px}.study-help{margin:10px 0 0;font-size:10px;color:var(--muted)}.study-help a{color:var(--muted)}
+@media(max-width:560px){.study-context select{font-size:16px;max-width:100%}.syllabus li.study-item{gap:9px}.study-app{min-height:40px;font-size:11px;padding-inline:8px}.study-preview-button{min-height:30px;font-size:11px}.study-launch{padding:13px}.study-launch textarea{font-size:16px}.study-secondary{min-height:42px}}
+
+:root[data-theme="dark"]{color-scheme:dark;--ink:#e3ebf2;--muted:#a2b2c2;--paper:#0e151e;--surface:#18232f;--surface-soft:#111c27;--surface-tabs:#101b26;--line:#334454;--divider:#2b3b49;--close-bg:#223241;--pt:#bd9bed;--pt-bg:#2b223c;--pt-solid:#7048a5;--rl:#edbf74;--rl-bg:#332b1c;--rl-solid:#855c23;--ti:#78cfc5;--ti-bg:#183431;--ti-solid:#216c66;--shadow:0 7px 22px #00000020;--accent:#264f68;--on-solid:#f8fafc;--on-accent:#111c27;--link:#8ac4ee;--cross:#b3cfdf;--dot:#8ba5bb22}
+dialog{background:var(--surface)}.study-app{color:var(--on-accent)!important}.toolbar-tools{display:flex;align-items:center;justify-content:flex-end;gap:18px;flex-wrap:wrap}.theme-toggle{display:inline-flex;gap:7px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:12px;white-space:nowrap}.theme-toggle:hover{background:var(--surface-soft)}.theme-toggle .theme-icon{font-size:16px;line-height:1}.node,.route,.study-secondary,.related button{color:var(--ink)}
+@media(max-width:560px){.toolbar-tools{justify-content:space-between;width:100%;gap:10px}.toolbar-tools .hint{flex:1}.theme-toggle{min-height:42px}}
+@media print{:root[data-theme="dark"]{color-scheme:light;--ink:#192c3b;--muted:#647582;--paper:#fff;--surface:#fff;--surface-soft:#f3f6f8;--surface-tabs:#e9eef2;--line:#dce4eb;--pt:#7850bc;--pt-bg:#f4effc;--rl:#b67515;--rl-bg:#fff7e8;--ti:#157e79;--ti-bg:#eaf6f4;--accent:#153b50;--on-accent:#fff}.theme-toggle{display:none}}
+
+.gran-search{margin:0 0 23px;border:1px solid var(--line);border-radius:10px;background:var(--surface-soft);overflow:hidden}
+.gran-search summary{cursor:pointer;font-size:13px;font-weight:650;padding:13px 15px;color:var(--ink)}
+.gran-search summary small{font-weight:400;color:var(--muted);font-size:11px;margin-left:5px}
+.gran-search-body{padding:0 15px 15px}.gran-search-body>p{font-size:11px;color:var(--muted);margin:0 0 12px}
+.gran-refine{display:flex;gap:8px 14px;flex-wrap:wrap;margin:10px 0 14px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gran-refine label{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink);cursor:pointer}.gran-refine input{accent-color:var(--color);width:14px;height:14px}
+.gran-links{list-style:none;margin:0;padding:0;display:grid;gap:8px}.gran-links li{margin:0!important;padding:0!important;border:0!important}.gran-links a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);font-size:12px}.gran-links a:hover{border-color:var(--color)}.gran-links a span:last-child{color:var(--color);font-size:16px}.gran-links small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.gran-footnote{font-size:10px!important;margin:12px 0 0!important;color:var(--muted)}
+@media(max-width:560px){.gran-search summary{padding:14px}.gran-refine label{min-height:36px;font-size:12px}.gran-refine input{width:17px;height:17px}.gran-links a{min-height:44px}}
+.practice{max-width:900px;margin:20px auto 70px;padding:0 24px}.practice h2{font-size:30px;letter-spacing:-.04em;margin:8px 0}.practice-lead{color:var(--muted);font-size:14px;margin:0 0 22px}.practice-actions{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.practice-btn{display:inline-flex;justify-content:center;align-items:center;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:600 12px/1.4 'Segoe UI',system-ui,sans-serif;text-decoration:none;cursor:pointer;white-space:normal;text-align:center}.practice-btn.primary{background:var(--ti-solid);color:var(--on-solid);border-color:var(--ti-solid)}.practice-btn:disabled{opacity:.5;cursor:not-allowed}.practice-card{padding:22px;border:1px solid var(--line);border-radius:13px;background:var(--surface);margin:18px 0}.practice-card h3{font-size:17px;margin:0 0 16px}.practice-fields{display:grid;grid-template-columns:2fr 1fr;gap:16px}.practice-fields label:last-child{grid-column:1/-1}.practice label{font-size:12px;display:block;color:var(--ink)}.practice select,.practice textarea{font:14px/1.5 'Segoe UI',system-ui,sans-serif;border:1px solid var(--line);border-radius:7px;background:var(--surface-soft);color:var(--ink);padding:10px;max-width:100%}.practice select{width:100%;margin:6px 0 0;min-height:44px}.practice textarea{width:100%;resize:vertical;min-height:80px;margin-top:7px}.practice .practice-check{display:flex;align-items:center;gap:8px;margin:18px 0 6px}.practice input[type=checkbox],.practice input[type=radio]{accent-color:var(--ti);flex-shrink:0;width:19px;height:19px}.practice-status{color:var(--muted);font-size:13px;min-height:22px;overflow-wrap:anywhere}.practice-status.error{color:light-dark(#b3261e,#ffad9f)}.practice-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.practice-metric{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:15px}.practice-metric strong{display:block;font-size:25px;letter-spacing:-.04em}.practice-metric span,.practice-caption{font-size:12px;color:var(--muted);overflow-wrap:anywhere}.practice-session-head{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;font-weight:650}.practice-session-head .practice-btn{font-weight:400;font-size:11px}.question-text{font-size:14px;line-height:1.75;padding:15px 0;white-space:pre-wrap;overflow-wrap:anywhere}#question-reading summary{font-size:12px;cursor:pointer;padding:12px 0;color:var(--link)}.practice-card .question-statement{white-space:pre-wrap;font-size:17px;line-height:1.6;margin:16px 0 22px;overflow-wrap:anywhere}.practice fieldset{padding:0;margin:0;border:0;min-width:0}.practice label.question-option{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:9px;margin:10px 0;padding:14px;font-size:14px;line-height:1.6;cursor:pointer;min-height:56px;overflow-wrap:anywhere}.question-option input{margin-top:3px}.question-option .option-letter{font-weight:750;margin-right:6px;color:var(--ti)}.question-option:has(input:checked){border-color:var(--ti);background:var(--ti-bg)}.question-option.answer-right{border-color:var(--ti);background:var(--ti-bg)}.question-option.answer-wrong{border-color:light-dark(#b3261e,#dd7b6a);background:light-dark(#fff1ef,#382521)}.practice-justification{margin:20px 0 12px}.practice-justification span{color:var(--muted)}.practice-confidence{max-width:250px;margin-bottom:18px}.question-feedback{padding:15px;margin:18px 0;background:var(--surface-soft);border:1px solid var(--line);border-radius:8px;font-size:14px}.question-feedback strong{display:block;margin-bottom:7px}.question-feedback small{display:block;color:var(--muted);font-size:11px;margin-top:8px}#pending-list{padding-left:20px;font-size:12px}#pending-list li{padding:10px 0;overflow-wrap:anywhere}#practice-pending summary{cursor:pointer;font-size:13px;font-weight:650}.practice mark{background:light-dark(#fff0b5,#645528);color:inherit;padding:1px 2px}.practice-block-launch{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:0 0 18px;flex-wrap:wrap}.practice-block-launch small{font-size:11px;color:var(--muted)}.study-item .study-actions{max-width:48%;overflow-wrap:anywhere}.study-item .study-practice{max-width:100%}.storage-warning{font-size:12px;color:light-dark(#9a4d00,#edbf74)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:560px){.practice{padding:0 16px;margin-top:12px}.practice h2{font-size:26px}.practice-card{padding:16px}.practice-fields{grid-template-columns:1fr}.practice-fields label:last-child{grid-column:auto}.practice select,.practice textarea{font-size:16px}.practice-actions .practice-btn{flex:1 1 130px}.practice-metric{padding:12px}.practice-metric strong{font-size:22px}.practice-metric span{font-size:11px}.practice label.question-option{font-size:15px;padding:13px 10px}.practice .question-statement{font-size:16px}.study-item{flex-direction:column!important;gap:9px!important}.study-item .study-actions{max-width:100%;width:100%;align-items:flex-start;gap:8px}.study-item .study-practice{text-align:left;min-height:32px;font-size:12px}.study-item .study-app{font-size:12px}.gran-warn,.progress-warn{color:#dfad65!important}.toolbar-tools .hint{flex-basis:100%}.views{flex-wrap:wrap}.view{min-height:42px}dialog{max-height:92dvh;width:calc(100% - 20px)}.close{min-width:42px;min-height:42px;right:12px;top:12px}.detail-head h2{padding-right:25px}.practice-block-launch .practice-btn{flex:1}.toolbar-tools{gap:10px}}
+
+.practice-btn.highlight{border-color:var(--ti);color:var(--ti);font-weight:700}
+.session-timer{font-family:monospace;font-size:14px;background:var(--surface-soft);padding:4px 8px;border-radius:6px;border:1px solid var(--line);color:var(--ink)}
+.session-timer.timer-warning{border-color:#b3261e;color:#b3261e;font-weight:bold;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* User bar and Auth */
+.user-bar{display:flex;justify-content:space-between;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:14px 0;flex-wrap:wrap;gap:10px}
+.user-info-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;font-weight:600}
+.practice-btn.small{min-height:32px;padding:6px 12px;font-size:11px}
+
+/* Dialogs */
+.practice-dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:0;max-width:540px;width:calc(100% - 32px);box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+.practice-dialog::backdrop{background:rgba(0,0,0,0.7);backdrop-filter:blur(3px)}
+.dialog-content{padding:22px}
+.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.dialog-head h3{font-size:18px;margin:0}
+.dialog-close{background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;line-height:1;padding:4px}
+.dialog-close:hover{color:var(--ink)}
+
+/* Auth Form */
+.auth-form label{display:block;margin:12px 0 6px;font-size:12px;font-weight:600}
+.auth-form input{width:100%;font:14px/1.5 'Segoe UI',system-ui,sans-serif;border:1px solid var(--line);border-radius:7px;background:var(--surface-soft);color:var(--ink);padding:10px;margin-top:4px}
+
+/* Leaderboard */
+.leaderboard-dialog{max-width:720px}
+.table-responsive{overflow-x:auto;margin:16px 0}
+.leaderboard-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+.leaderboard-table th,.leaderboard-table td{padding:10px 12px;border-bottom:1px solid var(--line)}
+.leaderboard-table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;background:var(--surface-soft)}
+.leaderboard-table tbody tr:hover{background:var(--surface-soft)}
+.badge-gold{color:#eab308;font-weight:bold}
+.badge-silver{color:#94a3b8;font-weight:bold}
+.badge-bronze{color:#d97706;font-weight:bold}
+
+.gran-block-launch{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin:0 0 16px}.gran-block-launch small{color:var(--muted);font-size:12px}.gran-block-launch .primary{background:var(--color);border-color:var(--color);color:var(--paper)}.courses-coming{margin:24px 0;padding:32px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}.courses-badge{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:30px;color:var(--ti);background:var(--ti-bg);font-size:12px;font-weight:700}.courses-coming h3{font-size:25px;letter-spacing:-.035em;margin:18px 0 10px}.courses-coming>p{max-width:580px;color:var(--muted)}.courses-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}.courses-grid article{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--surface-soft)}.courses-grid article>span{font-size:28px;color:var(--ti)}.courses-grid h4{font-size:17px;margin:12px 0 4px}.courses-grid p{color:var(--muted);margin:0;font-size:13px}@media(max-width:560px){.views{max-width:100%}.courses-coming{padding:20px}.courses-coming h3{font-size:22px}.courses-grid{gap:10px}.courses-grid article{padding:16px}.gran-block-launch .practice-btn{width:100%;min-height:46px}}
+
+.module-note{padding:14px 16px;margin:16px 0;background:var(--surface-soft);border:1px solid var(--line);border-radius:10px;font-size:13px;color:var(--muted)}.module-note p{margin:7px 0 0}.inline-module-link{display:inline;border:0;border-bottom:1px solid currentColor;background:none;color:var(--link);padding:2px;font:inherit;cursor:pointer}.gran-module{max-width:1100px}.gran-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px}.gran-controls>label{font-size:12px;font-weight:650;grid-row:1}.gran-controls>select,.gran-controls>input{grid-row:2;min-width:0;width:100%;min-height:44px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--surface-soft);color:var(--ink);font:inherit}.gran-module-refine{grid-column:1/-1;border:0;border-top:1px solid var(--line);margin:10px 0 0;padding:12px 0 0;display:flex;flex-wrap:wrap;gap:10px 18px}.gran-module-refine legend{font-size:12px;color:var(--muted);padding:0 8px 0 0}.gran-module-refine label{display:flex;align-items:center;gap:5px;font-size:13px;min-height:34px}.gran-module-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.gran-module-card{margin:0;min-width:0}.gran-module-card h3{margin:7px 0 15px}.gran-external-link{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;padding:12px;margin-top:9px;border:1px solid var(--line);border-radius:8px;color:var(--link);background:var(--surface-soft);text-decoration:none;font-size:14px;overflow-wrap:anywhere}.gran-external-link small{display:block;color:var(--muted);font-size:11px;margin-top:5px}.gran-external-link:hover{border-color:var(--ti)}.gran-unverified{margin-top:12px}.gran-unverified summary{font-size:12px;color:var(--muted);cursor:pointer}.report-summary{padding-bottom:26px;margin-bottom:30px;border-bottom:1px solid var(--line)}.report-summary h3{font-size:17px;margin-top:24px}.report-takeaways{padding-left:20px;font-size:14px}.report-takeaways li{margin:10px 0}.report-exams{display:grid;gap:12px;margin:16px 0}.report-exam{padding:18px;border:1px solid var(--line);background:var(--surface);border-radius:10px}.report-exam h4{margin:0;font-size:15px}.report-exam p{margin:8px 0 12px}.report-sources{font-size:12px;line-height:1.8}.report-summary .practice-caption{font-size:12px}@media(max-width:560px){.gran-module-grid{grid-template-columns:1fr}.gran-controls{grid-template-columns:1fr}.gran-controls>label,.gran-controls>input,.gran-controls>select{grid-row:auto}.gran-controls>input,.gran-controls>select{font-size:16px}.gran-module-refine{gap:8px 12px}.gran-module-refine label{min-height:44px}.inline-module-link{min-height:36px}.views{width:100%;gap:3px}.view{flex:1 1 auto;padding:8px 10px;font-size:12px}}
+
+</style>
+</head>
+<body>
+<header><div class="top"><div><div class="eyebrow">TJPB · Analista de TI · Desenvolvimento de Sistemas</div><h1>O mapa da sua preparação.</h1><p>Do conceito básico à aplicação. Encontre um assunto, enxergue as conexões e aprofunde.</p></div><div class="exam"><div><strong>3 frentes</strong><span>Português, RLM e TI</span></div><div><strong>60 questões</strong><span>prova objetiva</span></div><div><strong>+ discursiva</strong><span>40 pontos · até 30 linhas</span></div></div></div></header>
+<nav class="toolbar" aria-label="Visualizações"><div class="views" role="tablist"><button class="view" type="button" id="map-tab" role="tab" aria-controls="map-view" aria-selected="true">Mapa mental</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button><button class="view" type="button" id="data-tab" role="tab" aria-controls="data-view" aria-selected="false">Banca e dados</button></div><div class="toolbar-tools"><span class="hint"><i></i>Clique em qualquer assunto para ver o conteúdo completo</span><button type="button" class="theme-toggle" id="progress-btn" aria-label="Carregar progresso do banco de questões"><span class="theme-icon" aria-hidden="true">📊</span><span id="progress-label">Carregar progresso</span></button><input type="file" id="progress-file" accept="application/json,.json" hidden><button type="button" class="theme-toggle" id="theme-toggle" aria-label="Modo escuro" aria-pressed="true"><span class="theme-icon" aria-hidden="true">☾</span><span id="theme-label">Modo escuro</span></button></div></nav>
+<main>
+<div id="map-view" role="tabpanel" aria-labelledby="map-tab">
+<section class="map-area" aria-label="Árvore dos conteúdos do edital">
+<svg class="wires" aria-hidden="true"></svg>
+<div class="root" id="map-root"><small>Seu objetivo</small><strong>Desenvolvimento de Sistemas</strong></div>
+<div class="layout">
+<section class="branch pt"><div class="subject" id="pt-root"><div><strong>Português</strong><span class="subject-sub">Compreender → relacionar → reescrever</span></div><div class="qty">10<span>questões</span></div></div><div class="node-list" data-parent="pt-root" id="pt-list"></div><p class="study-note"><strong>Fio condutor:</strong> o texto. A gramática ajuda a explicar como o sentido é construído e alterado.</p></section>
+<section class="branch rl"><div class="subject" id="rl-root"><div><strong>Raciocínio lógico</strong><span class="subject-sub">Representar → calcular → validar</span></div><div class="qty">10<span>questões</span></div></div><div class="node-list" data-parent="rl-root" id="rl-list"></div><p class="study-note"><strong>Fio condutor:</strong> traduzir o problema. Escolha entre equação, diagrama, tabela ou contagem.</p></section>
+<section class="branch ti"><div class="subject" id="ti-root"><div><strong>Conhecimentos específicos</strong><span class="subject-sub">Entender a base → construir → entregar com qualidade</span></div><div class="qty">40<span>questões</span></div></div><div class="ti-groups">
+<div><div class="group-label" id="base-root">01 / Fundamentos</div><div class="node-list" data-parent="base-root" id="base-list"></div></div>
+<div><div class="group-label" id="build-root">02 / Construção</div><div class="node-list" data-parent="build-root" id="build-list"></div></div>
+<div><div class="group-label" id="ship-root">03 / Entrega e contexto</div><div class="node-list" data-parent="ship-root" id="ship-list"></div></div>
+</div></section>
+</div></section>
+<section class="routes" aria-label="Conexões entre os assuntos"><div class="routes-title">Veja os assuntos trabalhando juntos</div><div class="route-buttons"><button type="button" class="route" data-route="all" aria-pressed="true">Visão geral</button><button type="button" class="route" data-route="api" aria-pressed="false">Construir uma API</button><button type="button" class="route" data-route="logic" aria-pressed="false">Da lógica ao código</button><button type="button" class="route" data-route="rag" aria-pressed="false">Montar um RAG</button><button type="button" class="route" data-route="text" aria-pressed="false">Do texto à discursiva</button></div><p class="route-desc" aria-live="polite">A árvore organiza o edital. Os caminhos mostram sugestões de relações e sequência de estudo.</p></section>
+<footer class="bottom"><div class="legend"><span><i></i>área → assunto</span><span><i class="dashed"></i>conexões do caminho selecionado</span></div><span>Organização pedagógica baseada no edital · <a href="https://conhecimento.fgv.br/sites/default/files/concursos/edital-tjpb_19.10.pdf" target="_blank" rel="noopener">Consultar edital ↗</a></span></footer>
+</div>
+<section id="data-view" class="research" role="tabpanel" aria-labelledby="data-tab" hidden><section class="report-summary" aria-labelledby="report-heading">
+ <div class="eyebrow">Relatório enviado · pesquisa de 28/10/2026</div>
+ <h2 id="report-heading">FGV em TI e tribunais</h2>
+ <p class="practice-lead">Leitura de provas e orientação de estudo. Este módulo é uma análise; os enunciados e as respostas dos seus treinos continuam em Questões importadas.</p>
+ <div class="module-note"><strong>Como usar esta análise</strong><p>O relatório examina 46 itens de seis provas, incluindo 24 itens de três provas de TI em tribunais. A seleção é intencional. As notas de 1 a 5 são avaliações qualitativas de leitura, raciocínio, conhecimento técnico e distratores; não são taxas oficiais de acerto nem medem a dificuldade das provas completas.</p></div>
+ <h3>O que levar para o treino</h3>
+ <ul class="report-takeaways"><li>Compare conceitos e ferramentas de nomes próximos; explique por que cada alternativa funciona ou falha.</li><li>Em SQL e modelagem, transforme o cenário em regras e confira condições e casos-limite.</li><li>Separe as afirmações de uma questão antes de escolher a combinação correta.</li><li>Use o edital para decidir quais assuntos dessas provas pertencem ao seu estudo.</li></ul>
+ <h3>Provas de TI destacadas no relatório</h3>
+ <div class="report-exams"><article class="report-exam"><h4>TJSC — Analista de Sistemas</h4><p>Engenharia de software · Git · DDD · Containers e Kubernetes · OLAP · Banco de dados — índices · Segurança e governança · Tratamento de riscos</p><div class="report-sources"><a href="https://conhecimento.fgv.br/sites/default/files/concursos/prova-7.pdf" target="_blank" rel="noopener noreferrer">Abrir caderno Tipo 1 ↗</a> · <a href="https://conhecimento.fgv.br/sites/default/files/concursos/tribunal-de-justica-do-estado-de-santa-catarina.pdf" target="_blank" rel="noopener noreferrer">Gabarito definitivo ↗</a> · <a href="https://conhecimento.fgv.br/concursos/tjscservidor26" target="_blank" rel="noopener noreferrer">Página FGV ↗</a></div></article>
+<article class="report-exam"><h4>TJRJ — Analista de Dados Sênior</h4><p>Data Warehouse · Modelagem dimensional · Fatos e aditividade · SQL — GROUP BY e HAVING · SQL — último registro · Mineração de dados · UML — cardinalidade · MongoDB</p><div class="report-sources"><a href="https://conhecimento.fgv.br/sites/default/files/concursos/analista-judiciario-tecnologia-da-informacao-analista-de-dados-senior-ns-a16-analistadados-tipo-1.pdf" target="_blank" rel="noopener noreferrer">Abrir caderno Tipo 1 ↗</a> · <a href="https://conhecimento.fgv.br/sites/default/files/concursos/tjrj-analista-gabarito-definitivo.pdf" target="_blank" rel="noopener noreferrer">Gabarito definitivo ↗</a> · <a href="https://conhecimento.fgv.br/concursos/tjrjservidores25/01" target="_blank" rel="noopener noreferrer">Página FGV ↗</a></div></article>
+<article class="report-exam"><h4>TJRR — Gestão e Governança de TI</h4><p>Redes · CMMI · COBIT 2019 · PMBOK e gestão de riscos · Continuidade — RTO/RPO · LGPD · Contratação de TIC — Resolução CNJ 468/2022 · Contratação de TIC — IN SGD/ME 94/2022</p><div class="report-sources"><a href="https://conhecimento.fgv.br/sites/default/files/concursos/cns103t01-analista-judiciario-gestao-e-governanca-de-tecnologia-da-informacao.pdf" target="_blank" rel="noopener noreferrer">Abrir caderno Tipo 1 ↗</a> · <a href="https://conhecimento.fgv.br/sites/default/files/concursos/tjrr_gabarito_definitivo_v3.pdf" target="_blank" rel="noopener noreferrer">Gabarito definitivo ↗</a> · <a href="https://conhecimento.fgv.br/concursos/tjrr24" target="_blank" rel="noopener noreferrer">Página FGV ↗</a></div></article></div>
+ <p class="practice-caption">O relatório identifica a FAPERP como banca do TJPB 2012. A prova antiga pode apoiar a revisão de fundamentos, mas não representa o estilo da FGV atual. As demais provas do relatório, de gestão, docência e magistratura, são referências de contexto, separadas das três provas de TI.</p>
+ <a class="practice-btn" href="relatorio_visual_fgv_ti_tribunais.html" target="_blank" rel="noopener noreferrer">Abrir relatório visual completo ↗</a>
+ <p class="practice-caption">Síntese do arquivo enviado, sem nova auditoria das provas ou gabaritos nesta atualização. Os links dos cadernos e gabaritos foram preservados para consulta às fontes.</p>
+</section>
+<h2>Dados e referências do concurso</h2><div class="eyebrow">Pesquisa e contexto</div><h2>O que os dados ajudam a enxergar</h2><div class="quick-stats"><div class="stat"><strong>10 vagas</strong><span>TJPB 2026 · Desenvolvimento de Sistemas</span></div><div class="stat"><strong>260 inscritos</strong><span>TRF1 / FGV 2024 · Análise de Sistemas / Brasília</span></div><div class="stat"><strong>17 aprovados</strong><span>Lista final consultada · mesmo cargo do TRF1</span></div></div>
+    
+    <details open><summary>O que está confirmado para o TJPB 2026</summary><ul><li>10 vagas imediatas para TI – Desenvolvimento de Sistemas; 6 ampla concorrência, 1 PcD e 3 para pessoas negras.</li><li>Prova objetiva: 60 itens de cinco alternativas; 10 Português, 10 RLM e 40 específicos.</li><li>Uma discursiva de até 30 linhas, valendo 40 pontos; objetiva e discursiva eliminatórias e classificatórias.</li><li>Prova prevista para 24/01/2027, em João Pessoa; edital sujeito a retificações e atos posteriores.</li></ul><p><a href="https://conhecimento.fgv.br/sites/default/files/concursos/edital-tjpb_19.10.pdf" target="_blank" rel="noopener">Abrir edital oficial</a> · <a href="https://conhecimento.fgv.br/concursos/tjpb26" target="_blank" rel="noopener">Acompanhar comunicados FGV</a></p></details>
+    <details><summary>Comparação oficial: TRF1/FGV 2024</summary><ul><li>Analista – Análise de Sistemas de Informação, Brasília: 260 inscritos; cadastro de reserva; 17 pessoas na lista final de aprovados da FGV.</li><li>Técnico – Desenvolvimento de Sistemas de Informação, Brasília: 195 inscritos para 2 vagas (97,5 por vaga); 10 pessoas na lista final de aprovados.</li><li>Esses resultados ajudam a observar a seleção em cargos de TI, mas não permitem prever o número de nomeações do TJPB.</li><li>O certame teve atos posteriores e decisões judiciais; inscrição, aprovação, classificação e nomeação são medidas diferentes.</li></ul><p><a href="https://conhecimento.fgv.br/concursos/trf1servidor24" target="_blank" rel="noopener">Página e arquivos oficiais TRF1/FGV</a> · <a href="https://conhecimento.fgv.br/sites/default/files/concursos/940-tribunal-regional-federal-da-1a-regiao-inscritos-por-cargo-local.pdf" target="_blank" rel="noopener">Inscritos por cargo</a> · <a href="https://conhecimento.fgv.br/sites/default/files/concursos/940-trf1-resultado-final-de-aprovados-2025-02-26.pdf" target="_blank" rel="noopener">Resultado final de aprovados</a></p></details>
+    <details><summary>Histórico local: TJPB 2012</summary><ul><li>Reportagem contemporânea informou demanda de 149,1 candidatos por vaga para Tecnologia da Informação no concurso daquele ano; esse indicador não é uma contagem individual por especialidade.</li><li>A página oficial de nomeações de Analista – Desenvolvimento de Sistemas registra convocações até a 32ª posição; há desistências e final de fila, portanto posição alcançada não equivale ao mesmo número de posse efetiva.</li><li>O histórico é útil para contexto, mas é antigo e não prevê a quantidade de convocações do certame atual.</li></ul><p><a href="https://www.tjpb.jus.br/servicos/concursos-e-selecoes/concurso-2012" target="_blank" rel="noopener">Relação oficial de nomeações</a> · <a href="https://jornaldaparaiba.com.br/vamos-trabalhar/tribunal-de-justica-divulga-concorrencia-de-concurso-2" target="_blank" rel="noopener">Demanda publicada em 2012</a></p></details>
+    <details><summary>Leitura estratégica e limites dos dados</summary><ul><li>O peso da objetiva está nos específicos, mas Português e RLM somam 20 itens; a discursiva acrescenta 40 pontos e precisa de treino próprio.</li><li>Para identificar padrões da FGV, vamos comparar provas oficiais de TI: comando da questão, conceito exigido, alternativa correta, tipo de distrator e justificativa do gabarito definitivo. Relatos de candidatos entram como contexto, não como dado estatístico.</li><li>O número atual de inscritos e o total futuro de nomeações do TJPB 2026 ainda não estão consolidados/publicados nesta pesquisa.</li><li>“Aprovados” em resultado final não significa “nomeados”; nomeações devem ser acompanhadas nos atos oficiais de cada tribunal.</li></ul></details>
+    <p class="text-small">Fontes verificadas em 25/10/2026. Quando houver conflito, prevalecem edital, retificações e publicações oficiais do órgão/banca.</p>
+  </section>
+<section id="questions-view" class="practice" role="tabpanel" aria-labelledby="questions-tab" hidden>
+  <div class="eyebrow">Treino pessoal · TJPB / FGV</div>
+  <h2>Questões importadas</h2>
+  <p class="practice-lead">Treine com os arquivos já baixados e importados neste aparelho. Respostas, justificativas e histórico ficam neste navegador.</p>
+  <p class="module-note">Para pesquisar novas questões no site do Gran, use o módulo <button type="button" class="inline-module-link" data-view-target="gran-view">Filtros do Gran ↗</button>.</p>
+  <div class="user-bar">
+    <div id="user-info" class="user-info-box">
+      <span id="user-display">👤 Modo Visitante (offline)</span>
+      <button type="button" id="btn-open-auth" class="practice-btn small">Entrar / Criar Conta</button>
+      <button type="button" id="btn-logout" class="practice-btn small" hidden>Sair</button>
+    </div>
+    <button type="button" id="btn-open-leaderboard" class="practice-btn highlight">🏆 Placar da Turma</button>
+  </div>
+  <div class="practice-actions">
+    <button type="button" id="bank-sync" class="practice-btn primary">☁️ Sincronizar Progresso</button>
+    <button type="button" id="bank-import" class="practice-btn">Importar questões / backup</button>
+    <button type="button" id="bank-backup" class="practice-btn">Salvar backup</button>
+    <button type="button" id="bank-progress" class="practice-btn">Exportar progresso</button>
+    <button type="button" id="bank-offline" class="practice-btn">Baixar app offline</button>
+    <input type="file" id="bank-file" accept=".json,application/json" hidden>
+  </div>
+  <p id="practice-status" class="practice-status" role="status" aria-live="polite"></p>
+  <div id="practice-metrics" class="practice-metrics"></div>
+  <div id="practice-setup" class="practice-card">
+    <h3>Seu próximo bloco de questões</h3>
+    <div class="practice-fields">
+      <label>Bloco de estudo<select id="practice-block"><option value="">Todos os blocos</option></select></label>
+      <label>Quantidade<select id="practice-size"><option value="5">5 questões</option><option value="10" selected>10 questões</option><option value="20">20 questões</option></select></label>
+      <label>Ao importar sem bloco<select id="bank-import-block"><option value="">Identificar pelo assunto</option></select></label>
+      <label>Cronômetro por questão<select id="practice-timer"><option value="0">Desativado (livre)</option><option value="120">2 minutos</option><option value="180" selected>3 minutos (ritmo FGV)</option><option value="240">4 minutos</option></select></label>
+    </div>
+    <label class="practice-check"><input type="checkbox" id="practice-wrong">Revisar só os erros ainda não corrigidos</label>
+    <p id="practice-available" class="practice-caption"></p>
+    <button type="button" id="practice-start" class="practice-btn primary">Começar treino</button>
+  </div>
+  <section id="practice-session" class="practice-card" aria-label="Questão do treino" hidden>
+    <div class="practice-session-head">
+      <span id="session-position"></span>
+      <span id="session-countdown" class="session-timer" hidden>⏱ <span id="countdown-display">03:00</span></span>
+      <button type="button" id="practice-stop" class="practice-btn">Encerrar treino</button>
+    </div>
+    <p id="question-meta" class="practice-caption"></p>
+    <details id="question-reading"><summary>Texto associado · leia antes de responder</summary><div id="question-text" class="question-text"></div></details>
+    <h3 id="question-statement" class="question-statement"></h3>
+    <fieldset id="question-options"><legend class="sr-only">Escolha uma alternativa</legend></fieldset>
+    <label class="practice-justification">Como você pensou? <span>(opcional)</span><textarea id="question-why" rows="3" placeholder="Registre o conceito ou a dúvida que guiou sua resposta."></textarea></label>
+    <label class="practice-confidence">Sua confiança<select id="question-confidence"><option value="duvida">Fiquei em dúvida</option><option value="certeza">Tenho certeza</option><option value="chute">Foi um chute</option></select></label>
+    <button type="button" id="question-answer" class="practice-btn primary" disabled>Confirmar resposta</button>
+    <div id="question-feedback" class="question-feedback" aria-live="polite" hidden></div>
+    <div id="question-after" class="practice-actions" hidden><button type="button" id="question-next" class="practice-btn primary">Próxima questão</button><button type="button" id="question-explain" class="practice-btn">Preparar dúvida para o ChatGPT</button></div>
+    <div id="question-ai" hidden><label>Prompt com a questão e seu raciocínio<textarea id="question-ai-prompt" rows="7" readonly></textarea></label><div class="practice-actions"><button type="button" id="question-ai-copy" class="practice-btn">Copiar dúvida</button><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="practice-btn">Abrir ChatGPT ↗</a></div></div>
+  
+  <!-- Modal Autenticação -->
+  <dialog id="modal-auth" class="practice-dialog">
+    <div class="dialog-content">
+      <div class="dialog-head">
+        <h3 id="auth-title">Entrar na Turma TJPB</h3>
+        <button type="button" class="dialog-close" id="btn-close-auth">×</button>
+      </div>
+      <p class="practice-caption">Crie um usuário simples para registrar suas questões, pontuar no ranking e disputar com a galera.</p>
+      <form id="form-auth" class="auth-form" onsubmit="return false;">
+        <label id="auth-nome-group">Seu Nome / Apelido no Placar
+          <input type="text" id="auth-nome" placeholder="Ex: Janderson" autocomplete="name">
+        </label>
+        <label>Nome de Usuário (login)
+          <input type="text" id="auth-username" placeholder="Ex: janderson" autocomplete="username" required>
+        </label>
+        <label>Senha
+          <input type="password" id="auth-password" placeholder="Mínimo 4 dígitos" autocomplete="current-password" required>
+        </label>
+        <p id="auth-error" class="practice-status error" hidden></p>
+        <div class="practice-actions">
+          <button type="submit" id="btn-submit-auth" class="practice-btn primary">Entrar</button>
+          <button type="button" id="btn-toggle-auth-mode" class="practice-btn">Não tem conta? Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Modal Placar da Turma -->
+  <dialog id="modal-leaderboard" class="practice-dialog leaderboard-dialog">
+    <div class="dialog-content">
+      <div class="dialog-head">
+        <h3>🏆 Placar Geral da Turma</h3>
+        <button type="button" class="dialog-close" id="btn-close-leaderboard">×</button>
+      </div>
+      <p class="practice-caption">Aproveitamento e frequência dos participantes nos simulados do TJPB.</p>
+      <div class="table-responsive">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Candidato</th>
+              <th>Acertos</th>
+              <th>Total</th>
+              <th>Aprov.</th>
+              <th>Dias Ativos</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <tr><td colspan="6" style="text-align:center;padding:15px;">Carregando placar...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="practice-actions" style="margin-top:15px;">
+        <button type="button" id="btn-refresh-leaderboard" class="practice-btn primary">Atualizar Placar</button>
+      </div>
+    </div>
+  </dialog>
+
+</section>
+  <section id="practice-result" class="practice-card" aria-live="polite" hidden></section>
+  <details class="practice-card" id="practice-pending"><summary id="pending-label">Questões aguardando revisão</summary><ul id="pending-list"></ul></details>
+  <p class="practice-caption">O lote inicial tem 20 questões que você enviou. Questões com destaques perdidos ou fora do foco ficam separadas do treino. Gabaritos são os importados, ainda sujeitos à conferência na fonte.</p>
+  <p class="practice-caption">Seu histórico fica neste aparelho e nesta origem/endereço. Não há sincronização automática com o computador. Salve um backup para transferir ou recuperar seus dados. Percentuais resumem tentativas; repetição não comprova domínio do tema.</p>
+</section>
+<section id="gran-view" class="practice gran-module" role="tabpanel" aria-labelledby="gran-tab" hidden>
+ <div class="eyebrow">Pesquisa externa · FGV</div>
+ <h2>Filtros do Gran</h2>
+ <p class="practice-lead">Escolha um assunto e abra o filtro diretamente no site do Gran. A prática e as respostas acontecem lá; os links não abrem o treino deste app.</p>
+ <div class="module-note">Requer internet e pode exigir login no Gran. Para estudar offline com o banco deste aparelho, abra <button class="inline-module-link" type="button" data-view-target="questions-view">Questões importadas</button>.</div>
+ <div class="practice-card gran-controls">
+  <label for="gran-module-block">Área de estudo</label><select id="gran-module-block"><option value="">Todas as áreas</option></select>
+  <label for="gran-module-query">Buscar assunto</label><input id="gran-module-query" type="search" placeholder="Ex.: banco de dados, SQL, português…">
+  <fieldset class="gran-module-refine"><legend>Refinar os links</legend>
+   <label><input type="checkbox" id="gran-module-level"> Nível superior</label>
+   <label><input type="checkbox" id="gran-module-court"> Tribunais</label>
+   <label><input type="checkbox" id="gran-module-hard"> Difícil</label>
+   <label><input type="checkbox" id="gran-module-year"> Ano 2026</label>
+  </fieldset>
+ </div>
+ <p id="gran-module-count" class="practice-caption" role="status" aria-live="polite"></p>
+ <div id="gran-module-results" class="gran-module-grid"></div>
+ <p class="practice-caption">A banca FGV e a exclusão de anuladas/desatualizadas acompanham os links. Os filtros usam o mapeamento anterior, de 25/10/2026. Buscas “a conferir” ainda precisam de confirmação no Gran; refinamentos podem reduzir ou zerar os resultados.</p>
+</section>
+
+<section id="courses-view" class="practice courses" role="tabpanel" aria-labelledby="courses-tab" hidden>
+ <div class="eyebrow">SUA PREPARAÇÃO · TJPB / FGV</div>
+ <h2>Cursos e aulas</h2>
+ <div class="courses-coming"><span class="courses-badge">Em breve</span>
+ <h3>Um espaço para aprender cada assunto.</h3>
+ <p>Os cursos e as aulas ainda estão em preparação. Enquanto isso, explore os conteúdos no mapa mental e pratique questões.</p>
+ <div class="courses-grid"><article><span aria-hidden="true">▤</span><h4>Cursos</h4><p>Em breve</p></article><article><span aria-hidden="true">▷</span><h4>Aulas</h4><p>Em breve</p></article></div>
+ <button class="practice-btn primary" type="button" data-view-target="map-view">Explorar mapa mental</button>
+ </div>
+</section>
+</main>
+<dialog id="detail" aria-labelledby="detail-title"><div class="detail-head"><div class="eyebrow" id="detail-stage"></div><button type="button" class="close" aria-label="Fechar detalhes">×</button><h2 id="detail-title"></h2><p id="detail-preview"></p></div><div class="detail-body"><div class="gran-block-launch"><a class="practice-btn primary" id="gran-block-link" target="_blank" rel="noopener noreferrer">Questões no Gran ↗</a><small>Abre o filtro FGV deste assunto. Requer internet e acesso ao Gran.</small></div><div class="practice-block-launch"><button type="button" class="practice-btn" id="practice-block-button">Praticar neste bloco</button><small id="practice-block-note"></small></div><div class="study-context"><label for="study-mode">Minha sessão</label><select id="study-mode"><option value="home">Em casa · entender e praticar</option><option value="lunch">Almoço · conceito e exemplo</option><option value="bus">Ônibus · revisão no celular</option></select><p>Escolha um subtema e clique em Estudar. O aplicativo abre com o contexto do concurso e o prompt pronto para enviar.</p></div><div id="progress-block" hidden></div><details class="gran-search" id="gran-search"><summary>Praticar questões · buscar na FGV <small id="gran-search-count"></small></summary><div class="gran-search-body"><p>Abra um recorte deste bloco no Gran. A banca FGV já está selecionada; questões anuladas e desatualizadas ficam excluídas.</p><div class="gran-refine" aria-label="Refinar buscas do Gran"><label><input type="checkbox" id="gran-level">Nível superior</label><label><input type="checkbox" id="gran-court">Tribunais</label><label><input type="checkbox" id="gran-hard">Difícil</label><label><input type="checkbox" id="gran-year">Ano 2026</label></div><ul class="gran-links" id="gran-links"></ul><div class="gran-extract"><button type="button" id="copy-extractor">📋 Copiar extrator deste bloco</button><p class="gran-footnote">Abra uma das buscas acima, pressione F12, cole no Console e rode (use apenas scripts que você tenha revisado). Ao terminar, importe o JSON baixado: <code>python estudo.py importar arquivo.json</code></p></div><p class="gran-footnote">Cada busca cobre um recorte do bloco, não todo o edital. Contagens observadas em 25/10/2026, sem filtros; os refinamentos alteram os resultados e, em recortes pequenos, podem zerá-los. Buscas marcadas “testar” usam IDs ainda não conferidos no filtro. Você pode praticar no Gran ou importar um JSON para a aba Questões.</p></div></details><h3>Conteúdo para estudar</h3><ul class="syllabus" id="detail-items"></ul><section class="study-launch" id="study-launch" aria-labelledby="study-launch-title" hidden><h3 id="study-launch-title">Seu prompt de estudo</h3><p class="study-topic" id="study-topic"></p><label for="study-prompt" class="eyebrow" style="display:block;margin-bottom:7px">Mensagem pronta</label><textarea id="study-prompt" readonly spellcheck="false"></textarea><div class="launch-actions"><a class="study-app" id="study-open-app" href="#">Abrir no aplicativo ↗</a><button type="button" class="study-secondary" id="study-copy">Copiar prompt</button><a class="study-secondary" id="study-web" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Copiar e abrir ChatGPT web ↗</a></div><p class="study-status" id="study-status" role="status" aria-live="polite"></p><p class="study-help">No aplicativo, confira a mensagem e envie. Na web, cole o prompt copiado. <a href="https://learn.chatgpt.com/docs/app/commands#deep-links" target="_blank" rel="noopener noreferrer">Como funciona o link do aplicativo ↗</a></p></section><h3>Como os conceitos se ligam</h3><p class="concept-link" id="detail-explain"></p><div id="before-block"><h3>Sugestão de base para este assunto</h3><div class="related" id="detail-before"></div></div><h3>Continue a partir daqui</h3><div class="related" id="detail-links"></div><p style="font-size:11px;color:var(--muted);margin:0">A sequência é uma orientação de estudo. Os tópicos de conteúdo vêm do edital, agrupados para facilitar a leitura.</p></div></dialog>
+<script type="text/plain" id="extrator-src">
+(async()=>{
+  const BLOCO=''; // opcional: id do bloco do mapa (ex.: 'p3'); vai junto no JSON
+  const T0=performance.now();
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const seg=(a=T0)=>((performance.now()-a)/1000).toFixed(1)+'s';
+  const t=e=>{if(!e)return'';const c=e.cloneNode(true);c.querySelectorAll('u').forEach(u=>u.replaceWith('«'+u.textContent+'»'));return c.textContent.replace(/\s+/g,' ').trim();};
+  const lab=o=>t(o?.querySelector('.ds-question__body__options__option__label'));
+  const until=async(fn,ms)=>{const s=Date.now();while(Date.now()-s<ms){const v=fn();if(v)return v;await sleep(200);}return null;};
+  const RIGHT='ds-question__body__options__option--right';
+
+  document.querySelectorAll('.ds-question__body__group__trigger').forEach(b=>b.click());
+  await sleep(1500);
+  const qs=[...document.querySelectorAll('.ds-question')];
+  console.log(`▶ ${qs.length} questões. Mantenha esta aba visível até terminar.`);
+
+  const falhas=[];
+  for(let i=0;i<qs.length;i++){
+    const q=qs[i], id=t(q.querySelector('.ds-question__header__top__id')), t1=performance.now();
+    for(let tent=1;tent<=2&&!q.querySelector('.'+RIGHT);tent++){
+      q.querySelector('[role=radio]')?.click();
+      await sleep(300);
+      q.querySelector('#btnAnswerQuestion')?.click();
+      await until(()=>q.querySelector('.'+RIGHT),12000);
+    }
+    const ok=!!q.querySelector('.'+RIGHT);
+    if(!ok) falhas.push(id);
+    console.log(`[${i+1}/${qs.length}] ${id} ${ok?'✔':'✘ sem gabarito'} ${seg(t1)} (total ${seg()})`);
+    await sleep(400+Math.random()*500);
+  }
+
+  const textos=[];
+  const questoes=qs.map(q=>{
+    const opts=[...q.querySelectorAll('.ds-question__body__options__option')];
+    const certa=opts.find(o=>o.classList.contains(RIGHT));
+    const g=t(q.querySelector('.ds-question__body__group')).replace('Texto associado','').trim();
+    let tid=null;
+    if(g){tid=textos.indexOf(g);if(tid<0){textos.push(g);tid=textos.length-1;}}
+    return {
+      id:t(q.querySelector('.ds-question__header__top__id')),
+      assunto:[...q.querySelectorAll('.ds-question__header__top__subject a')].map(t),
+      prova:t(q.querySelector('[id^="prova-value"]')),
+      texto_id:tid,
+      enunciado:t(q.querySelector('.ds-question__body__statement')),
+      alternativas:Object.fromEntries(opts.map(o=>[lab(o),t(o.querySelector('.ds-question__body__options__option__description'))])),
+      gabarito:certa?lab(certa):null
+    };
+  });
+
+  const json=JSON.stringify({bloco:BLOCO||null,fonte:location.href,gerado_em:new Date().toISOString(),textos,questoes},null,1);
+  window.__json=json;
+
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+  a.download=`questoes_${BLOCO||'pagina'}_${Date.now()}.json`;
+  a.click();
+
+  const b=document.createElement('button');
+  b.textContent=`📋 Copiar JSON (${questoes.length} questões)`;
+  b.style.cssText='position:fixed;z-index:99999;right:20px;bottom:20px;padding:14px 20px;font:600 16px sans-serif;background:#0067ff;color:#fff;border:0;border-radius:10px;cursor:pointer';
+  b.onclick=async()=>{await navigator.clipboard.writeText(json);b.textContent='✔ Copiado!';setTimeout(()=>b.remove(),2000);};
+  document.body.appendChild(b);
+
+  console.log(`■ Fim em ${seg()}: ${questoes.filter(x=>x.gabarito).length}/${questoes.length} com gabarito.`+(falhas.length?` Falharam: ${falhas.join(', ')}`:''));
+})();
+</script>
+<script>
+const PracticeCore = (() => {
+  const blocks = new Set(['p1','p2','p3','p4','r1','r2','r3','r4',...Array.from({length:11},(_,i)=>'t'+(i+1))]);
+  const fold = s => String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const copy = o => JSON.parse(JSON.stringify(o));
+  const object = x => x && typeof x === 'object' && !Array.isArray(x);
+  const integer = (x,name) => { if(!Number.isSafeInteger(x)||x<0)throw Error(name+' inválido.'); return x; };
+  function inferBlock(subject) {
+    const s=fold(subject);
+    if(/crase|virgula|classes|gerundio|passiva|concordancia|regencia|pontuacao|pronom|norma culta|sintaxe|adverbio|adjetivo|substantivo/.test(s))return 'p3';
+    if(/senao|porque|por que|ortograf|coesao|conector|tempos verbais/.test(s))return 'p2';
+    if(/reescrita|reorganizacao|substituicao|redundancia|redacao oficial/.test(s))return 'p4';
+    if(/interpretacao|texto|noticia|literatura|significacao|estrangeirismo|tipologia/.test(s))return 'p1';
+    if(/banco de dados|sql|sgbd|postgres|relacional|modelagem relacional|nosql/.test(s))return 't5';
+    if(/engenharia de software|scrum|requisito|metodologia agil|cascata|xp|rup/.test(s))return 't2';
+    if(/programacao|algoritmo|java|python|javascript|typescript|estruturas de dados/.test(s))return 't3';
+    if(/arquitetura|microservi|rest|api|design pattern|mvc|padroes de projeto/.test(s))return 't4';
+    if(/devops|docker|kubernetes|ci\/cd|pipeline|nuvem|aws|git\b/.test(s))return 't7';
+    if(/seguranca|owasp|criptografia|qualidade|teste de software|vulnerabilidade/.test(s))return 't8';
+    if(/inteligencia artificial|machine learning|ia generativa|llm|deep learning/.test(s))return 't9';
+    if(/lgpd|pje|pdpj|transformacao digital|judiciario|governan|itil|cobit/.test(s))return 't10';
+    if(/acessibilidade|wcag|usabilidade|ux|ui/.test(s))return 't11';
+    if(/logica|proposic|tabela.verdade|argumentacao/.test(s))return 'r4';
+    if(/probabilidade|combinatoria|estatistica/.test(s))return 'r3';
+    if(/algebra|equac|matriz|funcao/.test(s))return 'r2';
+    if(/aritmetica|porcentagem|juros|regra de tres/.test(s))return 'r1';
+    return null;
+  }
+  function prepareQuestions(data, previous={}, fallbackBlock=null) {
+    if(!object(data)||!Array.isArray(data.questoes))throw Error('O arquivo precisa de uma lista questoes.');
+    if(data.questoes.length>10000)throw Error('Importe até 10.000 questões por arquivo.');
+    const texts=data.textos||[];
+    if(!Array.isArray(texts)||!texts.every(t=>typeof t==='string'))throw Error('A lista textos é inválida.');
+    const seen=new Set(), result={};
+    for(const q of data.questoes) {
+      if(!object(q)||typeof q.id!=='string'||!q.id.trim())throw Error('Questão sem identificador.');
+      const id=q.id.trim();if(!/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$/.test(id))throw Error('Identificador inválido: '+id);if(seen.has(id))throw Error('ID repetido no arquivo: '+id);seen.add(id);
+      if(typeof q.enunciado!=='string'||!q.enunciado.trim())throw Error(id+': enunciado vazio.');
+      const alts=q.alternativas;
+      if(!object(alts)||Object.keys(alts).length<2||!Object.entries(alts).every(([k,v])=>/^[A-E]$/.test(k)&&typeof v==='string'&&v.trim()))throw Error(id+': alternativas inválidas.');
+      const gab=String(q.gabarito||'').trim().toUpperCase();
+      if(!Object.hasOwn(alts,gab))throw Error(id+': gabarito ausente ou inválido.');
+      let texto=q.texto||'';
+      if(typeof texto!=='string')throw Error(id+': texto inválido.');
+      if(q.texto_id!==null&&q.texto_id!==undefined){if(!Number.isInteger(q.texto_id)||q.texto_id<0||q.texto_id>=texts.length)throw Error(id+': referência de texto inválida.');texto=texts[q.texto_id];}
+      const subjects=q.assunto||[];
+      if(!Array.isArray(subjects)||!subjects.every(a=>typeof a==='string'))throw Error(id+': assunto inválido.');
+      const bloco=q.bloco||data.bloco||previous[id]?.bloco||fallbackBlock||inferBlock(subjects.join(' > '));
+      if(bloco&&!blocks.has(bloco))throw Error(id+': bloco desconhecido.');
+      const reasons=[];
+      if(!bloco)reasons.push('Sem bloco identificado: importe com o bloco escolhido.');
+      if(/sublinhad/i.test(q.enunciado)&&!/[«]|<u\b/i.test([q.enunciado,texto,...Object.values(alts)].join(' ')))reasons.push('O enunciado depende de sublinhado que não foi preservado.');
+      if(/metodologia de ensino/.test(fold(subjects.join(' '))))reasons.push('Questão sobre ensino de Português; fora do foco deste edital.');
+      if(q.anulada===true||q.desatualizada===true)reasons.push('Marcada como anulada ou desatualizada.');
+      const fingerprint=JSON.stringify([q.enunciado,texto,alts,gab]);
+      const old=previous[id], version=old ? (old.version||1)+(old.fingerprint!==fingerprint?1:0) : (Number.isSafeInteger(q.version)&&q.version>0?q.version:1);
+      result[id]={id,enunciado:q.enunciado,texto,alternativas:copy(alts),gabarito:gab,assunto:[...subjects],bloco,
+        prova:typeof q.prova==='string'?q.prova:'',fonte:typeof(q.fonte||data.fonte)==='string'?(q.fonte||data.fonte):null,
+        gerado_em:q.gerado_em||data.gerado_em||null,review:reasons,version,fingerprint};
+    }
+    return result;
+  }
+  function merge(store,data,fallbackBlock=null) {
+    const parsed=prepareQuestions(data,store.questions,fallbackBlock);
+    const next={...copy(store),questions:{...store.questions,...parsed}};
+    if(data.tentativas!==undefined){
+      if(!Array.isArray(data.tentativas))throw Error('Histórico de tentativas inválido.');
+      const known=new Map(next.attempts.map(a=>[a.id,a]));
+      for(const raw of data.tentativas){
+        if(!object(raw)||typeof raw.id!=='string'||!raw.id||!next.questions[raw.questao_id])throw Error('Tentativa sem questão ou identificador válido.');
+        if(!/^[A-E]$/.test(raw.resposta)||!/^[A-E]$/.test(raw.gabarito))throw Error('Resposta ou gabarito histórico inválido.');
+        if(!blocks.has(raw.bloco)||typeof raw.quando!=='string'||!Number.isFinite(Date.parse(raw.quando)))throw Error('Bloco ou data da tentativa inválidos.');
+        const a={id:raw.id,questao_id:raw.questao_id,resposta:raw.resposta,gabarito:raw.gabarito,
+          correta:raw.resposta===raw.gabarito,bloco:raw.bloco,quando:raw.quando,
+          justificativa:typeof raw.justificativa==='string'?raw.justificativa:'',confianca:['certeza','duvida','chute'].includes(raw.confianca)?raw.confianca:'duvida',version:Number.isSafeInteger(raw.version)?raw.version:1};
+        if(known.has(a.id)&&JSON.stringify(known.get(a.id))!==JSON.stringify(a))throw Error('Tentativa repetida com conteúdo diferente: '+a.id);
+        known.set(a.id,a);
+      }
+      next.attempts=[...known.values()].sort((a,b)=>a.quando.localeCompare(b.quando)||a.id.localeCompare(b.id));
+    }
+    return next;
+  }
+  function answer(store,id,response,justification,confidence,attemptId,when) {
+    const q=store.questions[id];
+    if(!q||q.review.length)throw Error('Esta questão precisa de revisão antes do treino.');
+    if(!['certeza','duvida','chute'].includes(confidence))throw Error('Confiança inválida.');
+    if(!Object.hasOwn(q.alternativas,response))throw Error('Selecione uma alternativa válida.');
+    if(store.attempts.some(a=>a.id===attemptId))return store;
+    return {...store,attempts:[...store.attempts,{id:attemptId,questao_id:id,resposta:response,gabarito:q.gabarito,correta:response===q.gabarito,
+      bloco:q.bloco,quando:when,justificativa:String(justification||''),confianca:confidence,version:q.version}]};
+  }
+  function progress(store) {
+    const bs={},seen={};
+    const init=b=>{if(!bs[b]){bs[b]={questoes:0,tentativas:0,acertos:0,respondidas:0,pct:null,assuntos:[]};seen[b]=new Set()}};
+    for(const q of Object.values(store.questions)){if(q.bloco){init(q.bloco);bs[q.bloco].questoes++}}
+    const subjects={};
+    for(const a of store.attempts){const q=store.questions[a.questao_id];if(!q)continue;init(a.bloco);const b=bs[a.bloco];b.tentativas++;b.acertos+=Number(a.correta);seen[a.bloco].add(q.id);
+      const subject=q.assunto.slice(1).join(' > ')||q.assunto.join(' > ')||'(sem assunto)';const key=JSON.stringify([a.bloco,subject]);
+      subjects[key]||={bloco:a.bloco,assunto:subject,tentativas:0,acertos:0};subjects[key].tentativas++;subjects[key].acertos+=Number(a.correta);
+    }
+    for(const [key,b] of Object.entries(bs)){b.respondidas=seen[key].size;b.questoes=Math.max(b.questoes,b.respondidas);b.pct=b.tentativas?Math.round(100*b.acertos/b.tentativas):null}
+    for(const a of Object.values(subjects)){const {bloco,...s}=a;s.pct=Math.round(100*s.acertos/s.tentativas);bs[bloco].assuntos.push(s)}
+    Object.values(bs).forEach(b=>b.assuntos.sort((a,b)=>a.pct-b.pct||b.tentativas-a.tentativas));
+    return {gerado_em:new Date().toISOString(),origem:'navegador',blocos:bs};
+  }
+  function normalizeProgress(o) {
+    if(!object(o)||!object(o.blocos))throw Error('Progresso sem lista de blocos.');
+    const result={gerado_em:typeof o.gerado_em==='string'?o.gerado_em.slice(0,40):'',origem:typeof o.origem==='string'?o.origem:'importado',blocos:{}};
+    for(const [id,b] of Object.entries(o.blocos)){
+      if(!blocks.has(id))throw Error('Bloco desconhecido no progresso: '+id);
+      if(!object(b))throw Error('Bloco de progresso inválido.');
+      const total=integer(b.tentativas,'Tentativas'),ac=integer(b.acertos,'Acertos'),count=integer(b.questoes,'Questões'),seen=integer(b.respondidas,'Respondidas');
+      if(ac>total||seen>count||seen>total)throw Error('Contadores de progresso inconsistentes.');
+      if(b.assuntos!==undefined&&!Array.isArray(b.assuntos))throw Error('Assuntos de progresso inválidos.');
+      const subjects=(b.assuntos||[]).map(a=>{if(!object(a)||typeof a.assunto!=='string')throw Error('Assunto inválido.');const t=integer(a.tentativas,'Tentativas'),c=integer(a.acertos,'Acertos');if(c>t)throw Error('Acertos inválidos.');return{assunto:a.assunto.slice(0,1000),tentativas:t,acertos:c,pct:t?Math.round(100*c/t):null}});
+      result.blocos[id]={questoes:count,tentativas:total,acertos:ac,respondidas:seen,pct:total?Math.round(100*ac/total):null,assuntos:subjects};
+    }
+    return result;
+  }
+  function backup(store) {
+    const texts=[],index=new Map();
+    const questions=Object.values(store.questions).map(q=>{let tid=null;if(q.texto){if(!index.has(q.texto)){index.set(q.texto,texts.length);texts.push(q.texto)}tid=index.get(q.texto)}const {fingerprint,review,texto,...rest}=q;return{...rest,texto_id:tid}});
+    return {formato:'tjpb-questoes-backup-v1',gerado_em:new Date().toISOString(),textos:texts,questoes:questions,tentativas:copy(store.attempts)};
+  }
+  function eligible(store,block='',wrong=false) {
+    const latest=new Map();for(const a of store.attempts)latest.set(a.questao_id,a);
+    return Object.values(store.questions).filter(q=>!q.review.length&&(!block||q.bloco===block)&&(!wrong||latest.get(q.id)?.correta===false));
+  }
+  return {blocks,prepareQuestions,merge,answer,progress,normalizeProgress,backup,eligible};
+})();
+if(typeof module!=='undefined'&&module.exports)module.exports=PracticeCore;
+
+</script>
+<script>
+const nodes={"p1": {"title": "Interpretação de textos", "items": ["Compreensão e interpretação de textos variados", "Tipos e gêneros textuais", "Significação das palavras e efeitos de sentido"], "explanation": "Conecta com: coesão, substituição de trechos, reorganização de períodos e reescrita em diferentes níveis de formalidade.", "id": "p1", "preview": "Gêneros · sentido · inferência", "stage": "Português", "before": [], "links": ["p2", "p4", "t2"]}, "p2": {"title": "Coesão e ortografia", "items": ["Ortografia oficial", "Referência, substituição e repetição", "Conectores e sequenciação textual", "Tempos e modos verbais"], "explanation": "Conecta com: progressão argumentativa, relações entre orações e interpretação de pronomes e conectivos no contexto.", "id": "p2", "preview": "Conectores · referências · verbos", "stage": "Português", "before": ["p1"], "links": ["p3", "p4"]}, "p3": {"title": "Gramática em contexto", "items": ["Classes de palavras", "Coordenação e subordinação entre orações e termos", "Pontuação", "Concordância verbal e nominal", "Regência verbal e nominal", "Crase e colocação dos pronomes átonos"], "explanation": "Encadeamento: identificar a função sintática → reconhecer a relação entre termos/orações → aplicar concordância, regência, crase e pontuação.", "id": "p3", "preview": "Sintaxe · pontuação · concordância", "stage": "Português", "before": ["p1", "p2"], "links": ["p4"]}, "p4": {"title": "Reescrita e redação", "items": ["Substituição de palavras ou trechos", "Reorganização de orações e períodos", "Reescrita de gêneros e níveis de formalidade diferentes", "Redação oficial"], "explanation": "Conecta com: preservar o sentido, a correção gramatical, a coesão e a adequação ao contexto.", "id": "p4", "preview": "Sentido · formalidade · texto oficial", "stage": "Português", "before": ["p1", "p2", "p3"], "links": ["t2", "t10"]}, "r1": {"title": "Números e proporções", "items": ["Conjuntos numéricos", "Razões e proporções", "Regra de três simples e composta", "Porcentagem", "Juros simples e compostos"], "explanation": "Encadeamento: razão → proporção → regra de três; porcentagem e juros aplicam essas relações a variações e capitalização.", "id": "r1", "preview": "Porcentagem · regra de três · juros", "stage": "Raciocínio lógico e matemático", "before": [], "links": ["r2", "r3"]}, "r2": {"title": "Álgebra e padrões", "items": ["Equações, inequações e sistemas", "Funções", "Sequências", "Matrizes e determinantes"], "explanation": "Conecta com: representar relações por símbolos, identificar regularidades e resolver sistemas de condições.", "id": "r2", "preview": "Equações · funções · sequências", "stage": "Raciocínio lógico e matemático", "before": ["r1"], "links": ["r3", "t3"]}, "r3": {"title": "Contagem e dados", "items": ["Análise combinatória", "Probabilidade", "Estatística descritiva"], "explanation": "Encadeamento: contagem de casos → espaço amostral → probabilidade; estatística resume e interpreta dados observados.", "id": "r3", "preview": "Combinatória · probabilidade · estatística", "stage": "Raciocínio lógico e matemático", "before": ["r1"], "links": ["t9", "t8"]}, "r4": {"title": "Lógica e argumentação", "items": ["Proposições e conectivos", "Tabelas-verdade", "Equivalências e negações", "Argumentação lógica", "Diagramas lógicos", "Problemas de raciocínio lógico-matemático"], "explanation": "Encadeamento: proposições → conectivos → tabela-verdade → equivalência/negação → validade de argumentos; diagramas ajudam a visualizar relações entre conjuntos.", "id": "r4", "preview": "Proposições · negações · diagramas", "stage": "Raciocínio lógico e matemático", "before": [], "links": ["t3", "t5", "p1"]}, "t1": {"title": "Fundamentos de TI", "items": ["Arquitetura de computadores, sistemas operacionais, redes e TCP/IP", "Bancos de dados e computação em nuvem", "Ciclo de vida, requisitos, arquitetura e integração de sistemas", "Scrum, Kanban, qualidade, testes, segurança, LGPD, COBIT 2019, ITIL 4, projetos, serviços e indicadores de TI", "IA/IA generativa, transformação digital no Judiciário, PJe, PDPJ-Br, acessibilidade, normas CNJ, MoReq-Jus e PDTI 2024–2026"], "explanation": "Conecta com: quase todos os ramos específicos; é a camada de vocabulário comum.", "id": "t1", "preview": "Computadores · SO · redes · gestão", "stage": "TI / Fundamentos", "before": [], "links": ["t3", "t5", "t7", "t10"]}, "t3": {"title": "Algoritmos e programação", "items": ["Big-O; listas, pilhas, filas, árvores e tabelas hash; busca e ordenação", "POO: classes, objetos, encapsulamento, abstração, herança e polimorfismo; SOLID", "Java: Collections, Streams, lambdas, records, sealed classes, pattern matching, switch expressions e virtual threads", "Jakarta EE, Spring, Spring Boot, Hibernate/JPA", "JavaScript/TypeScript, Node.js, Angular e React", "Python, FastAPI e Django", "Dart e Flutter: widgets, estado/reatividade, layout, navegação e rotas"], "explanation": "Encadeamento: lógica → estruturas → custo de execução → orientação a objetos e princípios → bibliotecas e frameworks.", "id": "t3", "preview": "Big-O · estruturas · POO · linguagens", "stage": "TI / Fundamentos", "before": ["r4"], "links": ["t4", "t5", "t6", "t8"]}, "t5": {"title": "Dados e persistência", "items": ["Modelo relacional, álgebra relacional, chaves e integridade", "Dependências funcionais e 1FN, 2FN, 3FN", "SQL: DML, DDL, DCL, TCL, subconsultas, agregação, views, triggers e procedures", "Planos de execução, índices, estatísticas, particionamento e query tuning", "PostgreSQL, Oracle, MySQL/MariaDB e SQL Server", "NoSQL: chave-valor, documentos/MongoDB, colunar, grafo; vetores, embeddings, similaridade e índice vetorial"], "explanation": "Conecta com: modelagem de domínio → persistência → transações → desempenho; escolhas distribuídas ligam-se a CAP e consistência.", "id": "t5", "preview": "SQL · modelagem · índices · NoSQL", "stage": "TI / Fundamentos", "before": ["t1"], "links": ["t3", "t4", "t9"]}, "t2": {"title": "Engenharia de software", "items": ["SDLC; cascata e iterativo", "Scrum: papéis, eventos e artefatos; Kanban, Lean e SAFe", "Elicitação, análise, especificação e validação de requisitos", "Requisitos funcionais/não funcionais, regras de negócio, histórias, critérios de aceite e backlog", "APF/IFPUG e estimativas ágeis", "SDD, especificação executável e harness com assistência de IA"], "explanation": "Pré-requisito conceitual: entender problema e usuário antes de desenhar solução, codificar ou testar.", "id": "t2", "preview": "Requisitos · ágil · estimativas · SDLC", "stage": "TI / Construção", "before": ["p1"], "links": ["t4", "t8", "t11"]}, "t4": {"title": "Arquitetura e sistemas", "items": ["GoF; inversão de controle e injeção de dependência", "SOA, REST/SOAP, APIs, microsserviços, API gateway, service mesh e serverless", "EDA, publicação/assinatura, Kafka e RabbitMQ", "Clean Architecture e DDD", "CAP, PACELC, BASE/ACID, latência/throughput, escalabilidade e disponibilidade", "Failover, clusters, balanceamento, replicação, sharding, cache, Redis, circuit breaker, graceful degradation, NGINX e HAProxy", "Métricas de qualidade: cobertura, defeitos, MTTR, frequência de entrega, lead time e satisfação"], "explanation": "Encadeamento: componentes → limites e contratos → comunicação → distribuição/carga → tolerância a falhas e observabilidade.", "id": "t4", "preview": "Padrões · APIs · distribuição · cache", "stage": "TI / Construção", "before": ["t1", "t3", "t5"], "links": ["t6", "t7", "t8"]}, "t6": {"title": "Desenvolvimento mobile", "items": ["Ciclo de vida Android/iOS", "Persistência local: SQLite, Room, Hive/Isar e preferências", "Armazenamento seguro, SSL Pinning, proteção contra engenharia reversa e TLS/SSL", "Consumo REST, JSON e notificações Firebase Cloud Messaging"], "explanation": "Conecta com: Flutter/Dart, APIs, bancos locais, autenticação e proteção de dados em trânsito e repouso.", "id": "t6", "preview": "Flutter · ciclo de vida · APIs · dados locais", "stage": "TI / Construção", "before": ["t3", "t5"], "links": ["t4", "t8", "t11"]}, "t11": {"title": "UX e acessibilidade", "items": ["UI/UX: princípios, user flows, wireframes, protótipos, design systems e responsividade", "eMAG, WCAG 2.1/2.2, semântica HTML5, ARIA e leitores de tela"], "explanation": "Do usuário ao produto: necessidades → fluxos → protótipo → interface acessível → validação.", "id": "t11", "preview": "UI · protótipos · eMAG · WCAG · ARIA", "stage": "TI / Construção", "before": ["t2"], "links": ["t3", "t6", "t8"]}, "t7": {"title": "DevOps e nuvem", "items": ["CI/CD: Jenkins, GitLab CI/CD e GitHub Actions; Git, Gitflow, Trunk-Based e GitOps", "Docker, Docker Compose, Kubernetes", "IaaS/PaaS/SaaS; nuvem pública, privada e híbrida", "Terraform: providers, módulos e state", "Métricas/alertas: Zabbix, Prometheus e Grafana; logs: ELK/OpenSearch; tracing e APM"], "explanation": "Encadeamento: versionar → integrar/testar → empacotar → provisionar/deploy → observar e responder a incidentes.", "id": "t7", "preview": "Git · CI/CD · Docker · K8s · observabilidade", "stage": "TI / Entrega e contexto", "before": ["t1", "t3", "t8"], "links": ["t4", "t10"]}, "t8": {"title": "Segurança e qualidade", "items": ["Codificação segura, threat modeling, DevSecOps e OWASP Top 10", "AES, RSA, curvas elípticas, PKI/ICP-Brasil e assinatura digital", "Autenticação/autorização, rate limiting, SAML 2.0, OAuth 2.0, OIDC e JWT", "Testes unitários, integração, funcionais, sistema, aceitação, carga/desempenho; TDD", "SAST, DAST, IAST, SonarQube, contract testing e mutation testing", "Segurança de IA: prompt injection, jailbreak, ataques adversariais, sanitização e vazamento de contexto"], "explanation": "Conexão transversal: segurança começa nos requisitos e arquitetura, continua no código e testes e permanece na operação.", "id": "t8", "preview": "Testes · OWASP · OAuth · criptografia", "stage": "TI / Entrega e contexto", "before": ["t2", "t3"], "links": ["t4", "t7", "t9", "t10"]}, "t9": {"title": "Inteligência artificial", "items": ["Pré-processamento de texto: tokenização, stemming, lematização e stop words", "TF-IDF, word embeddings, Transformers e LLMs", "Engenharia de prompt; APIs de IA; Hugging Face e LangChain", "RAG"], "explanation": "Encadeamento: texto → representação → modelo → integração por API → recuperação de contexto; segurança e governança acompanham o fluxo todo.", "id": "t9", "preview": "NLP · embeddings · LLMs · RAG", "stage": "TI / Entrega e contexto", "before": ["t3", "t5"], "links": ["r3", "t8", "t10"]}, "t10": {"title": "Tecnologia no Judiciário", "items": ["PDPJ-Br, MNI/MInG, LGPD, Marco Civil e privacidade por padrão", "Governança algorítmica: impacto, transparência, explicabilidade, auditoria e supervisão humana", "Limites de IA em atos decisórios do Judiciário"], "explanation": "Contexto de aplicação: serviços judiciais → interoperabilidade → proteção de dados → governança e supervisão da IA.", "id": "t10", "preview": "PDPJ-Br · LGPD · CNJ · governança", "stage": "TI / Entrega e contexto", "before": ["t1"], "links": ["t4", "t8", "t9"]}};
+const branches={"pt-list":['p1','p2','p3','p4'],"rl-list":['r1','r2','r3','r4'],"base-list":['t1','t3','t5'],"build-list":['t2','t4','t6','t11'],"ship-list":['t7','t8','t9','t10']};
+const routes={all:{ids:[],text:'A árvore organiza o edital. Os caminhos mostram sugestões de relações e sequência de estudo.'},api:{ids:['t2','t4','t3','t5','t8','t7'],text:'Requisitos → arquitetura → código → persistência → testes e segurança → entrega. Um mesmo projeto exercita seis áreas do edital.'},logic:{ids:['r4','r2','t3','t5','t4'],text:'Lógica e relações matemáticas → algoritmos → consultas e estruturas de dados → decisões de arquitetura.'},rag:{ids:['t3','t5','t9','t8','t10'],text:'Código → dados e busca vetorial → recuperação e geração → proteção do contexto → governança no Judiciário.'},text:{ids:['p1','p2','p3','p4','t2'],text:'Interpretação → coesão → estrutura da frase → reescrita. Use a escrita para explicar requisitos e justificar decisões técnicas na discursiva.'}};
+let selectedRoute='all';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+Object.entries(branches).forEach(([list,ids])=>{document.getElementById(list).innerHTML=ids.map((id,i)=>`<button type="button" class="node" id="node-${id}" data-node="${id}" aria-haspopup="dialog"><span class="num">${String(i+1).padStart(2,'0')}</span><strong>${esc(nodes[id].title)}</strong><small>${esc(nodes[id].preview)}</small><span class="more" aria-hidden="true">↗</span></button>`).join('')});
+const area=document.querySelector('.map-area'),svg=document.querySelector('.wires');
+function coords(el){const a=area.getBoundingClientRect(),b=el.getBoundingClientRect();return{x:b.left-a.left,y:b.top-a.top,w:b.width,h:b.height}}
+function path(d,color,extra=''){return `<path class="wire ${extra}" d="${d}" stroke="${color}"/>`}
+function draw(){if(document.getElementById('map-view').hidden)return;const colors=getComputedStyle(document.documentElement);svg.setAttribute('viewBox',`0 0 ${area.clientWidth} ${area.clientHeight}`);let html='';const root=coords(document.getElementById('map-root'));
+ ['pt-root','rl-root','ti-root'].forEach((id,i)=>{const b=coords(document.getElementById(id));const color=colors.getPropertyValue(['--pt','--rl','--ti'][i]);const ax=root.x+root.w/2,ay=root.y+root.h,bx=b.x+b.w/2,by=b.y;const bend=ay+(by-ay)*.48;html+=path(`M${ax} ${ay} C${ax} ${bend} ${bx} ${bend} ${bx} ${by}`,color)});
+ ['base-root','build-root','ship-root'].forEach(id=>{const a=coords(document.getElementById('ti-root')),b=coords(document.getElementById(id)),ax=a.x+a.w/2,ay=a.y+a.h,bx=b.x+8,by=b.y+4;html+=path(`M${ax} ${ay} C${ax} ${ay+10} ${bx} ${ay+10} ${bx} ${by}`,colors.getPropertyValue('--ti'))});
+ document.querySelectorAll('.node-list').forEach(list=>{const parent=coords(document.getElementById(list.dataset.parent));const targets=[...list.querySelectorAll('.node')].map(coords);const l=coords(list),branch=list.closest('.branch'),color=getComputedStyle(branch).getPropertyValue('--color');const trunk=l.x+2;const fromX=parent.x+8,fromY=parent.y+parent.h;targets.forEach(b=>{const endY=b.y+b.h/2;html+=path(`M${fromX} ${fromY} L${trunk} ${fromY+7} L${trunk} ${endY} L${b.x} ${endY}`,color)});});
+ const ids=routes[selectedRoute].ids;for(let i=0;i<ids.length-1;i++){const a=coords(document.getElementById('node-'+ids[i])),b=coords(document.getElementById('node-'+ids[i+1]));const ax=a.x+a.w/2,ay=a.y+a.h,bx=b.x+b.w/2,by=b.y;if(Math.abs(ax-bx)<15){html+=path(`M${ax} ${ay} L${bx} ${by}`, colors.getPropertyValue('--cross'),'cross')}else{const k=Math.max(30,Math.abs(bx-ax)*.3);html+=path(`M${a.x+a.w} ${a.y+a.h/2} C${a.x+a.w+k} ${a.y+a.h/2} ${b.x-k} ${b.y+b.h/2} ${b.x} ${b.y+b.h/2}`, colors.getPropertyValue('--cross'),'cross')}}svg.innerHTML=html;
+}
+function setRoute(name){selectedRoute=name;const ids=routes[name].ids;document.querySelectorAll('.node').forEach(b=>{b.classList.toggle('dim',ids.length>0&&!ids.includes(b.dataset.node));b.classList.toggle('active-path',ids.includes(b.dataset.node))});document.querySelectorAll('.route').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.route===name)));document.querySelector('.route-desc').textContent=routes[name].text;draw()}
+document.querySelectorAll('.route').forEach(b=>b.addEventListener('click',()=>setRoute(b.dataset.route)));
+const modal=document.getElementById('detail');let modalOrigin;
+function related(ids){return ids.map(id=>`<button type="button" data-open="${id}">${esc(nodes[id].title)} ↗</button>`).join('')}
+function openNode(id){const n=nodes[id],color=id[0]==='p'?'pt':id[0]==='r'?'rl':'ti';modal.style.setProperty('--color',`var(--${color})`);modal.style.setProperty('--tint',`var(--${color}-bg)`);document.getElementById('detail-stage').textContent=n.stage;document.getElementById('detail-title').textContent=n.title;document.getElementById('detail-preview').textContent=n.preview;currentStudyNode=id; renderPracticeBlock(id); renderGranSearch(id); document.getElementById("gran-search").open=true;renderProgress(id); renderStudyItems(id); document.getElementById('study-launch').hidden=true; selectedStudy=null;document.getElementById('detail-explain').textContent=n.explanation;document.getElementById('detail-before').innerHTML=related(n.before);document.getElementById('before-block').hidden=!n.before.length;document.getElementById('detail-links').innerHTML=related(n.links);if(!modal.open){modalOrigin=document.activeElement;modal.showModal()}modal.scrollTop=0;modal.querySelector('.close').focus()}
+document.querySelectorAll('[data-node]').forEach(b=>b.addEventListener('click',()=>openNode(b.dataset.node)));
+modal.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b)openNode(b.dataset.open);if(e.target===modal){const r=modal.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)modal.close()}});
+modal.querySelector('.close').addEventListener('click',()=>modal.close());modal.addEventListener('close',()=>modalOrigin?.focus());
+function showView(id){
+ document.querySelectorAll('.view').forEach(tab=>tab.setAttribute('aria-selected',String(tab.getAttribute('aria-controls')===id)));
+ ['map-view','data-view','questions-view','gran-view','courses-view'].forEach(key=>document.getElementById(key).hidden=key!==id);
+ document.querySelector('.hint').hidden=id!=='map-view';if(id==='map-view')requestAnimationFrame(draw);
+}
+document.querySelectorAll('.view').forEach(tab=>tab.addEventListener('click',()=>showView(tab.getAttribute('aria-controls'))));
+document.querySelectorAll('[data-view-target]').forEach(button=>button.addEventListener('click',()=>{showView(button.dataset.viewTarget);document.querySelector('.view[aria-controls="'+button.dataset.viewTarget+'"]').focus()}));
+document.querySelector('.views').addEventListener('keydown',e=>{
+ if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+ e.preventDefault();const tabs=[...document.querySelectorAll('.view')],i=tabs.indexOf(document.activeElement);
+ const n=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+ tabs[n].click();tabs[n].focus();
+});
+
+let currentStudyNode=null;
+let selectedStudy=null;
+const studyMode=document.getElementById('study-mode');
+try{const saved=localStorage.getItem('tjpb-study-mode');if(['home','lunch','bus'].includes(saved))studyMode.value=saved}catch{}
+const sessionInstructions={
+ home:'Estou em casa. Posso concentrar-me em uma explicação um pouco mais aprofundada e praticar. Organize uma sessão curta, com dois exercícios ao final, apresentados um de cada vez.',
+ lunch:'Estou no intervalo do almoço. Quero um bloco curto: um conceito central, um exemplo resolvido e uma única pergunta de aplicação. Evite uma aula extensa.',
+ bus:'Estou no ônibus, estudando pelo celular. Use trechos curtos, linguagem visual com setas ou uma pequena comparação e uma única pergunta que eu consiga responder sem papel ou computador. Evite tabelas largas e código longo.'
+};
+function buildStudyPrompt(id,topic){
+ const n=nodes[id];const discipline=id[0]==='p'?'Língua Portuguesa':id[0]==='r'?'Raciocínio Lógico e Matemático':'Conhecimentos específicos de TI';
+ return `Seja meu tutor para o concurso do TJPB, cargo de Analista Judiciário – TI – Desenvolvimento de Sistemas, organizado pela FGV (edital nº 01/2026).
+
+Disciplina: ${discipline}.
+Área: ${n.title}.
+Subtema desta sessão: ${topic}.
+
+Meu objetivo é compreender e aplicar os conceitos para resolver questões de concurso, não decorar todo o conteúdo. Explique o porquê, construa o raciocínio e indique apenas o que realmente precisa ser memorizado. Mantenha a sessão focada no subtema escolhido; retome pré-requisitos só quando forem necessários.
+
+${sessionInstructions[studyMode.value]}
+
+Conduza a sessão assim:
+1. Explique o conceito de forma intuitiva e correta, começando pela ideia mais básica. Relacione-o aos conceitos próximos que ajudam a entendê-lo.
+2. Mostre um exemplo simples resolvido, justificando cada passo. Destaque uma confusão comum e como reconhecê-la.
+3. Mostre como esse conceito pode aparecer em questões da FGV para nível superior, especialmente TI e tribunais quando pertinente. Ao citar uma questão real ou afirmar um padrão da banca, verifique a fonte e informe órgão, cargo, ano e link. Não invente frequência, questão, comentário oficial ou gabarito. Se não houver fonte confirmada, identifique claramente o exemplo como autoral e a análise como hipótese.
+4. Proponha a prática adequada à minha sessão, uma questão por vez, identificando as questões autorais. Espere minha resposta antes de revelar o gabarito. Peça que eu explique brevemente meu raciocínio.
+5. Depois da resposta, explique por que cada alternativa está certa ou errada, identifique a causa da minha dificuldade e ofereça uma pergunta de transferência para conferir se compreendi. Ao encerrar, resuma em até três ideias essenciais e sugira a próxima conexão de estudo.
+
+Considere a questão discursiva ao treinar clareza: quero conseguir explicar o conceito com minhas próprias palavras. Não presuma conhecer meu nível só porque curso Análise e Desenvolvimento de Sistemas.
+
+Referência do escopo: https://conhecimento.fgv.br/sites/default/files/concursos/edital-tjpb_19.10.pdf`;
+}
+function studyAppUrl(prompt){return 'codex://new?prompt='+encodeURIComponent(prompt)}
+function renderStudyItems(id){
+ const n=nodes[id];
+ const tops=granSearchCatalog.topics.filter(f=>f.blocos.includes(id));
+ const itemLevel=tops.some(f=>(f.itens||[]).length);
+ document.getElementById('detail-items').innerHTML=n.items.map((topic,index)=>{
+  const mine=tops.filter(f=>(f.itens||[]).includes(index));
+  const broad=tops.find(f=>f.verified&&!f.amplo)||tops.find(f=>f.verified);
+  const practice=mine.length?mine.map(f=>`<a class="study-practice" href="${esc(granSearchUrl(f))}" target="_blank" rel="noopener noreferrer" aria-label="Praticar ${esc(topic)}: ${esc(f.label)} no Gran">Praticar: ${esc(f.label)}${f.status==='testar'?' (testar)':''}${granSmall(f)?' (pode vir vazio)':''} ↗</a>`).join(''):(broad?`<a class="study-practice" href="${esc(granSearchUrl(broad))}" target="_blank" rel="noopener noreferrer">Gran · busca do bloco ↗</a>`:(itemLevel?'<span class="study-pending">Sem busca ainda</span>':''));
+  return `<li class="study-item"><span class="study-label">${esc(topic)}</span><span class="study-actions"><a class="study-app" href="${esc(studyAppUrl(buildStudyPrompt(id,topic)))}" data-study="${index}" aria-label="Estudar ${esc(topic)} no aplicativo" rel="noreferrer">Estudar ↗</a>${practice}<button type="button" class="study-preview-button" data-preview="${index}" aria-label="Ver prompt de ${esc(topic)}">Ver / copiar prompt</button></span></li>`}).join('');
+}
+function prepareStudy(index,show=true){
+ if(!currentStudyNode)return;
+ const topic=nodes[currentStudyNode].items[index];if(typeof topic!=='string')return;
+ selectedStudy={id:currentStudyNode,index};
+ const prompt=buildStudyPrompt(currentStudyNode,topic);
+ document.getElementById('study-topic').textContent=topic;
+ document.getElementById('study-prompt').value=prompt;
+ document.getElementById('study-open-app').href=studyAppUrl(prompt);
+ document.getElementById('study-status').textContent='O prompt leva o escopo do concurso, o subtema e o formato desta sessão.';
+ document.getElementById('study-launch').hidden=false;
+ if(show)document.getElementById('study-launch').scrollIntoView({block:'nearest',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+}
+studyMode.addEventListener('change',()=>{
+ try{localStorage.setItem('tjpb-study-mode',studyMode.value)}catch{}
+ if(currentStudyNode)renderStudyItems(currentStudyNode);
+ if(selectedStudy)prepareStudy(selectedStudy.index,false);
+});
+document.getElementById('detail-items').addEventListener('click',e=>{
+ const preview=e.target.closest('[data-preview]');if(preview)prepareStudy(Number(preview.dataset.preview));
+ const launch=e.target.closest('[data-study]');if(launch){prepareStudy(Number(launch.dataset.study),false);document.getElementById('study-status').textContent='Abertura solicitada ao aplicativo. Se ele não abrir, copie o prompt abaixo ou use a opção web.'}
+});
+async function copyStudyPrompt(){
+ const field=document.getElementById('study-prompt'),status=document.getElementById('study-status');
+ try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(field.value)}else{throw new Error('Clipboard unavailable')}status.textContent='Prompt copiado. Cole em uma nova conversa do ChatGPT.';return true}
+ catch{field.focus();field.select();try{if(document.execCommand('copy')){status.textContent='Prompt copiado. Cole em uma nova conversa do ChatGPT.';return true}}catch{}status.textContent='O navegador não permitiu copiar automaticamente. O texto está selecionado: use Ctrl+C (ou ⌘C).';return false}
+}
+document.getElementById('study-copy').addEventListener('click',copyStudyPrompt);
+document.getElementById('study-web').addEventListener('click',()=>{void copyStudyPrompt()});
+
+
+
+const granSearchCatalog={"source": "Gran Questões · interface autenticada", "verifiedAt": "2026-10-25", "topics": [{"blocos": ["p1"], "label": "Interpretação de Texto — ramo amplo", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403701%2C409511%2C421058%2C430370%2C419148%2C419149%2C419150%2C408995%2C403705%2C409010%2C409011%2C409012%2C419151%2C419152%2C408983%2C408984%2C408985%2C419154%2C419155%2C419156%2C419157%2C419158%2C419160%2C419161%2C419162%2C419163%2C408987%2C403683%2C403684%2C403685%2C403686%2C403687%2C403688%2C403689%2C403690%2C403691%2C403692%2C403693%2C403694%2C403695%2C403696%2C403697%2C403698%2C403699%2C408988%2C408989%2C408990%2C408991%2C408992%2C408993%2C419164%2C419165%2C419166%2C419167%2C419168%2C419169%2C419170%2C419171%2C419172%2C419173%2C419174%2C403707%2C408996%2C408997%2C408998%2C408999%2C409000%2C409001%2C403706%2C409576%2C409577%2C409587%2C419175%2C419176%2C403708%2C409578%2C409579%2C409580%2C409581%2C409582%2C409583%2C409584%2C409585%2C409586%2C403703%2C403702%2C409512%2C419177%2C419178%2C419179%2C419180%2C419181%2C419182%2C419183%2C419184%2C409517%2C409519%2C409518%2C409524%2C409525%2C409526%2C409527%2C409528%2C409529%2C409530%2C409531%2C409532%2C409533%2C409534%2C409535%2C409536%2C409537%2C409538%2C409510%2C409539%2C409540%2C409541%2C419186%2C409542%2C409543%2C409544%2C419187%2C419188%2C419189%2C419190%2C419191%2C419192%2C419193%2C419194%2C419195%2C419196%2C419197%2C419198%2C419199%2C409520%2C419200%2C419201%2C419202%2C419203%2C419204%2C419205%2C419207%2C419208%2C419209%2C419210%2C419211%2C419212%2C419213%2C419214%2C419216&desatualizada=0&anulada=0", "count": 5905, "verified": true, "params": {"banca": "102", "assunto": "403701,409511,421058,430370,419148,419149,419150,408995,403705,409010,409011,409012,419151,419152,408983,408984,408985,419154,419155,419156,419157,419158,419160,419161,419162,419163,408987,403683,403684,403685,403686,403687,403688,403689,403690,403691,403692,403693,403694,403695,403696,403697,403698,403699,408988,408989,408990,408991,408992,408993,419164,419165,419166,419167,419168,419169,419170,419171,419172,419173,419174,403707,408996,408997,408998,408999,409000,409001,403706,409576,409577,409587,419175,419176,403708,409578,409579,409580,409581,409582,409583,409584,409585,409586,403703,403702,409512,419177,419178,419179,419180,419181,419182,419183,419184,409517,409519,409518,409524,409525,409526,409527,409528,409529,409530,409531,409532,409533,409534,409535,409536,409537,409538,409510,409539,409540,409541,419186,409542,409543,409544,419187,419188,419189,419190,419191,419192,419193,419194,419195,419196,419197,419198,419199,409520,419200,419201,419202,419203,419204,419205,419207,419208,419209,419210,419211,419212,419213,419214,419216", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [0, 2], "amplo": true}, {"blocos": ["p2"], "label": "Coesão e coerência", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403711%2C409551%2C409552&desatualizada=0&anulada=0", "count": 259, "params": {"banca": "102", "assunto": "403711,409551,409552", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [1, 2], "amplo": false}, {"blocos": ["p3"], "label": "Análise sintática", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403652&desatualizada=0&anulada=0", "count": 239, "verified": true, "params": {"banca": "102", "assunto": "403652", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [1], "amplo": false}, {"blocos": ["p4"], "label": "Reescrita de frases e parágrafos do texto", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403712%2C409564%2C419267&desatualizada=0&anulada=0", "count": 420, "verified": true, "params": {"banca": "102", "assunto": "403712,409564,419267", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [0, 1], "amplo": false}, {"blocos": ["p2"], "label": "Ortografia oficial e acentuação gráfica", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403613%2C419321&desatualizada=0&anulada=0", "count": 101, "verified": true, "params": {"banca": "102", "assunto": "403613,419321", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [0], "amplo": false}, {"blocos": ["p1"], "label": "Tipologias e Gêneros Textuais", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403703&desatualizada=0&anulada=0", "count": 48, "verified": true, "params": {"banca": "102", "assunto": "403703", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [1], "amplo": false}, {"blocos": ["r4"], "label": "Lógica Proposicional", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=404259%2C411071&desatualizada=0&anulada=0", "count": 19, "verified": true, "params": {"banca": "102", "assunto": "404259,411071", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["r3"], "label": "Princípios de Contagem e Probabilidade", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=425313%2C425314&desatualizada=0&anulada=0", "count": 15, "verified": true, "params": {"banca": "102", "assunto": "425313,425314", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["r1"], "label": "Aritmética e Fundamentos básicos", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403826%2C403827%2C408550%2C408551%2C408552%2C408553%2C408554%2C408555%2C408556%2C408557%2C408558%2C440298%2C440299%2C403830%2C408559%2C408560%2C408561%2C408562%2C408563%2C408564%2C425053%2C408565%2C408566%2C408567%2C403831%2C408568%2C408573%2C408574%2C408569%2C408575%2C408570%2C408576%2C408577%2C408571%2C408578%2C408579%2C408572%2C403835%2C408580%2C408581%2C408582%2C408583%2C403833%2C408584%2C408585%2C408586%2C408587%2C408588%2C408589%2C408590%2C408591%2C408592%2C403832%2C408593%2C408594%2C403910%2C408595%2C408596%2C408597%2C408598%2C403838%2C403828%2C408600%2C403829%2C425054%2C425055%2C425056%2C403836%2C403834%2C425058%2C440803&desatualizada=0&anulada=0", "count": 1294, "verified": true, "params": {"banca": "102", "assunto": "403826,403827,408550,408551,408552,408553,408554,408555,408556,408557,408558,440298,440299,403830,408559,408560,408561,408562,408563,408564,425053,408565,408566,408567,403831,408568,408573,408574,408569,408575,408570,408576,408577,408571,408578,408579,408572,403835,408580,408581,408582,408583,403833,408584,408585,408586,408587,408588,408589,408590,408591,408592,403832,408593,408594,403910,408595,408596,408597,408598,403838,403828,408600,403829,425054,425055,425056,403836,403834,425058,440803", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["r2"], "label": "Álgebra e equações polinominais + Álgebra Linear", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403837%2C403891%2C408693%2C408694%2C408695%2C425093%2C408702%2C408703%2C408709&desatualizada=0&anulada=0", "count": 39, "verified": true, "params": {"banca": "102", "assunto": "403837,403891,408693,408694,408695,425093,408702,408703,408709", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t1"], "label": "Tecnologia da Informação — busca geral", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=14&desatualizada=0&anulada=0", "count": 10365, "verified": true, "params": {"banca": "102", "assunto": "14", "desatualizada": "0", "anulada": "0"}, "coverage": "ampla", "verifiedAt": "2026-10-25", "itens": [], "amplo": true}, {"blocos": ["t5"], "label": "Banco de Dados", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=8026%2C400723%2C8076%2C397486%2C8064%2C8027%2C8028%2C8029%2C8036%2C8035%2C8034%2C8033%2C8032%2C8037%2C8038%2C8030%2C8031%2C8039%2C8040%2C8041%2C8042%2C8043%2C8044%2C8080%2C8081%2C8075%2C8057%2C8045%2C8046%2C8047%2C8048%2C8049%2C8050%2C8051%2C8052%2C8053%2C8054%2C8055%2C397485%2C8079%2C8078%2C397482%2C397484%2C397483%2C397481%2C8062%2C8061%2C8059%2C8056%2C8060%2C8058%2C416910%2C416903%2C8269%2C397560%2C8065%2C8066%2C8068%2C8022%2C8025%2C7969%2C7971%2C8067%2C7989%2C8086%2C8124%2C8096%2C8132%2C416975%2C416976%2C8069%2C400733%2C397572%2C8102%2C8143%2C416983%2C428516%2C428517%2C397350%2C416900%2C416899%2C416896%2C416933%2C8261%2C8271%2C416962%2C7949%2C8248%2C8098%2C397488%2C8110%2C8125%2C397487%2C8183%2C8186%2C416960%2C416968%2C8010%2C7999%2C416941%2C7992%2C400729%2C397545%2C428518%2C8004%2C8100%2C8099%2C7963%2C397544%2C7972%2C400726%2C7973%2C8089%2C7964%2C397349%2C8152%2C400727%2C8001%2C7975&desatualizada=0&anulada=0", "count": 1305, "verified": true, "params": {"banca": "102", "assunto": "8026,400723,8076,397486,8064,8027,8028,8029,8036,8035,8034,8033,8032,8037,8038,8030,8031,8039,8040,8041,8042,8043,8044,8080,8081,8075,8057,8045,8046,8047,8048,8049,8050,8051,8052,8053,8054,8055,397485,8079,8078,397482,397484,397483,397481,8062,8061,8059,8056,8060,8058,416910,416903,8269,397560,8065,8066,8068,8022,8025,7969,7971,8067,7989,8086,8124,8096,8132,416975,416976,8069,400733,397572,8102,8143,416983,428516,428517,397350,416900,416899,416896,416933,8261,8271,416962,7949,8248,8098,397488,8110,8125,397487,8183,8186,416960,416968,8010,7999,416941,7992,400729,397545,428518,8004,8100,8099,7963,397544,7972,400726,7973,8089,7964,397349,8152,400727,8001,7975", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t2"], "label": "Engenharia de Software", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=7988&desatualizada=0&anulada=0", "count": 442, "verified": true, "params": {"banca": "102", "assunto": "7988", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t3"], "label": "Desenvolvimento de Software", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=7967&desatualizada=0&anulada=0", "count": 748, "verified": true, "params": {"banca": "102", "assunto": "7967", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t4"], "label": "Arquitetura de Software", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=400724%2C428761%2C397563%2C428766&desatualizada=0&anulada=0", "count": 61, "verified": true, "params": {"banca": "102", "assunto": "400724,428761,397563,428766", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t6"], "label": "Dispositivos Móveis (Android, IOS)", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=428749&desatualizada=0&anulada=0", "count": 22, "verified": true, "params": {"banca": "102", "assunto": "428749", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t7"], "label": "Noções de DevOps", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=428855&desatualizada=0&anulada=0", "count": 16, "verified": true, "params": {"banca": "102", "assunto": "428855", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t8"], "label": "Segurança da Informação", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=8150%2C429569%2C429586%2C429590&desatualizada=0&anulada=0", "count": 514, "verified": true, "params": {"banca": "102", "assunto": "8150,429569,429586,429590", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t9"], "label": "Inteligência Artificial", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=430204&desatualizada=0&anulada=0", "count": 82, "verified": true, "params": {"banca": "102", "assunto": "430204", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t11"], "label": "Conceitos de Acessibilidade", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=398540%2C416918&desatualizada=0&anulada=0", "count": 23, "verified": true, "params": {"banca": "102", "assunto": "398540,416918", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["t10"], "label": "Lei Geral de Proteção de Dados Pessoais (LGPD)", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=404802%2C428157&desatualizada=0&anulada=0", "count": 196, "verified": true, "params": {"banca": "102", "assunto": "404802,428157", "desatualizada": "0", "anulada": "0"}, "coverage": "recorte", "verifiedAt": "2026-10-25", "itens": [], "amplo": false}, {"blocos": ["p3"], "label": "Classes de palavras", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=419336&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "419336", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [0], "amplo": false}, {"blocos": ["p3"], "label": "Uso da vírgula", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403667&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "403667", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [2], "amplo": false}, {"blocos": ["p3"], "label": "Emprego do sinal indicativo de crase", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403682&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "403682", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [5], "amplo": false}, {"blocos": ["p3"], "label": "Voz passiva", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=409191&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "409191", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [], "amplo": false}, {"blocos": ["p3"], "label": "Gerúndio", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=419383&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "419383", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [], "amplo": false}, {"blocos": ["p3"], "label": "Classificação dos advérbios", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=409264&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "409264", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [], "amplo": false}, {"blocos": ["p3"], "label": "Classes morfológicas da palavra \"se\"", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=409451&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "409451", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [], "amplo": false}, {"blocos": ["p2"], "label": "Senão/se não", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403689&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "403689", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [0], "amplo": false}, {"blocos": ["p2"], "label": "Por que/porque/porquê/por quê", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403684&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "403684", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [0], "amplo": false}, {"blocos": ["p4"], "label": "Equivalência e substituição de palavras, locuções, expressões e trechos", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=419266&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "419266", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [0], "amplo": false}, {"blocos": ["p4"], "label": "Reorganização e reescrita de orações e períodos", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=409564&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "409564", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [1], "amplo": false}, {"blocos": ["p4"], "label": "Redundância", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=409501&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "409501", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [], "amplo": false}, {"blocos": ["p1"], "label": "Tipologias Textuais", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=403702&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "403702", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [1], "amplo": false}, {"blocos": ["p1"], "label": "Texto literário e texto não literário", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=419167&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "419167", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [], "amplo": false}, {"blocos": ["p1"], "label": "Notícia", "url": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos?banca=102&assunto=419225&desatualizada=0&anulada=0", "count": null, "verified": false, "status": "testar", "params": {"banca": "102", "assunto": "419225", "desatualizada": "0", "anulada": "0"}, "coverage": "id extraído dos links das questões", "verifiedAt": null, "itens": [], "amplo": false}], "parameters": {"banca": {"FGV": "102"}, "assunto": {"format": "IDs separados por vírgula; pode representar disciplina, assunto ou conjunto de subassuntos; usar as combinações registradas"}, "desatualizada": {"exclude": "0"}, "anulada": {"exclude": "0"}, "nivel": {"Superior": "1"}, "dificuldade": {"Difícil": "4"}, "anos": {"example": "2026"}, "carreira": {"Tribunais": "103"}}, "route": "https://questoes.grancursosonline.com.br/aluno/filtro/concursos", "kind": "web-filter-catalog", "internalApi": {"status": "not_inspected", "note": "Nenhum endpoint interno, cabeçalho de autenticação ou corpo de requisição foi capturado. URLs de interface não são endpoints de API."}, "notes": ["Filtros observados pela interface; a correspondência com os blocos é uma organização pedagógica e pode ser parcial.", "Ao selecionar ramos, a lista de IDs pode mudar conforme os subassuntos selecionados. Não pressupor que um ID inclua automaticamente todos os descendentes.", "Uma disciplina selecionada sem recorte específico pode ampliar a busca para a disciplina inteira.", "As contagens são observações de 25/10/2026 e não são consultadas ao vivo no mapa.", "Não foram respondidas questões nem alterados gabaritos nesta pesquisa.", "Buscas com status 'testar' usam IDs de assunto extraídos dos links das questões do Gran (não foram abertas no filtro). Confirme o resultado antes de confiar.", "Itens sem busca própria (Concordância, Regência, Colocação pronominal, Reescrita de gêneros/formalidade, Redação oficial) aguardam ID: selecione o assunto no filtro do Gran e use a URL da barra de endereço."]};
+function granSearchUrl(filter){
+ const url=new URL(filter.url);
+ if(document.getElementById('gran-level').checked)url.searchParams.set('nivel','1');else url.searchParams.delete('nivel');
+ if(document.getElementById('gran-court').checked)url.searchParams.set('carreira','103');else url.searchParams.delete('carreira');
+ if(document.getElementById('gran-hard').checked)url.searchParams.set('dificuldade','4');else url.searchParams.delete('dificuldade');
+ if(document.getElementById('gran-year').checked)url.searchParams.set('anos','2026');else url.searchParams.delete('anos');
+ return url.href;
+}
+function granRefined(){return ['gran-level','gran-court','gran-hard','gran-year'].some(i=>document.getElementById(i).checked)}
+function granSmall(f){return granRefined()&&f.count!=null&&f.count<100}
+function granNote(f){
+ if(f.status==='testar')return 'ID dos links do Gran · abra e confirme o resultado';
+ if(granSmall(f))return Number(f.count).toLocaleString('pt-BR')+' questões sem filtros · com filtros marcados pode vir vazio';
+ if(f.amplo)return 'Busca ampla ('+Number(f.count).toLocaleString('pt-BR')+' questões) · prefira um tópico específico';
+ return f.count==null?'Resultado confirmado na interface':Number(f.count).toLocaleString('pt-BR')+' questões na verificação inicial'+(granRefined()?' (sem filtros)':'');
+}
+function renderGranSearch(id){
+ const filters=granSearchCatalog.topics.filter(f=>f.blocos.includes(id)).sort((a,b)=>(a.amplo-b.amplo)||0);
+ const ok=filters.filter(f=>f.verified).length;
+ const primary=filters.find(f=>f.verified&&!f.amplo)||filters.find(f=>f.verified)||filters[0];
+ const direct=document.getElementById('gran-block-link');direct.hidden=!primary;
+ if(primary){direct.href=granSearchUrl(primary);direct.setAttribute('aria-label','Questões de '+nodes[id].title+' no Gran, banca FGV');}else direct.removeAttribute('href');
+ document.getElementById('gran-search').hidden=filters.length===0;
+ document.getElementById('gran-search-count').textContent=filters.length+(filters.length===1?' busca':' buscas')+(ok<filters.length?' · '+ok+' verificada'+(ok===1?'':'s'):(filters.length===1?' verificada':' verificadas'));
+ document.getElementById('gran-links').innerHTML=filters.map(f=>`<li><a href="${esc(granSearchUrl(f))}" target="_blank" rel="noopener noreferrer" aria-label="Buscar ${esc(f.label)} na FGV pelo Gran"><span>${esc(f.label)}<small class="${granSmall(f)||f.status==='testar'||f.amplo?'gran-warn':''}">${esc(granNote(f))}</small></span><span aria-hidden="true">↗</span></a></li>`).join('');
+}
+document.querySelectorAll('.gran-refine input').forEach(input=>input.addEventListener('change',()=>{if(currentStudyNode){renderGranSearch(currentStudyNode);renderStudyItems(currentStudyNode)}}));
+
+let granProgress=null;
+const pctClass=p=>p>=70?'p-ok':p>=50?'p-mid':'p-low';
+function applyProgress(){
+ Object.keys(nodes).forEach(id=>{
+  const num=document.querySelector('#node-'+id+' .num');if(!num)return;
+  num.querySelectorAll('.prog').forEach(x=>x.remove());
+  const d=granProgress&&granProgress.blocos&&granProgress.blocos[id];
+  if(!d)return;
+  const b=document.createElement('b');b.className='prog '+(d.tentativas>0?pctClass(d.pct):'p-none');
+  b.textContent=d.tentativas>0?d.pct+'%':'sem tentativas';
+  b.title=d.tentativas>0?d.acertos+' acertos em '+d.tentativas+' tentativas · '+d.questoes+' questões no banco':d.questoes+' questões no banco, ainda sem tentativas';
+  num.appendChild(b);
+ });
+}
+function renderProgress(id){
+ const box=document.getElementById('progress-block'),btn=document.getElementById('copy-extractor');
+ btn.textContent='📋 Copiar extrator deste bloco ('+id+')';
+ const d=granProgress&&granProgress.blocos&&granProgress.blocos[id];
+ const weak=[];
+ (nodes[id].before||[]).forEach(b=>{const x=granProgress&&granProgress.blocos&&granProgress.blocos[b];if(x&&x.tentativas>=5&&x.pct<70)weak.push(nodes[b].title+' ('+x.pct+'%)')});
+ if(!granProgress){box.hidden=true;return}
+ let h='<div class="progress-card"><h4>Seu desempenho neste bloco</h4>';
+ if(!d)h+='<small>Nenhuma questão deste bloco no banco ainda. Use o extrator abaixo e importe o JSON.</small>';
+ else if(!d.tentativas)h+='<small>'+d.questoes+' questões no banco, sem tentativas. Use Praticar neste bloco para começar pelo navegador.</small>';
+ else{
+  h+='<strong>'+d.pct+'%</strong> <small>('+d.acertos+' acertos em '+d.tentativas+' tentativas · '+d.respondidas+' de '+d.questoes+' questões vistas)</small>';
+  const fracos=d.assuntos.filter(a=>a.pct<70).slice(0,3);
+  if(fracos.length)h+='<ul>'+fracos.map(a=>'<li>'+esc(a.assunto)+': '+a.pct+'% ('+a.acertos+'/'+a.tentativas+')</li>').join('')+'</ul>';
+ }
+ if(weak.length)h+='<p class="progress-warn">Base abaixo de 70%: '+esc(weak.join(', '))+'. Vale reforçar antes de avançar.</p>';
+ h+='<small style="display:block;margin-top:6px">Progresso carregado em '+esc(String(granProgress.gerado_em||'').replace('T',' '))+'</small></div>';
+ box.innerHTML=h;box.hidden=false;
+}
+function loadProgress(o){
+ o=PracticeCore.normalizeProgress(o);
+ granProgress=o;
+ try{localStorage.setItem('tjpb-progresso',JSON.stringify(o))}catch{}
+ document.getElementById('progress-label').textContent='Progresso: '+String(o.gerado_em||'').slice(0,10);
+ applyProgress();
+ if(currentStudyNode&&modal.open)renderProgress(currentStudyNode);
+}
+document.getElementById('progress-btn').addEventListener('click',()=>document.getElementById('progress-file').click());
+document.getElementById('progress-file').addEventListener('change',e=>{
+ const f=e.target.files[0];if(!f)return;
+ f.text().then(t=>{try{const o=JSON.parse(t);if(!o.blocos)throw 0;loadProgress(o)}catch{alert('Arquivo inválido. Use o progresso.json gerado por: python estudo.py progresso')}});
+ e.target.value='';
+});
+document.getElementById('copy-extractor').addEventListener('click',async()=>{
+ const btn=document.getElementById('copy-extractor');
+ const src=document.getElementById('extrator-src').textContent.replace("const BLOCO='';","const BLOCO='"+currentStudyNode+"';");
+ let ok=false;
+ try{await navigator.clipboard.writeText(src);ok=true}catch{
+  const ta=document.createElement('textarea');ta.value=src;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+  try{ok=document.execCommand('copy')}catch{}ta.remove();
+ }
+ const old=btn.textContent;btn.textContent=ok?'✔ Copiado! Cole no Console do Gran':'Não consegui copiar';
+ setTimeout(()=>{btn.textContent=old},2800);
+});
+try{const raw=localStorage.getItem('tjpb-progresso');if(raw)loadProgress(JSON.parse(raw))}catch{}
+
+const themeToggle=document.getElementById('theme-toggle');
+function updateThemeControl(){const dark=document.documentElement.dataset.theme==='dark';themeToggle.setAttribute('aria-pressed',String(dark));document.getElementById('theme-label').textContent=dark?'Modo escuro':'Modo claro';themeToggle.querySelector('.theme-icon').textContent=dark?'☾':'☀';}
+themeToggle.addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{localStorage.setItem('tjpb-theme',theme)}catch{}updateThemeControl();draw();});
+window.addEventListener('storage',event=>{if(event.key==='tjpb-theme'){document.documentElement.dataset.theme=event.newValue==='light'?'light':'dark';updateThemeControl();draw();}});
+updateThemeControl();
+
+new ResizeObserver(()=>requestAnimationFrame(draw)).observe(area);window.addEventListener('load',draw);requestAnimationFrame(draw);
+</script>
+<script type="application/json" id="practice-seed">{"textos": ["ATENÇÃO: o texto a seguir refere-se às próximas 10 questões. Mário recomeçou a passear, com as mãos nos bolsos, a cabeça baixa. Camila, ainda na poltrona, com as costas para a janela, os cotovelos fincados nos joelhos e o queixo nas mãos, procurava uma palavra com que pudesse convencer o filho da sua inocência. Tudo lhe parecia preferível àquela humilhação. Daria a luz dos seus olhos, - ah, antes ela fosse cega! para que Mário a julgasse pura, muito digna de todo o respeito das filhas, muito honesta, toda de seu marido e das suas crianças. Compreendia bem que o sentimento e a imaginação nas mulheres só servem para a dor. Colhem rosas as insensíveis, que vivem eternamente na doce paz; para as outras há pedras, duras como aquelas palavras do seu filho adorado. Antes ela fora surda: não as teria ouvido! Quantas vezes o marido teria beijado outras mulheres, amado outros corpos... e aí estava como dele só se dizia bem! Ele amara outras pela volúpia, pelo pecado, pelo crime; ela só se desviara para um homem, depois de lutas redentoras; e porque fora arrastada nessa fascinação, e porque não sabia esconder a sua ventura, aí estava boca do filho a dizer-lhe amarguras... (ALMEIDA, Julia Lopes de. A Falência. São Paulo: Via Leitura, 2018.)"], "questoes": [{"id": "Q4327828", "assunto": ["Língua Portuguesa", "Gerúndio"], "prova": "FGV - ALE GO - Assistente Legislativo - Área: Técnico de Gravação de Som - 2026", "texto_id": null, "enunciado": "Leia com atenção o seguinte texto, retirado do Livro dos Erros, organizado por Mário Goulart: “O empresário Danilo Bastos comprou cenários e guarda-roupa para uma peça sobre Lucrécia Bórgia. Contratou Nestor de Holanda para escrever o texto e deixou claro: - O primeiro ato termina com Alexandre VI coroando Lucrécia rainha da Itália. Nestor se admirou: - Lucrécia nunca foi rainha da Itália. Danilo não quis saber: - Ah, se nunca foi, vai ser. Gastei mais de um milhão nos cenários e no guarda-roupa. Não posso perder esse dinheiro.” No segmento do texto: “- O primeiro ato termina com Alexandre VI coroando Lucrécia rainha da Itália.” A forma verbal de gerúndio “coroando” está empregada de forma correta. Dentre as frases retiradas do romance O Cortiço, de Aluísio Azevedo, assinale a única incorreta no uso do gerúndio.", "alternativas": {"A": "— Você quer encarregar-se disto? – propôs ele ao companheiro, parando ambos à espera do bonde; se quiser pode tratar, que lhe darei uma gratificação menos má...", "B": "...era vista com frequência a dar de mamar a um pequerrucho de poucos meses, empinando muito a barriga para a frente, pelo hábito de andar sempre grávida.", "C": "...que muitas vezes lhe arrancara, a ele, sinceras lágrimas de comoção, declamando no teatro em honra da moral triunfante e estigmatizando o adultério com a retórica mais veemente e indignada.", "D": "O rapaz não respondeu à carta, e, daí a meses, desaparecendo Pombinha da casa da mãe, essa quase morre de desgosto.", "E": "A cadeia continuava e continuaria interminavelmente; o cortiço estava preparando uma nova prostituta naquela pobre menina desamparada, que se fazia mulher ao lado de uma infeliz mãe ébria."}, "gabarito": "D", "bloco": "p3"}, {"id": "Q4327692", "assunto": ["Língua Portuguesa", "Literatura"], "prova": "FGV - ALE GO - Analista Legislativo - Área: Analista Administrativo - 2026", "texto_id": null, "enunciado": "A frase abaixo, retirada do romance O Coruja, de Aluísio Azevedo, que mostra uma troca indevida entre acidente e incidente, é:", "alternativas": {"A": "“Não procuravam as suas relações, nem ele as de ninguém, e, apesar das vaias e das repetidas pilhérias dos colegas, teria passado tranquilamente os primeiros dias da sua nova existência, se um incidente desagradável não o viesse perturbar.”", "B": "“Amavam-se brutalmente, e ambos sabiam disso. Esse amor irracional e empírico carregara-se muito mais, de parte a parte, com o trágico incidente da viagem, em que ele fora vítima.”", "C": "“Chegaram sem o menor incidente ao destino que levaram.”", "D": "“Coruja resignou-se, sem um gesto de contrariedade e não falou a ninguém sobre esse incidente, nem mesmo ao amigo.”", "E": "“E às quatro da tarde, sem nenhum outro incidente desagradável, voltavam à fazenda, trazendo consigo o tal Hipólito, que parecia embirrar com o Coruja ainda mais do que a própria noiva.”"}, "gabarito": "B", "bloco": "p1"}, {"id": "Q4413707", "assunto": ["Língua Portuguesa", "Voz passiva"], "prova": "FGV - EBSERH - Médico - Área: Cirurgia Geral - 2026", "texto_id": null, "enunciado": "Um aspecto interessante da língua escrita é a preferência pela voz ativa em lugar da passiva, ainda que essa seja útil em várias situações, já que a voz ativa torna a frase mais direta, objetiva e concisa. Assinale a frase que exemplifica um tipo de voz passiva.", "alternativas": {"A": "Os profissionais da saúde ajudam-se uns aos outros, ajudando os pacientes.", "B": "Indicam-se remédios aos doentes, segundo informações científicas dos laboratórios.", "C": "Todos os médicos tinham chegado à reunião na hora marcada pelo cirurgião-chefe.", "D": "Precisa-se de muita dedicação e conhecimento para o trabalho na área da saúde.", "E": "Todas as pessoas sentadas na sala de espera dos hospitais trazem alguma necessidade de ajuda."}, "gabarito": "B", "bloco": "p3"}, {"id": "Q4330866", "assunto": ["Língua Portuguesa", "Senão/se não"], "prova": "FGV - ALE RO - Analista Legislativo - Área Taquigrafia - 2026", "texto_id": null, "enunciado": "Assinale a frase em que houve troca indevida entre senão / se não.", "alternativas": {"A": "“Pode o cão ladrar contra todos, mas não pode morder senão os que dele se aproximam.” (Santo Agostinho).", "B": "“Você, se não for ao enterro dos outros, eles não virão ao seu.” (Clarence Day).", "C": "“A ciência não será jamais o culto senão de uma pequena parcela da humanidade.” (Joaquim Nabuco).", "D": "“Em certa idade da vida, se não se encher de crianças a sua casa, ela se encherá de manias e de vícios.” (Sainte-Beuve).", "E": "“Os homens não seguem se não aqueles que não estão em dúvida.” (Walter Lippman)."}, "gabarito": "E", "bloco": "p2"}, {"id": "Q4349097", "assunto": ["Língua Portuguesa", "Norma culta ou norma padrão"], "prova": "FGV - TJ RJ - Técnico de Atividade Judiciária sem Especialidade - 2026", "texto_id": null, "enunciado": "A substantivação é um processo sintático de transformar outras classes de palavras em substantivos. A frase em que isso NÃO ocorre é:", "alternativas": {"A": "“O silêncio não era completo; ouvia-se o rodar de carros que passavam fora.” (A Mão e a Luva)", "B": "“O proceder de Luís Alves, sóbrio, direto, sem desfalecimentos, fazia perceber à moça que ele nascera para vencer.” (A Mão e a Luva)", "C": "“Estácio gostava de lhe ver o airoso do busto e a firme serenidade com que ela conduzia o animal.” (Helena)", "D": "“Apertei-lhes a mão e saí, a rir comigo da superstição das duas mulheres, um rir filosófico, desinteressado, superior.” (Memórias Póstumas de Brás Cubas)", "E": "“Raimundo parecia feito expressamente para servir Luís Garcia.” (Iaiá Garcia)"}, "gabarito": "E", "bloco": "p3"}, {"id": "Q4326706", "assunto": ["Língua Portuguesa", "Estrangeirismo"], "prova": "FGV - ALE RJ - Especialista Legislativo - Nível III - Área: Administração Geral - 2026", "texto_id": null, "enunciado": "Todas as frases a seguir mostram palavras de origem inglesa (anglicismos), frequentes em nosso vocabulário. Assinale a frase em que o anglicismo empregado tem seu equivalente em língua portuguesa corretamente indicado.", "alternativas": {"A": "No grupo, àquela hora, havia muitos participantes online. / abordando o mesmo tema.", "B": "O serviço de delivery funciona diariamente em São Paulo. / de alimentação.", "C": "Mandei um e-mail de agradecimento a todos os participantes do grupo. / correio eletrônico.", "D": "A música country não agrada a todos os públicos. / tradicional.", "E": "Os restaurantes cariocas servem drinks variados. / uísques."}, "gabarito": "C", "bloco": "p1"}, {"id": "Q4330915", "assunto": ["Língua Portuguesa", "Equivalência e substituição de palavras, locuções, expressões e trechos."], "prova": "FGV - ALE RO - Analista Legislativo - Área: Redação e Revisão - 2026", "texto_id": null, "enunciado": "As frases abaixo utilizam o verbo ter em lugar de outro de significado mais específico. Assinale a frase em que a substituição de ter por outro verbo é feita de forma adequada.", "alternativas": {"A": "Meu filho tem um cargo importante numa multinacional. / desempenha", "B": "Além de ter herdado uma fortuna, tem muito bom salário. / dispõe de.", "C": "É, em termos gerais, um bom projeto, mas tem alguns problemas que devem ser resolvidos. / apresenta.", "D": "Depois de longa disputa, Paulo teve de novo as terras que sempre foram de sua família. / ganhou.", "E": "Temos o projeto de fazer uma nova sede no Rio. / Oferecemos."}, "gabarito": "C", "bloco": "p4"}, {"id": "Q4417739", "assunto": ["Língua Portuguesa", "Redundância"], "prova": "FGV - Prefeitura de São José dos Campos - Professor II - Área Português - 2026", "texto_id": null, "enunciado": "Assinale a frase abaixo em que não foi empregada uma construção redundante, o que se deve evitar na língua escrita.", "alternativas": {"A": "Responda a esse pedido e ganhe grátis um livro.", "B": "Os operários receberão um prêmio adicional a mais.", "C": "Ontem à noite os turistas saíram protegidos e cobertos por capas de chuva.", "D": "Ficamos zangados com os que nos invejam, e aflitos se ninguém nos inveja.", "E": "Não há nada tão irreal e inverossímil como os acontecimentos da vida real"}, "gabarito": "D", "bloco": "p4"}, {"id": "Q4330880", "assunto": ["Língua Portuguesa", "Uso da Vírgula"], "prova": "FGV - ALE RO - Analista Legislativo - Área Taquigrafia - 2026", "texto_id": null, "enunciado": "O segmento textual abaixo que se mostra inteiramente correto quanto ao uso de vírgulas, é:", "alternativas": {"A": "Olhe, se me cedesse as dez braças do fundo a sua parte ficaria cortada em linha reta até à pedreira, e escusava eu de ficar com uma aba de terreno alheio a meter-se pelo meu.", "B": "Mas nenhuma outra guerra é possível à Alemanha senão uma guerra mundial sim, uma guerra mundial de extensão e violência nunca imaginadas.", "C": "Já que ninguém conhece a si mesmo ninguém pode julgar o outro.", "D": "Crer no progresso não significa que o progresso já se efetuou.", "E": "A verdadeira questão não é se as máquinas pensam mas se os homens pensam."}, "gabarito": "D", "bloco": "p3"}, {"id": "Q4330800", "assunto": ["Língua Portuguesa", "Classificação dos advérbios"], "prova": "FGV - ALE RO - Analista Legislativo - Área: Redação e Revisão - 2026", "texto_id": null, "enunciado": "Assinale a frase em que a classificação do advérbio sublinhado está corretamente feita.", "alternativas": {"A": "“As sociedades modernas parecem orgulhar-se «demais» da abolição da escravatura” (Marquês de Custine) / intensidade.", "B": "“Academia é esse hospital de parlapatice, onde se pratica «diariamente», in anima mobili, a experiência do medalhão” (Mário de Andrade) / modo.", "C": "“Aquela sombria gravidade que a gente nota nas fotografias em grupo dos membros da ABL é de reprovação pelo Português «ainda» estar vivo” (Luís Fernando Veríssimo) / afirmação.", "D": "“Se o mundo fosse «realmente» governado pelo acaso, não haveria tantas injustiças” (Galiani) / dúvida.", "E": "“O que chamamos acaso «talvez» seja a lógica de Deus” (Bernanos) / negação."}, "gabarito": "A", "bloco": "p3"}, {"id": "Q4418407", "assunto": ["Língua Portuguesa", "Metodologia de ensino de língua portuguesa"], "prova": "FGV - Prefeitura de São José dos Campos - Professor I - 2026", "texto_id": null, "enunciado": "Leia o texto a seguir. Tomando-se a linguagem como atividade discursiva, o texto como unidade de ensino e a noção de gramática como relativa ao conhecimento que o falante tem de sua linguagem, as atividades curriculares em Língua Portuguesa correspondem, principalmente, a atividades discursivas: uma prática constante de escuta de textos orais e leitura de textos escritos e de produção de textos orais e escritos, que devem permitir, por meio da análise e reflexão sobre os múltiplos aspectos envolvidos, a expansão e construção de instrumentos que permitam ao aluno, progressivamente, ampliar sua competência discursiva. (BRASIL, Ministério da Educação, (1998). Parâmetros Curriculares Nacionais para o Ensino Fundamental. Brasília, MEC/SEF. p. 27) Desde a publicação dos Parâmetros Curriculares Nacionais, a escuta e a produção de gêneros textuais orais passaram a figurar oficialmente nos manuais de ensino. Assinale a opção que apresenta uma das razões da importância do trabalho com gêneros orais na escola.", "alternativas": {"A": "Ampliar o repertório de regras gramaticais inerentes ao uso adequado do português em contextos formais.", "B": "Sustentar posições ideológicas por meio de estratégias linguísticas que se dão na interação face a face.", "C": "Compreender que a oralidade deve ser usada em contextos informais e a escrita, em contextos formais.", "D": "Reconhecer a contribuição de elementos não verbais (gestos, entonações e expressões faciais) na produção discursiva.", "E": "Inferir a forma como o interlocutor lida com o texto oral produzido a partir de suas reações comportamentais."}, "gabarito": "D", "bloco": "p1"}, {"id": "Q4363334", "assunto": ["Língua Portuguesa", "Emprego do sinal indicativo de crase"], "prova": "FGV - IBGE - Agente de Pesquisas e Mapeamento - 2026", "texto_id": 0, "enunciado": "Sobre o trecho “Tudo lhe parecia preferível àquela humilhação.”, assinale a afirmativa correta.", "alternativas": {"A": "A crase se justifica pela junção do “a” preposição + “a” que inicia o pronome “aquela”.", "B": "Existe um erro de construção, já que o pronome não admite crase.", "C": "É gramaticalmente correto substituir a preposição “a” pela expressão “do que”.", "D": "A substituição de “àquela humilhação” por “aquele insulto” implicaria ausência de acento grave, já que antes de palavra no gênero masculino não se usa crase.", "E": "O uso da crase é facultativo, considerando que o pronome “aquela” admite dupla possibilidade de uso do acento grave."}, "gabarito": "A", "bloco": "p3"}, {"id": "Q4363358", "assunto": ["Língua Portuguesa", "Por que/porque/porquê/por quê"], "prova": "FGV - IBGE - Agente de Pesquisas e Mapeamento - 2026", "texto_id": 0, "enunciado": "Em “e porque fora arrastada nessa fascinação”, a grafia do elemento destacado se justifica, pois", "alternativas": {"A": "é um pronome interrogativo.", "B": "apresenta uma preposição ligada a um pronome relativo.", "C": "é um termo substantivado.", "D": "trata-se de uma conjunção causal.", "E": "está sendo utilizado em início de frase."}, "gabarito": "D", "bloco": "p2"}, {"id": "Q4330285", "assunto": ["Língua Portuguesa", "Classes de palavras (classes gramaticais)"], "prova": "FGV - ALE RO - Consultor Legislativo - Área Assessoramento em Orçamentos - 2026", "texto_id": null, "enunciado": "Assinale a frase em que o termo sublinhado corresponde a um particípio e não a um adjetivo.", "alternativas": {"A": "“Venha! O senhor será sempre recebido de braços «abertos» nesta casa;” (Aluísio Azevedo)", "B": "“...ora topava um pedaço de madeira enterrado na areia, ora dava com alguns destroços do leme ou do casco, e, à proporção que os ia descobrindo, atirava-os à boca «aberta» do mar, como um domador que, depois de dar de comer à fera, ajunta-lhe ainda as migalhas caídas por fora da jaula.” (Aluísio Azevedo)", "C": "“O velho roncava estas palavras na posição da fera que arma o pulo. Firmado nas plantas, com as mãos «abertas» como duas garras, encarava feroz Miguel, como suspenso à espera da resposta suprema.” (Aluísio Azevedo)", "D": "“Como os mais vestia um jaquetão de veludo com mangas compridas e abotoadas, calções justos e claros, enfeitados de fitas na junção com a meia listrada, camisa de lã, «aberta» pelo vento, no pescoço.” (Aluísio Azevedo)", "E": "“– Então! Senhor Miguel! Não temos hoje leitura? – perguntou Ângela, colocando a mão «aberta» sobre os olhos para poder enxergar o interrogado.” (Aluísio Azevedo)"}, "gabarito": "D", "bloco": "p3"}, {"id": "Q4363330", "assunto": ["Língua Portuguesa", "Tipologias Textuais"], "prova": "FGV - IBGE - Agente de Pesquisas e Mapeamento - 2026", "texto_id": 0, "enunciado": "O texto classifica-se como", "alternativas": {"A": "injuntivo.", "B": "argumentativo.", "C": "descritivo.", "D": "narrativo.", "E": "expositivo."}, "gabarito": "D", "bloco": "p1"}, {"id": "Q4570272", "assunto": ["Língua Portuguesa", "Norma culta ou norma padrão"], "prova": "FGV - Prefeitura de Macaé - Técnico em Saúde Bucal - 2026", "texto_id": null, "enunciado": "A norma culta é fator importante na língua escrita. Assinale a opção que apresenta a frase inteiramente adequada à correção gramatical.", "alternativas": {"A": "O paciente não quiz ser operado de imediato.", "B": "Se os médicos requisessem mais verbas, seriam atendidos.", "C": "Os laboratórios querem que os médicos receitassem seus remédios.", "D": "Os hospitais públicos não tem condições de competir com os hospitais particulares.", "E": "Os doentes com maior gravidade serão previamente selecionados para atendimento de urgência."}, "gabarito": "E", "bloco": "p3"}, {"id": "Q4330877", "assunto": ["Língua Portuguesa", "Classes morfológicas da palavra \"se\""], "prova": "FGV - ALE RO - Analista Legislativo - Área Taquigrafia - 2026", "texto_id": null, "enunciado": "A frase abaixo em que o pronome SE tem valor de pronome recíproco, é:", "alternativas": {"A": "“Lagartas que buscassem conhecer-se a si mesmas jamais se transformariam em borboletas.” (André Gide).", "B": "“Ele conhece todo o universo e não se conhece.” (La Fontaine).", "C": "“Quem erra a primeira casa do botão, não conseguirá abotoar-se.” (Goethe).", "D": "“Saber e chorar se abraçam e isso significa viver.” (Dostoievski).", "E": "“É melhor morrer de acordo com as regras que salvar-se contra elas.” (Molière)."}, "gabarito": "D", "bloco": "p3"}, {"id": "Q4363337", "assunto": ["Língua Portuguesa", "Reorganização e reescrita de orações e períodos"], "prova": "FGV - IBGE - Agente de Pesquisas e Mapeamento - 2026", "texto_id": 0, "enunciado": "Assinale a opção em que a reescrita do trecho “Colhem rosas as insensíveis, que vivem eternamente na doce paz (...)” mantém o sentido original.", "alternativas": {"A": "As insensíveis, que vivem eternamente na doce paz, colhem rosas.", "B": "As insensíveis colhem rosas, que vivem eternamente na doce paz.", "C": "Eternamente na doce paz vivem as insensíveis que colhem rosas.", "D": "As insensíveis eternamente colhem rosas, que vivem na doce paz.", "E": "Na doce paz, eternamente vivem as rosas, que colhem as insensíveis."}, "gabarito": "A", "bloco": "p4"}, {"id": "Q4418429", "assunto": ["Língua Portuguesa", "Notícia"], "prova": "FGV - Prefeitura de São José dos Campos - Professor I - 2026", "texto_id": null, "enunciado": "Leia o texto a seguir, publicado em outubro de 2024: Comissão de Educação aprova projeto que proíbe uso de celular em escolas Uso fica proibido inclusive no recreio e crianças de até dez anos não poderão sequer portar consigo o aparelho 30/10/2024 - 15:02 Fonte: Agência Câmara de Notícias A Comissão de Educação da Câmara dos Deputados aprovou projeto de lei que proíbe o uso de telefone celular e de outros aparelhos eletrônicos portáteis por alunos da educação básica em escolas públicas e particulares, inclusive no recreio e nos intervalos entre as aulas. Além de proibir o uso, o texto proíbe também o porte de celular por alunos da educação infantil e dos anos iniciais do ensino fundamental, para que se protejam crianças de até 10 anos de idade de possíveis abusos. A proposta autoriza, por outro lado, o uso de celular em sala de aula para fins estritamente pedagógicos, em todos os anos da educação básica. Permite, ainda, o uso para fins de acessibilidade, inclusão e condições médicas. (https://www.camara.leg.br/noticias/1106874-comissao-de-educacao-aprovaprojeto-que-proibe-uso-de-celular-em-escolas - acesso em 31.10.24) Assinale a opção que apresenta uma razão pela qual se pode afirmar que se trata de um texto pertencente ao gênero “notícia”.", "alternativas": {"A": "Presença de verbos no passado.", "B": "Informalidade nas escolhas linguísticas.", "C": "Objetividade na transmissão da informação.", "D": "Presença de fonte e autoria.", "E": "Temática de relevância educacional."}, "gabarito": "C", "bloco": "p1"}, {"id": "Q4363339", "assunto": ["Língua Portuguesa", "Texto literário e texto não literário"], "prova": "FGV - IBGE - Agente de Pesquisas e Mapeamento - 2026", "texto_id": 0, "enunciado": "O texto se caracteriza como literário, pois apresenta função", "alternativas": {"A": "utilitária, com linguagem predominantemente objetiva.", "B": "descritiva, uma vez que narra informações precisas, com linguagem técnica.", "C": "artística, já que fala sobre o próprio fazer poético.", "D": "estética, em que o modo de dizer importa na construção de sentido.", "E": "informativa, considerando o compromisso com a veracidade dos fatos."}, "gabarito": "D", "bloco": "p1"}, {"id": "FGV-TI-01", "assunto": ["Engenharia de Software", "Scrum", "Metodologias Ágeis"], "bloco": "t2", "prova": "FGV - Analista Judiciário - Desenvolvimento de Sistemas", "texto_id": null, "enunciado": "No framework Scrum, o evento com timebox de no máximo 3 horas para uma Sprint de um mês, que tem como objetivo inspecionar como foi a última Sprint no que diz respeito às pessoas, aos relacionamentos, aos processos e às ferramentas, visando à melhoria contínua da equipe, é denominado:", "alternativas": {"A": "Sprint Planning.", "B": "Daily Scrum.", "C": "Sprint Review.", "D": "Sprint Retrospective.", "E": "Backlog Refinement."}, "gabarito": "D"}, {"id": "FGV-TI-02", "assunto": ["Engenharia de Software", "Qualidade e Testes de Software"], "bloco": "t8", "prova": "FGV - Analista de TI - Engenharia de Software", "texto_id": null, "enunciado": "Em relação às técnicas de teste de software, assinale a opção que descreve corretamente o Teste de Caixa-Preta (funcional):", "alternativas": {"A": "Baseia-se na análise direta da estrutura interna do código-fonte e dos fluxos lógicos de execução.", "B": "Avalia o comportamento externo do sistema ou componente a partir dos requisitos e especificações, sem conhecimento da sua implementação interna.", "C": "Consiste exclusivamente na conferência da taxa de cobertura de comandos e decisões em tempo de compilação.", "D": "É executado necessariamente pelos programadores que escreveram os módulos antes de qualquer integração.", "E": "Examina apenas o consumo de CPU e vazamento de memória dos objetos em runtime."}, "gabarito": "B"}, {"id": "FGV-TI-03", "assunto": ["Banco de Dados", "SQL", "Transações e Propriedades ACID"], "bloco": "t5", "prova": "FGV - Analista Judiciário - Banco de Dados", "texto_id": null, "enunciado": "Em sistemas gerenciadores de banco de dados relacionais (SGBD-R), a propriedade de transação ACID que assegura que, uma vez confirmada (commit) a transação, seus efeitos persistem no banco mesmo na ocorrência de falhas posteriores de energia ou do sistema operacional, é a:", "alternativas": {"A": "Atomicidade.", "B": "Consistência.", "C": "Isolamento.", "D": "Durabilidade.", "E": "Integridade Referencial."}, "gabarito": "D"}, {"id": "FGV-TI-04", "assunto": ["Banco de Dados", "SQL e Álgebra Relacional"], "bloco": "t5", "prova": "FGV - Analista de Sistemas - Banco de Dados", "texto_id": null, "enunciado": "Considere duas tabelas A e B. Na linguagem SQL ANSI, a junção que retorna todos os registros da tabela A e apenas os registros correspondentes da tabela B (preenchendo com valores NULL nas colunas de B quando não houver correspondência) é:", "alternativas": {"A": "INNER JOIN.", "B": "LEFT OUTER JOIN.", "C": "RIGHT OUTER JOIN.", "D": "FULL OUTER JOIN.", "E": "CROSS JOIN."}, "gabarito": "B"}, {"id": "FGV-TI-05", "assunto": ["Arquitetura de Software", "Design Patterns"], "bloco": "t4", "prova": "FGV - Analista Judiciário - Desenvolvimento de Sistemas", "texto_id": null, "enunciado": "De acordo com o catálogo GoF (Gang of Four), o padrão de projeto comportamental que define uma família de algoritmos, encapsula cada um deles e os torna intercambiáveis, permitindo que o algoritmo varie independentemente dos clientes que o utilizam, é o:", "alternativas": {"A": "Singleton.", "B": "Adapter.", "C": "Strategy.", "D": "Decorator.", "E": "Facade."}, "gabarito": "C"}, {"id": "FGV-TI-06", "assunto": ["DevOps e Nuvem", "DevSecOps", "Contêineres"], "bloco": "t7", "prova": "FGV - Analista Judiciário - Infraestrutura e DevOps", "texto_id": null, "enunciado": "Em ambientes de integração e entrega contínuas (CI/CD) utilizando Docker e Kubernetes, o conceito que define a menor unidade de execução gerenciável e implantável no Kubernetes, composta por um ou mais contêineres que compartilham rede e armazenamento, é denominado:", "alternativas": {"A": "Cluster.", "B": "Pod.", "C": "ReplicaSet.", "D": "DaemonSet.", "E": "Ingress."}, "gabarito": "B"}, {"id": "FGV-TI-07", "assunto": ["Segurança da Informação", "OWASP Top 10", "Vulnerabilidades Web"], "bloco": "t8", "prova": "FGV - Analista de Segurança da Informação", "texto_id": null, "enunciado": "Segundo as diretrizes de segurança da OWASP (Open Web Application Security Project), a utilização de instruções SQL parametrizadas (Prepared Statements) em consultas ao banco de dados é a principal contramedida eficaz contra o ataque de:", "alternativas": {"A": "Cross-Site Scripting (XSS).", "B": "SQL Injection (SQLi).", "C": "Cross-Site Request Forgery (CSRF).", "D": "Broken Object Level Authorization (BOLA).", "E": "Server-Side Request Forgery (SSRF)."}, "gabarito": "B"}, {"id": "FGV-TI-08", "assunto": ["Tecnologia no Judiciário", "LGPD", "Proteção de Dados"], "bloco": "t10", "prova": "FGV - Analista Judiciário - Governança e LGPD", "texto_id": null, "enunciado": "Nos termos da Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 - LGPD), o profissional indicado pelo controlador e operador para atuar como canal de comunicação entre o controlador, os titulares dos dados e a Autoridade Nacional de Proteção de Dados (ANPD) é o:", "alternativas": {"A": "Auditor Geral de Dados.", "B": "Encarregado pelo tratamento de dados pessoais (DPO).", "C": "Custodiante da Infraestrutura.", "D": "Gestor de Segurança da Informação (CISO).", "E": "Controlador Adjunto de Governança."}, "gabarito": "B"}], "nota": "Questões de Português e TI (FGV) estruturadas para o edital TJPB Desenvolvimento de Sistemas."}</script>
+<script>
+const PRACTICE_KEY='tjpb-question-bank-v1', SESSION_KEY='tjpb-question-session-v1';
+let practiceStore={questions:{},attempts:[]},practiceSession=null;
+const byId=id=>document.getElementById(id);
+function practiceStatus(text,error=false){byId('practice-status').textContent=text;byId('practice-status').classList.toggle('error',error)}
+function persistPractice(next){
+  try{localStorage.setItem(PRACTICE_KEY,JSON.stringify(PracticeCore.backup(next)))}catch{throw Error('Não foi possível salvar no navegador. Libere espaço ou permita o armazenamento antes de responder.');}
+  practiceStore=next;
+}
+function saveSession(){try{if(practiceSession)localStorage.setItem(SESSION_KEY,JSON.stringify(practiceSession));else localStorage.removeItem(SESSION_KEY)}catch{practiceStatus('O histórico foi salvo, mas a posição deste treino não pôde ser guardada.',true)}}
+function practiceProgress(){loadProgress(PracticeCore.progress(practiceStore))}
+function renderPracticeOverview(){
+  const eligible=PracticeCore.eligible(practiceStore),all=Object.values(practiceStore.questions),n=practiceStore.attempts.length,hits=practiceStore.attempts.filter(a=>a.correta).length;
+  byId('practice-metrics').innerHTML=`<div class="practice-metric"><strong>${eligible.length}</strong><span>questões prontas / ${all.length} no banco</span></div><div class="practice-metric"><strong>${n}</strong><span>tentativas deste aparelho</span></div><div class="practice-metric"><strong>${n?Math.round(hits*100/n)+'%':'—'}</strong><span>taxa de acerto nas tentativas</span></div>`;
+  const pending=all.filter(q=>q.review.length);
+  byId('pending-label').textContent=pending.length+' questões aguardando revisão';
+  byId('pending-list').innerHTML=pending.map(q=>`<li><strong>${esc(q.id)}</strong> · ${esc(q.assunto.slice(1).join(' > '))}<br>${esc(q.review.join(' '))}</li>`).join('');
+  byId('practice-pending').hidden=!pending.length;
+  const available=PracticeCore.eligible(practiceStore,byId('practice-block').value,byId('practice-wrong').checked);
+  byId('practice-available').textContent=available.length+' questões disponíveis neste filtro. O treino usará até '+byId('practice-size').value+'.';
+  byId('practice-start').disabled=!available.length;
+  byId('bank-import').disabled=Boolean(practiceSession);
+}
+function renderPracticeBlock(id){
+  const count=PracticeCore.eligible(practiceStore,id).length;
+  byId('practice-block-note').textContent=count?count+' questões prontas neste aparelho':'Importe um JSON deste bloco para começar.';
+  byId('practice-block-button').textContent=count?'Questões importadas ('+count+')':'Abrir questões importadas';
+}
+function setPracticePanel(panel){
+  byId('practice-setup').hidden=panel!=='setup';byId('practice-session').hidden=panel!=='session';byId('practice-result').hidden=panel!=='result';
+}
+function newPracticeId(){return typeof crypto.randomUUID==='function'?crypto.randomUUID():Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)}
+let timerInterval = null;
+function stopCountdown() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  const el = byId('session-countdown');
+  if (el) el.hidden = true;
+}
+function startCountdown(seconds) {
+  stopCountdown();
+  if (!seconds || seconds <= 0) return;
+  const el = byId('session-countdown');
+  const disp = byId('countdown-display');
+  if (!el || !disp) return;
+  el.hidden = false;
+  el.classList.remove('timer-warning');
+  let remaining = seconds;
+  const update = () => {
+    const m = String(Math.floor(remaining / 60)).padStart(2, '0');
+    const s = String(remaining % 60).padStart(2, '0');
+    disp.textContent = `${m}:${s}`;
+    if (remaining <= 30) el.classList.add('timer-warning');
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      practiceStatus('Tempo sugerido para a questão esgotado (ritmo de prova). Finalize sua resposta!', true);
+    }
+    remaining--;
+  };
+  update();
+  timerInterval = setInterval(update, 1000);
+}
+
+const AUTH_TOKEN_KEY = 'tjpb-auth-token-v1';
+let currentUser = null;
+let isRegisterMode = false;
+
+function getAuthHeaders() {
+  const token = localStorage.getItem(AUTH_TOKEN_KEY);
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  return headers;
+}
+
+async function checkCurrentUser() {
+  const token = localStorage.getItem(AUTH_TOKEN_KEY);
+  if (!token) {
+    updateUserUI(null);
+    return;
+  }
+  try {
+    const res = await fetch('/api/me', { headers: getAuthHeaders() });
+    const data = await res.json();
+    if (data.ok && data.user) {
+      currentUser = data.user;
+      updateUserUI(currentUser);
+    } else {
+      localStorage.removeItem(AUTH_TOKEN_KEY);
+      currentUser = null;
+      updateUserUI(null);
+    }
+  } catch {
+    updateUserUI(currentUser);
+  }
+}
+
+function updateUserUI(user) {
+  const disp = byId('user-display');
+  const btnAuth = byId('btn-open-auth');
+  const btnLogout = byId('btn-logout');
+  if (!disp) return;
+  if (user) {
+    disp.textContent = `👤 ${user.nome} (@${user.username})`;
+    if (btnAuth) btnAuth.hidden = true;
+    if (btnLogout) btnLogout.hidden = false;
+  } else {
+    disp.textContent = '👤 Visitante (não autenticado)';
+    if (btnAuth) btnAuth.hidden = false;
+    if (btnLogout) btnLogout.hidden = true;
+  }
+}
+
+function openAuthDialog(register = false) {
+  isRegisterMode = register;
+  byId('auth-title').textContent = isRegisterMode ? 'Criar Conta na Turma' : 'Entrar na Turma';
+  byId('btn-submit-auth').textContent = isRegisterMode ? 'Cadastrar e Entrar' : 'Entrar';
+  byId('btn-toggle-auth-mode').textContent = isRegisterMode ? 'Já tem conta? Entrar' : 'Não tem conta? Cadastrar';
+  byId('auth-nome-group').hidden = !isRegisterMode;
+  byId('auth-error').hidden = true;
+  byId('auth-username').value = '';
+  byId('auth-password').value = '';
+  byId('auth-nome').value = '';
+  byId('modal-auth').showModal();
+}
+
+async function handleAuthSubmit() {
+  const username = byId('auth-username').value.trim();
+  const password = byId('auth-password').value;
+  const nome = byId('auth-nome').value.trim();
+  const errEl = byId('auth-error');
+  errEl.hidden = true;
+  const endpoint = isRegisterMode ? '/api/register' : '/api/login';
+  const payload = isRegisterMode ? { username, password, nome } : { username, password };
+  
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Falha ao autenticar.');
+    localStorage.setItem(AUTH_TOKEN_KEY, data.user.token);
+    currentUser = data.user;
+    updateUserUI(currentUser);
+    byId('modal-auth').close();
+    practiceStatus(`Bem-vindo, ${currentUser.nome}! Seus dados estão conectados.`);
+    syncWithServer();
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.hidden = false;
+  }
+}
+
+function logoutUser() {
+  localStorage.removeItem(AUTH_TOKEN_KEY);
+  currentUser = null;
+  updateUserUI(null);
+  practiceStatus('Você saiu da sua conta.');
+}
+
+async function openLeaderboard() {
+  byId('modal-leaderboard').showModal();
+  refreshLeaderboard();
+}
+
+async function refreshLeaderboard() {
+  const tbody = byId('leaderboard-body');
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:15px;">Atualizando ranking...</td></tr>';
+  try {
+    const res = await fetch('/api/leaderboard');
+    const data = await res.json();
+    if (!data.ok || !data.leaderboard.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:15px;">Nenhum participante pontuou ainda. Seja o primeiro!</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.leaderboard.map(item => {
+      let badge = item.posicao;
+      if (item.posicao === 1) badge = '<span class="badge-gold">🥇 1º</span>';
+      else if (item.posicao === 2) badge = '<span class="badge-silver">🥈 2º</span>';
+      else if (item.posicao === 3) badge = '<span class="badge-bronze">🥉 3º</span>';
+      
+      const isMe = currentUser && currentUser.username === item.username;
+      const highlightStyle = isMe ? 'style="font-weight:bold;background:rgba(37,99,235,0.1);"' : '';
+      return `<tr ${highlightStyle}>
+        <td>${badge}</td>
+        <td>${esc(item.nome)} <small style="color:var(--muted)">(@${esc(item.username)})</small></td>
+        <td><strong>${item.acertos}</strong></td>
+        <td>${item.total}</td>
+        <td>${item.taxa}%</td>
+        <td>🔥 ${item.dias_ativos}d</td>
+      </tr>`;
+    }).join('');
+  } catch {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:15px;color:red;">Não foi possível carregar o placar.</td></tr>';
+  }
+}
+
+async function syncWithServer() {
+  practiceStatus('Sincronizando com o servidor...');
+  try {
+    const payload = PracticeCore.backup(practiceStore);
+    const res = await fetch('/api/sync', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('Servidor respondeu com código ' + res.status);
+    const data = await res.json();
+    practiceStatus('✔ ' + (data.msg || 'Sincronização concluída com sucesso!'));
+  } catch (err) {
+    practiceStatus('Falha ao sincronizar: ' + err.message, true);
+  }
+}
+
+function startPractice(){
+  const available=PracticeCore.eligible(practiceStore,byId('practice-block').value,byId('practice-wrong').checked);
+  for(let i=available.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[available[i],available[j]]=[available[j],available[i]]}
+  if(!available.length){practiceStatus('Não há questões prontas com esse filtro.');return}
+  practiceSession={id:newPracticeId(),ids:available.slice(0,Number(byId('practice-size').value)).map(q=>q.id),index:0,timerSeconds:Number(byId('practice-timer')?.value||0)};
+  saveSession();renderPracticeQuestion();renderPracticeOverview();
+}
+function currentPracticeAttempt(){return practiceSession&&practiceStore.attempts.find(a=>a.id===practiceSession.id+':'+practiceSession.index)}
+function renderPracticeQuestion(){
+  if(!practiceSession)return;
+  const q=practiceStore.questions[practiceSession.ids[practiceSession.index]];
+  if(!q||q.review.length){practiceSession=null;saveSession();setPracticePanel('setup');practiceStatus('O treino foi encerrado porque uma questão mudou ou precisa de revisão. As respostas anteriores foram preservadas.');return}
+  setPracticePanel('session');
+  byId('session-position').textContent='Questão '+(practiceSession.index+1)+' de '+practiceSession.ids.length;
+  byId('question-meta').textContent=q.id+' · '+q.assunto.join(' > ')+'\n'+q.prova;
+  byId('question-statement').textContent=q.enunciado;
+  byId('question-reading').hidden=!q.texto;byId('question-reading').open=Boolean(q.texto);byId('question-text').textContent=q.texto;
+  byId('question-options').innerHTML=Object.entries(q.alternativas).sort(([a],[b])=>a.localeCompare(b)).map(([letter,text])=>`<label class="question-option" data-letter="${letter}"><input type="radio" name="practice-answer" value="${letter}"><span><span class="option-letter">${letter}</span>${esc(text).replace(/«([^»]+)»/g,'<mark>$1</mark>')}</span></label>`).join('');
+  byId('question-why').value='';byId('question-confidence').value='duvida';byId('question-answer').disabled=true;byId('question-answer').hidden=false;
+  byId('question-feedback').hidden=true;byId('question-after').hidden=true;byId('question-ai').hidden=true;
+  byId('question-why').disabled=false;byId('question-confidence').disabled=false;
+  const attempt=currentPracticeAttempt();if(attempt){stopCountdown();renderPracticeFeedback(attempt);}else{startCountdown(practiceSession.timerSeconds);}
+  byId('practice-session').scrollIntoView({block:'start',behavior:'instant'});
+}
+function renderPracticeFeedback(attempt){
+  stopCountdown();
+  byId('question-options').querySelectorAll('input').forEach(input=>{input.disabled=true;input.checked=input.value===attempt.resposta;input.closest('label').classList.toggle('answer-right',input.value===attempt.gabarito);input.closest('label').classList.toggle('answer-wrong',input.value===attempt.resposta&&!attempt.correta)});
+  byId('question-why').value=attempt.justificativa;byId('question-why').disabled=true;byId('question-confidence').value=attempt.confianca;byId('question-confidence').disabled=true;
+  byId('question-answer').hidden=true;byId('question-feedback').hidden=false;byId('question-after').hidden=false;
+  const title=attempt.correta?'Resposta correta.':'Resposta incorreta.';
+  byId('question-feedback').innerHTML=`<strong>${title}</strong>Você marcou ${esc(attempt.resposta)}. Gabarito importado: ${esc(attempt.gabarito)}.<small>Resposta e justificativa salvas neste navegador. A explicação conceitual pode ser estudada no mapa ou preparada para o ChatGPT.</small>`;
+  byId('question-next').textContent=practiceSession.index===practiceSession.ids.length-1?'Ver resultado':'Próxima questão';
+}
+function gradePractice(){
+  if(!practiceSession||currentPracticeAttempt())return;
+  const selected=byId('question-options').querySelector('input:checked');if(!selected)return;
+  try{
+    const next=PracticeCore.answer(practiceStore,practiceSession.ids[practiceSession.index],selected.value,byId('question-why').value,byId('question-confidence').value,practiceSession.id+':'+practiceSession.index,new Date().toISOString());
+    persistPractice(next);saveSession();renderPracticeFeedback(currentPracticeAttempt());practiceProgress();renderPracticeOverview();practiceStatus('Resposta salva.');
+  }catch(e){practiceStatus(e.message,true)}
+}
+function finishPractice(){
+  stopCountdown();
+  if(!practiceSession)return;
+  const attempts=practiceStore.attempts.filter(a=>a.id.startsWith(practiceSession.id+':'));
+  const hits=attempts.filter(a=>a.correta).length;practiceSession=null;saveSession();setPracticePanel('result');
+  byId('practice-result').innerHTML=`<h3>Treino encerrado</h3><p><strong>${hits} acertos em ${attempts.length} respostas${attempts.length?' · '+Math.round(100*hits/attempts.length)+'%':''}</strong></p><p class="practice-caption">As tentativas e justificativas foram salvas. Seu mapa já mostra o progresso deste aparelho.</p><button class="practice-btn primary" type="button" id="practice-again">Preparar outro treino</button>`;
+  byId('practice-again').addEventListener('click',()=>{setPracticePanel('setup');renderPracticeOverview()});renderPracticeOverview();practiceProgress();
+}
+function downloadPractice(name,text,type='application/json'){
+  const url=URL.createObjectURL(new Blob([text],{type})),link=document.createElement('a');link.href=url;link.download=name;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+function buildPracticeDoubt(){
+  const q=practiceStore.questions[practiceSession.ids[practiceSession.index]],a=currentPracticeAttempt();
+  return `Sou candidato ao TJPB, Analista Judiciário de TI – Desenvolvimento de Sistemas, banca FGV. Quero entender e aplicar o conceito, com um exemplo simples e uma pergunta de transferência depois da explicação.\n\nAssunto: ${q.assunto.join(' > ')}\nQuestão: ${q.id}\nProva informada no arquivo: ${q.prova}\n${q.texto?'Texto associado:\n'+q.texto+'\n\n':''}Enunciado:\n${q.enunciado}\n\n${Object.entries(q.alternativas).map(([k,v])=>k+') '+v).join('\n')}\n\nMinha resposta: ${a.resposta}.\nGabarito importado: ${a.gabarito} (ainda não conferido na fonte).\nMeu raciocínio: ${a.justificativa||'Não registrei.'}\nConfiança: ${a.confianca}.\n\nExplique o conceito e por que cada alternativa funciona ou falha. Avalie meu raciocínio sem presumir minha dificuldade. Se o gabarito parecer inconsistente ou faltar um destaque no texto, aponte a dúvida. Não invente comentário oficial ou frequência de cobrança da FGV. Ao citar questões reais, informe a fonte. Espere minha resposta à pergunta de transferência.`;
+}
+async function copyPracticeText(field){
+  try{await navigator.clipboard.writeText(field.value);practiceStatus('Prompt copiado. Cole na conversa do ChatGPT.');return}catch{}
+  field.focus();field.select();try{if(document.execCommand('copy')){practiceStatus('Prompt copiado.');return}}catch{}
+  practiceStatus('Texto selecionado. Use Copiar no menu do celular ou Ctrl+C no computador.');
+}
+function isPhone(){return /Android|iPhone|iPad/i.test(navigator.userAgent)}
+function phoneChatClick(e){
+  if(!isPhone())return;
+  e.preventDefault();void copyStudyPrompt();window.open('https://chatgpt.com/','_blank','noopener,noreferrer');
+}
+
+for(const select of [byId('practice-block'),byId('bank-import-block')])while(select.options.length>1)select.remove(1);
+Object.keys(nodes).forEach(id=>{for(const select of [byId('practice-block'),byId('bank-import-block')]){const option=document.createElement('option');option.value=id;option.textContent=id+' · '+nodes[id].title;select.appendChild(option)}});
+for(const id of ['practice-block','practice-size','practice-wrong'])byId(id).addEventListener('change',renderPracticeOverview);
+byId('practice-start').addEventListener('click',startPractice);
+byId('question-options').addEventListener('change',()=>{byId('question-answer').disabled=!byId('question-options').querySelector('input:checked')});
+byId('question-answer').addEventListener('click',gradePractice);
+byId('practice-stop').addEventListener('click',finishPractice);
+byId('question-next').addEventListener('click',()=>{if(practiceSession.index+1>=practiceSession.ids.length)finishPractice();else{practiceSession.index++;saveSession();renderPracticeQuestion()}});
+byId('question-explain').addEventListener('click',()=>{byId('question-ai-prompt').value=buildPracticeDoubt();byId('question-ai').hidden=false;byId('question-ai').scrollIntoView({block:'nearest'})});
+byId('question-ai-copy').addEventListener('click',()=>copyPracticeText(byId('question-ai-prompt')));
+byId('bank-sync')?.addEventListener('click',syncWithServer);
+byId('bank-import').addEventListener('click',()=>byId('bank-file').click());
+byId('bank-file').addEventListener('change',async e=>{
+  const file=e.target.files[0];e.target.value='';if(!file)return;
+  try{if(file.size>20*1024*1024)throw Error('O arquivo excede 20 MB. Divida em lotes menores.');const data=JSON.parse(await file.text());const next=PracticeCore.merge(practiceStore,data,byId('bank-import-block').value||null);persistPractice(next);practiceProgress();renderPracticeOverview();practiceStatus('Arquivo importado. '+Object.keys(next.questions).length+' questões no banco; histórico preservado.')}catch(error){practiceStatus('Importação recusada: '+error.message+' O banco anterior foi preservado.',true)}
+});
+byId('bank-backup').addEventListener('click',()=>{downloadPractice('tjpb-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(PracticeCore.backup(practiceStore),null,2));practiceStatus('Backup preparado para download. Guarde-o para recuperar ou transferir seu histórico.');});
+byId('bank-progress').addEventListener('click',()=>downloadPractice('progresso.json',JSON.stringify(PracticeCore.progress(practiceStore),null,2)));
+byId('bank-offline').addEventListener('click',()=>{
+  const clone=document.documentElement.cloneNode(true);clone.querySelector('#practice-seed').textContent=JSON.stringify(PracticeCore.backup(practiceStore)).replace(/</g,'\\u003c');clone.querySelectorAll('dialog').forEach(d=>d.removeAttribute('open'));
+  downloadPractice('tjpb-estudo-offline.html','<!doctype html>\n'+clone.outerHTML,'text/html');practiceStatus('App preparado para download com as questões e tentativas atuais. No Android, abra o HTML no Chrome. Salve também um backup JSON.');
+});
+byId('practice-block-button').addEventListener('click',()=>{const id=currentStudyNode;modal.close();byId('practice-block').value=id;showView('questions-view');renderPracticeOverview();byId('practice-setup').scrollIntoView({block:'start'})});
+byId('detail-items').addEventListener('click',e=>{if(e.target.closest('[data-study]'))phoneChatClick(e)});byId('study-open-app').addEventListener('click',phoneChatClick);
+try{
+  const saved=localStorage.getItem(PRACTICE_KEY),data=saved?JSON.parse(saved):JSON.parse(byId('practice-seed').textContent);
+  practiceStore=PracticeCore.merge({questions:{},attempts:[]},data);if(!saved)persistPractice(practiceStore);
+}catch(error){practiceStatus('Não foi possível carregar o banco: '+error.message+' Importe um backup para continuar.',true)}
+try{const saved=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');if(saved&&typeof saved.id==='string'&&Array.isArray(saved.ids)&&saved.ids.length&&saved.ids.every(id=>practiceStore.questions[id])&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<saved.ids.length)practiceSession=saved}catch{}
+renderPracticeOverview();
+if(practiceStore.attempts.length)practiceProgress();
+setPracticePanel('setup');
+if(practiceSession)renderPracticeQuestion();
+const initialViews={questoes:'questions-view',gran:'gran-view',cursos:'courses-view',banca:'data-view'};
+showView(initialViews[new URLSearchParams(location.search).get('view')]||'map-view');
+
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname.startsWith('192.168.') || location.hostname === '127.0.0.1')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+  });
+}
+
+byId('btn-open-auth')?.addEventListener('click', () => openAuthDialog(false));
+byId('btn-close-auth')?.addEventListener('click', () => byId('modal-auth').close());
+byId('btn-toggle-auth-mode')?.addEventListener('click', () => openAuthDialog(!isRegisterMode));
+byId('form-auth')?.addEventListener('submit', (e) => { e.preventDefault(); handleAuthSubmit(); });
+byId('btn-logout')?.addEventListener('click', logoutUser);
+byId('btn-open-leaderboard')?.addEventListener('click', openLeaderboard);
+byId('btn-close-leaderboard')?.addEventListener('click', () => byId('modal-leaderboard').close());
+byId('btn-refresh-leaderboard')?.addEventListener('click', refreshLeaderboard);
+checkCurrentUser();
+
+function granModuleUrl(filter){
+ const url=new URL(filter.url);
+ url.searchParams.set('banca','102');url.searchParams.set('anulada','0');url.searchParams.set('desatualizada','0');
+ for(const [control,param,value] of [['level','nivel','1'],['court','carreira','103'],['hard','dificuldade','4'],['year','anos','2026']]){
+  if(document.getElementById('gran-module-'+control).checked)url.searchParams.set(param,value);else url.searchParams.delete(param);
+ }
+ return url.href;
+}
+function renderGranModule(){
+ const block=document.getElementById('gran-module-block').value;
+ const fold=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+ const query=fold(document.getElementById('gran-module-query').value.trim());
+ let total=0;
+ const cards=Object.entries(nodes).filter(([id])=>!block||id===block).map(([id,node])=>{
+  const filters=granSearchCatalog.topics.filter(f=>f.blocos.includes(id)&&(!query||fold(node.title+' '+node.items.join(' ')+' '+f.label).includes(query)));
+  if(!filters.length)return '';
+  total+=filters.length;
+  const confirmed=filters.filter(f=>f.verified),pending=filters.filter(f=>!f.verified);
+  const link=f=>`<a class="gran-external-link" href="${esc(granModuleUrl(f))}" target="_blank" rel="noopener noreferrer"><span>${esc(f.label)}<small>${f.verified?'Mapeamento verificado em 25/10/2026':'Busca a conferir no Gran'}</small></span><span aria-hidden="true">↗</span><span class="sr-only"> · abrir no site do Gran</span></a>`;
+  return `<article class="practice-card gran-module-card"><div class="eyebrow">${esc(node.stage)}</div><h3>${esc(node.title)}</h3>${confirmed.map(link).join('')}${pending.length?`<details class="gran-unverified"><summary>Buscas a conferir (${pending.length})</summary>${pending.map(link).join('')}</details>`:''}</article>`;
+ }).join('');
+ document.getElementById('gran-module-results').innerHTML=cards||'<p class="module-note">Nenhum filtro encontrado. Tente outro termo ou selecione todas as áreas.</p>';
+ document.getElementById('gran-module-count').textContent=total+' atalhos de busca no Gran. Os links abrem uma nova aba externa.';
+}
+while(document.getElementById('gran-module-block').options.length>1)document.getElementById('gran-module-block').remove(1);
+for(const [id,node] of Object.entries(nodes)){
+ const option=document.createElement('option');option.value=id;option.textContent=node.title;document.getElementById('gran-module-block').appendChild(option);
+}
+document.getElementById('gran-module-block').addEventListener('change',renderGranModule);
+document.getElementById('gran-module-query').addEventListener('input',renderGranModule);
+document.querySelectorAll('.gran-module-refine input').forEach(input=>input.addEventListener('change',renderGranModule));
+renderGranModule();
+
+</script>
+</body></html>

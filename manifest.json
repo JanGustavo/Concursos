@@ -1,0 +1,22 @@
+{
+  "name": "TJPB Estudo & Questões",
+  "short_name": "TJPB Estudo",
+  "description": "Mapa de estudo e treino de questões offline para Analista Judiciário TJPB - FGV",
+  "start_url": "/?view=questoes",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e293b",
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "arquivo": "servir.py",
+    "sha256": "9733efaa523846bc4e78db322922d20878fff6bce891fcbba59558fd751b770f",
+    "bytes": 7536
+  },
+  {
+    "arquivo": "auth_db.py",
+    "sha256": "750d210f6463799da90150e8579ccac07c8f608749697c9aa26d173f1beb6f83",
+    "bytes": 6257
+  },
+  {
+    "arquivo": "tjpb-mapa-estudo.html",
+    "sha256": "f0f896aaba1659356ab0e2ba5b138d3d18321e8764e420e00f8b71b21bf35211",
+    "bytes": 181857
+  },
+  {
+    "arquivo": "relatorio_visual_fgv_ti_tribunais.html",
+    "sha256": "0e8146e8a7362bfb5d9b53a9bbbc8fb17b066d899dfe3f015087ee244d5ed784",
+    "bytes": 53434
+  },
+  {
+    "arquivo": "tjpb_desenvolvimento_sistemas_relatorio.html",
+    "sha256": "038028e726f70eb3f94f37c39c94ef36ed19eca18ae00392ac5929207656fcfe",
+    "bytes": 25083
+  },
+  {
+    "arquivo": "manifest.json",
+    "sha256": "eb141066559bd9c6b81b427bca6d6870e1e573b1d47e90fb325eab3e09cb0fa5",
+    "bytes": 532
+  },
+  {
+    "arquivo": "service-worker.js",
+    "sha256": "c20daaa2350e83b56e3b611c67485e6accd7d9b8725670b616f04b08742c4dfc",
+    "bytes": 1331
+  },
+  {
+    "arquivo": "assets/icon-192.png",
+    "sha256": "ae0e5ddc1de8fb1b506c7d78f90defe74c4986a453f52217b97e5759f8a8b444",
+    "bytes": 1243
+  },
+  {
+    "arquivo": "assets/icon-512.png",
+    "sha256": "aab374a40ab417c312b3bbd44219ce95004a62dd8f74100e71d5df5608615e78",
+    "bytes": 3722
+  }
+]

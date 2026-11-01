@@ -1,0 +1,116 @@
+<section id="questions-view" class="practice" role="tabpanel" aria-labelledby="questions-tab" hidden>
+  <div class="eyebrow">Treino pessoal · TJPB / FGV</div>
+  <h2>Questões importadas</h2>
+  <p class="practice-lead">Treine com os arquivos já baixados e importados neste aparelho. Respostas, justificativas e histórico ficam neste navegador.</p>
+  <p class="module-note">Para pesquisar novas questões no site do Gran, use o módulo <button type="button" class="inline-module-link" data-view-target="gran-view">Filtros do Gran ↗</button>.</p>
+  <div class="user-bar">
+    <div id="user-info" class="user-info-box">
+      <span id="user-display">👤 Modo Visitante (offline)</span>
+      <button type="button" id="btn-open-auth" class="practice-btn small">Entrar / Criar Conta</button>
+      <button type="button" id="btn-logout" class="practice-btn small" hidden>Sair</button>
+    </div>
+    <button type="button" id="btn-open-leaderboard" class="practice-btn highlight">🏆 Placar da Turma</button>
+  </div>
+  <div class="practice-actions">
+    <button type="button" id="bank-sync" class="practice-btn primary">☁️ Sincronizar Progresso</button>
+    <button type="button" id="bank-import" class="practice-btn">Importar questões / backup</button>
+    <button type="button" id="bank-backup" class="practice-btn">Salvar backup</button>
+    <button type="button" id="bank-progress" class="practice-btn">Exportar progresso</button>
+    <button type="button" id="bank-offline" class="practice-btn">Baixar app offline</button>
+    <input type="file" id="bank-file" accept=".json,application/json" hidden>
+  </div>
+  <p id="practice-status" class="practice-status" role="status" aria-live="polite"></p>
+  <div id="practice-metrics" class="practice-metrics"></div>
+  <div id="practice-setup" class="practice-card">
+    <h3>Seu próximo bloco de questões</h3>
+    <div class="practice-fields">
+      <label>Bloco de estudo<select id="practice-block"><option value="">Todos os blocos</option></select></label>
+      <label>Quantidade<select id="practice-size"><option value="5">5 questões</option><option value="10" selected>10 questões</option><option value="20">20 questões</option></select></label>
+      <label>Ao importar sem bloco<select id="bank-import-block"><option value="">Identificar pelo assunto</option></select></label>
+      <label>Cronômetro por questão<select id="practice-timer"><option value="0">Desativado (livre)</option><option value="120">2 minutos</option><option value="180" selected>3 minutos (ritmo FGV)</option><option value="240">4 minutos</option></select></label>
+    </div>
+    <label class="practice-check"><input type="checkbox" id="practice-wrong">Revisar só os erros ainda não corrigidos</label>
+    <p id="practice-available" class="practice-caption"></p>
+    <button type="button" id="practice-start" class="practice-btn primary">Começar treino</button>
+  </div>
+  <section id="practice-session" class="practice-card" aria-label="Questão do treino" hidden>
+    <div class="practice-session-head">
+      <span id="session-position"></span>
+      <span id="session-countdown" class="session-timer" hidden>⏱ <span id="countdown-display">03:00</span></span>
+      <button type="button" id="practice-stop" class="practice-btn">Encerrar treino</button>
+    </div>
+    <p id="question-meta" class="practice-caption"></p>
+    <details id="question-reading"><summary>Texto associado · leia antes de responder</summary><div id="question-text" class="question-text"></div></details>
+    <h3 id="question-statement" class="question-statement"></h3>
+    <fieldset id="question-options"><legend class="sr-only">Escolha uma alternativa</legend></fieldset>
+    <label class="practice-justification">Como você pensou? <span>(opcional)</span><textarea id="question-why" rows="3" placeholder="Registre o conceito ou a dúvida que guiou sua resposta."></textarea></label>
+    <label class="practice-confidence">Sua confiança<select id="question-confidence"><option value="duvida">Fiquei em dúvida</option><option value="certeza">Tenho certeza</option><option value="chute">Foi um chute</option></select></label>
+    <button type="button" id="question-answer" class="practice-btn primary" disabled>Confirmar resposta</button>
+    <div id="question-feedback" class="question-feedback" aria-live="polite" hidden></div>
+    <div id="question-after" class="practice-actions" hidden><button type="button" id="question-next" class="practice-btn primary">Próxima questão</button><button type="button" id="question-explain" class="practice-btn">Preparar dúvida para o ChatGPT</button></div>
+    <div id="question-ai" hidden><label>Prompt com a questão e seu raciocínio<textarea id="question-ai-prompt" rows="7" readonly></textarea></label><div class="practice-actions"><button type="button" id="question-ai-copy" class="practice-btn">Copiar dúvida</button><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="practice-btn">Abrir ChatGPT ↗</a></div></div>
+  
+  <!-- Modal Autenticação -->
+  <dialog id="modal-auth" class="practice-dialog">
+    <div class="dialog-content">
+      <div class="dialog-head">
+        <h3 id="auth-title">Entrar na Turma TJPB</h3>
+        <button type="button" class="dialog-close" id="btn-close-auth">×</button>
+      </div>
+      <p class="practice-caption">Crie um usuário simples para registrar suas questões, pontuar no ranking e disputar com a galera.</p>
+      <form id="form-auth" class="auth-form" onsubmit="return false;">
+        <label id="auth-nome-group">Seu Nome / Apelido no Placar
+          <input type="text" id="auth-nome" placeholder="Ex: Janderson" autocomplete="name">
+        </label>
+        <label>Nome de Usuário (login)
+          <input type="text" id="auth-username" placeholder="Ex: janderson" autocomplete="username" required>
+        </label>
+        <label>Senha
+          <input type="password" id="auth-password" placeholder="Mínimo 4 dígitos" autocomplete="current-password" required>
+        </label>
+        <p id="auth-error" class="practice-status error" hidden></p>
+        <div class="practice-actions">
+          <button type="submit" id="btn-submit-auth" class="practice-btn primary">Entrar</button>
+          <button type="button" id="btn-toggle-auth-mode" class="practice-btn">Não tem conta? Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Modal Placar da Turma -->
+  <dialog id="modal-leaderboard" class="practice-dialog leaderboard-dialog">
+    <div class="dialog-content">
+      <div class="dialog-head">
+        <h3>🏆 Placar Geral da Turma</h3>
+        <button type="button" class="dialog-close" id="btn-close-leaderboard">×</button>
+      </div>
+      <p class="practice-caption">Aproveitamento e frequência dos participantes nos simulados do TJPB.</p>
+      <div class="table-responsive">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Candidato</th>
+              <th>Acertos</th>
+              <th>Total</th>
+              <th>Aprov.</th>
+              <th>Dias Ativos</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <tr><td colspan="6" style="text-align:center;padding:15px;">Carregando placar...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="practice-actions" style="margin-top:15px;">
+        <button type="button" id="btn-refresh-leaderboard" class="practice-btn primary">Atualizar Placar</button>
+      </div>
+    </div>
+  </dialog>
+
+</section>
+  <section id="practice-result" class="practice-card" aria-live="polite" hidden></section>
+  <details class="practice-card" id="practice-pending"><summary id="pending-label">Questões aguardando revisão</summary><ul id="pending-list"></ul></details>
+  <p class="practice-caption">O lote inicial tem 20 questões que você enviou. Questões com destaques perdidos ou fora do foco ficam separadas do treino. Gabaritos são os importados, ainda sujeitos à conferência na fonte.</p>
+  <p class="practice-caption">Seu histórico fica neste aparelho e nesta origem/endereço. Não há sincronização automática com o computador. Salve um backup para transferir ou recuperar seus dados. Percentuais resumem tentativas; repetição não comprova domínio do tema.</p>
+</section>

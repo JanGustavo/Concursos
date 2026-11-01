@@ -1,0 +1,134 @@
+{
+  "fonte": "Questões selecionadas FGV - TJPB Desenvolvimento de Sistemas",
+  "textos": [],
+  "questoes": [
+    {
+      "id": "FGV-TI-01",
+      "assunto": ["Engenharia de Software", "Scrum", "Metodologias Ágeis"],
+      "bloco": "t2",
+      "prova": "FGV - Analista Judiciário - Desenvolvimento de Sistemas",
+      "texto_id": null,
+      "enunciado": "No framework Scrum, o evento com timebox de no máximo 3 horas para uma Sprint de um mês, que tem como objetivo inspecionar como foi a última Sprint no que diz respeito às pessoas, aos relacionamentos, aos processos e às ferramentas, visando à melhoria contínua da equipe, é denominado:",
+      "alternativas": {
+        "A": "Sprint Planning.",
+        "B": "Daily Scrum.",
+        "C": "Sprint Review.",
+        "D": "Sprint Retrospective.",
+        "E": "Backlog Refinement."
+      },
+      "gabarito": "D"
+    },
+    {
+      "id": "FGV-TI-02",
+      "assunto": ["Engenharia de Software", "Qualidade e Testes de Software"],
+      "bloco": "t8",
+      "prova": "FGV - Analista de TI - Engenharia de Software",
+      "texto_id": null,
+      "enunciado": "Em relação às técnicas de teste de software, assinale a opção que descreve corretamente o Teste de Caixa-Preta (funcional):",
+      "alternativas": {
+        "A": "Baseia-se na análise direta da estrutura interna do código-fonte e dos fluxos lógicos de execução.",
+        "B": "Avalia o comportamento externo do sistema ou componente a partir dos requisitos e especificações, sem conhecimento da sua implementação interna.",
+        "C": "Consiste exclusivamente na conferência da taxa de cobertura de comandos e decisões em tempo de compilação.",
+        "D": "É executado necessariamente pelos programadores que escreveram os módulos antes de qualquer integração.",
+        "E": "Examina apenas o consumo de CPU e vazamento de memória dos objetos em runtime."
+      },
+      "gabarito": "B"
+    },
+    {
+      "id": "FGV-TI-03",
+      "assunto": ["Banco de Dados", "SQL", "Transações e Propriedades ACID"],
+      "bloco": "t5",
+      "prova": "FGV - Analista Judiciário - Banco de Dados",
+      "texto_id": null,
+      "enunciado": "Em sistemas gerenciadores de banco de dados relacionais (SGBD-R), a propriedade de transação ACID que assegura que, uma vez confirmada (commit) a transação, seus efeitos persistem no banco mesmo na ocorrência de falhas posteriores de energia ou do sistema operacional, é a:",
+      "alternativas": {
+        "A": "Atomicidade.",
+        "B": "Consistência.",
+        "C": "Isolamento.",
+        "D": "Durabilidade.",
+        "E": "Integridade Referencial."
+      },
+      "gabarito": "D"
+    },
+    {
+      "id": "FGV-TI-04",
+      "assunto": ["Banco de Dados", "SQL e Álgebra Relacional"],
+      "bloco": "t5",
+      "prova": "FGV - Analista de Sistemas - Banco de Dados",
+      "texto_id": null,
+      "enunciado": "Considere duas tabelas A e B. Na linguagem SQL ANSI, a junção que retorna todos os registros da tabela A e apenas os registros correspondentes da tabela B (preenchendo com valores NULL nas colunas de B quando não houver correspondência) é:",
+      "alternativas": {
+        "A": "INNER JOIN.",
+        "B": "LEFT OUTER JOIN.",
+        "C": "RIGHT OUTER JOIN.",
+        "D": "FULL OUTER JOIN.",
+        "E": "CROSS JOIN."
+      },
+      "gabarito": "B"
+    },
+    {
+      "id": "FGV-TI-05",
+      "assunto": ["Arquitetura de Software", "Design Patterns"],
+      "bloco": "t4",
+      "prova": "FGV - Analista Judiciário - Desenvolvimento de Sistemas",
+      "texto_id": null,
+      "enunciado": "De acordo com o catálogo GoF (Gang of Four), o padrão de projeto comportamental que define uma família de algoritmos, encapsula cada um deles e os torna intercambiáveis, permitindo que o algoritmo varie independentemente dos clientes que o utilizam, é o:",
+      "alternativas": {
+        "A": "Singleton.",
+        "B": "Adapter.",
+        "C": "Strategy.",
+        "D": "Decorator.",
+        "E": "Facade."
+      },
+      "gabarito": "C"
+    },
+    {
+      "id": "FGV-TI-06",
+      "assunto": ["DevOps e Nuvem", "DevSecOps", "Contêineres"],
+      "bloco": "t7",
+      "prova": "FGV - Analista Judiciário - Infraestrutura e DevOps",
+      "texto_id": null,
+      "enunciado": "Em ambientes de integração e entrega contínuas (CI/CD) utilizando Docker e Kubernetes, o conceito que define a menor unidade de execução gerenciável e implantável no Kubernetes, composta por um ou mais contêineres que compartilham rede e armazenamento, é denominado:",
+      "alternativas": {
+        "A": "Cluster.",
+        "B": "Pod.",
+        "C": "ReplicaSet.",
+        "D": "DaemonSet.",
+        "E": "Ingress."
+      },
+      "gabarito": "B"
+    },
+    {
+      "id": "FGV-TI-07",
+      "assunto": ["Segurança da Informação", "OWASP Top 10", "Vulnerabilidades Web"],
+      "bloco": "t8",
+      "prova": "FGV - Analista de Segurança da Informação",
+      "texto_id": null,
+      "enunciado": "Segundo as diretrizes de segurança da OWASP (Open Web Application Security Project), a utilização de instruções SQL parametrizadas (Prepared Statements) em consultas ao banco de dados é a principal contramedida eficaz contra o ataque de:",
+      "alternativas": {
+        "A": "Cross-Site Scripting (XSS).",
+        "B": "SQL Injection (SQLi).",
+        "C": "Cross-Site Request Forgery (CSRF).",
+        "D": "Broken Object Level Authorization (BOLA).",
+        "E": "Server-Side Request Forgery (SSRF)."
+      },
+      "gabarito": "B"
+    },
+    {
+      "id": "FGV-TI-08",
+      "assunto": ["Tecnologia no Judiciário", "LGPD", "Proteção de Dados"],
+      "bloco": "t10",
+      "prova": "FGV - Analista Judiciário - Governança e LGPD",
+      "texto_id": null,
+      "enunciado": "Nos termos da Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 - LGPD), o profissional indicado pelo controlador e operador para atuar como canal de comunicação entre o controlador, os titulares dos dados e a Autoridade Nacional de Proteção de Dados (ANPD) é o:",
+      "alternativas": {
+        "A": "Auditor Geral de Dados.",
+        "B": "Encarregado pelo tratamento de dados pessoais (DPO).",
+        "C": "Custodiante da Infraestrutura.",
+        "D": "Gestor de Segurança da Informação (CISO).",
+        "E": "Controlador Adjunto de Governança."
+      },
+      "gabarito": "B"
+    }
+  ]
+}

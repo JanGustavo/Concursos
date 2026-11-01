@@ -1,0 +1,13 @@
+{
+  "questoes": [],
+  "tentativas": [
+    {
+      "id": "sync-test-1",
+      "questao_id": "FGV-TI-01",
+      "resposta": "D",
+      "gabarito": "D",
+      "bloco": "t2",
+      "quando": "2026-10-27T00:00:00Z"
+    }
+  ]
+}
