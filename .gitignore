@@ -3,3 +3,17 @@ credentials.json
 __pycache__/
 *.pyc
 deploy/logs/
+.venv/
+credentials.json
+token.json
+__pycache__/
+token*.json
+frontend-courses/node_modules/
+dados/drive_*.json
+dados/drive_*.csv
+dados/drive_*.txt
+token*.tmp
+
+groq-config.json
+.env
+.env.*

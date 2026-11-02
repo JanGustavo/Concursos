@@ -30,13 +30,17 @@ cleanup(){ rm -rf -- "$STAGING"; if [[ $REMOTE_STAGE =~ ^/tmp/tjpb-deploy\.[a-zA
 trap cleanup EXIT
 if [[ $MODE == deploy ]]; then
   log 'Gerando HTML e pacote com lista explícita de arquivos (sem dados de usuários)'
+  if [[ ! -d "$ROOT/frontend-courses/node_modules" ]]; then
+    npm --prefix "$ROOT/frontend-courses" ci --ignore-scripts --no-audit --no-fund
+  fi
+  npm --prefix "$ROOT/frontend-courses" run build
   python3 "$ROOT/scripts/build_mobile.py"
   python3 - "$ROOT" "$STAGING" <<'PY'
 from pathlib import Path
 import sys,hashlib,tarfile,ast
 root,stage=map(Path,sys.argv[1:])
-files=['servir.py','auth_db.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png']
-for name in ['servir.py','auth_db.py']: ast.parse((root/name).read_text())
+files=['servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','dados/drive_catalog.json','dados/drive_tree.json']
+for name in ['servir.py','auth_db.py','library_service.py','ai_service.py']: ast.parse((root/name).read_text())
 with tarfile.open(stage/'app.tar.gz','w:gz') as archive:
  for name in files:
   p=root/name
@@ -51,6 +55,12 @@ REMOTE_STAGE=$("${SSH[@]}" "$TARGET" 'mktemp -d /tmp/tjpb-deploy.XXXXXXXX')
 "${SCP[@]}" "$ROOT/deploy/remote-tjpb.sh" "$TARGET:$REMOTE_STAGE/remote-tjpb.sh"
 if [[ $MODE == deploy ]]; then
   "${SCP[@]}" "$STAGING/app.tar.gz" "$STAGING/SHA256SUMS" "$STAGING/files.txt" "$TARGET:$REMOTE_STAGE/"
+  # Provisionamento inicial explícito da integração; nunca sobrescreve o token ativo da VPS.
+  if ! "${SSH[@]}" "$TARGET" 'test -s /var/www/tjpb/token.json'; then
+    [[ -r "$ROOT/token.json" ]] || { echo 'A autorização do Drive precisa ser configurada antes de publicar os cursos.'; exit 1; }
+    log 'Provisionando a autorização do Drive em arquivo privado no servidor TJPB'
+    "${SCP[@]}" "$ROOT/token.json" "$TARGET:$REMOTE_STAGE/drive-token.json"
+  fi
 fi
 log "Executando $MODE apenas no serviço TJPB"
 printf -v REMOTE_COMMAND 'bash %q %q %q %q' "$REMOTE_STAGE/remote-tjpb.sh" "$REMOTE_STAGE" "$MODE" "$RELEASE"

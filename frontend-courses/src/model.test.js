@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {flattenTree,filterTree,relatedResources,readProgress} from './model.js';
+const tree={id:'root',name:'Banco de Dados',type:'folder',children:[{id:'m1',name:'Modelagem',type:'folder',children:[{id:'v1',name:'01 - Conceitos',type:'video'},{id:'p1',name:'Resumo',type:'pdf'}]},{id:'m2',name:'SQL',type:'folder',children:[{id:'v2',name:'01 - Conceitos',type:'video'},{id:'p2',name:'Resumo',type:'pdf'}]}]};
+test('associa PDF somente à pasta da aula, mesmo com nomes repetidos',()=>{const e=flattenTree(tree);assert.deepEqual(relatedResources(e,e[0]).map(x=>x.id),['p1'])});
+test('busca por módulo inclui seus materiais',()=>assert.equal(filterTree(tree,'sql').children[0].children.length,2));
+test('busca ignora acentos e preserva caminhos',()=>assert.equal(filterTree(tree,'modelágem').children[0].id,'m1'));
+test('nenhum resultado não muda a árvore original',()=>{assert.equal(filterTree(tree,'inexistente'),null);assert.equal(tree.children.length,2)});
+test('progresso malformado não quebra a retomada',()=>{assert.deepEqual(readProgress('{'),{});assert.equal(readProgress('{"v1":{"time":-1,"done":"sim"}}').v1.time,0);assert.equal(readProgress('{"v1":{"time":20,"done":true}}').v1.done,true)});
+test('apenas PDFs remove vídeos e mantém os módulos',()=>{const result=filterTree(tree,'','pdf');assert.deepEqual(flattenTree(result).map(e=>e.id),['p1','p2']);assert.equal(result.children.length,2)});
+test('busca pelo nome da pasta não ignora o tipo',()=>assert.deepEqual(flattenTree(filterTree(tree,'SQL','video')).map(e=>e.id),['v2']));
+test('pastas sem o formato buscado desaparecem sem alterar a árvore',()=>{assert.equal(filterTree(tree,'Resumo','video'),null);assert.equal(flattenTree(tree).length,4)});

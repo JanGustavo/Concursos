@@ -8,6 +8,9 @@ s = source.read_text()
 core = (ROOT / 'assets' / 'practice-core.js').read_text()
 ui = (ROOT / 'assets' / 'practice-ui.js').read_text()
 css = (ROOT / 'assets' / 'practice.css').read_text()
+css += '\n' + (ROOT / 'assets' / 'courses-app.css').read_text()
+css += '\n' + (ROOT / 'assets' / 'cyber-theme.css').read_text()
+courses_ui = (ROOT / 'assets' / 'courses-app.js').read_text()
 panel = (ROOT / 'assets' / 'practice-panel.html').read_text()
 gran_panel = (ROOT / 'assets' / 'gran-panel.html').read_text()
 gran_ui = (ROOT / 'assets' / 'gran-module.js').read_text()
@@ -35,7 +38,8 @@ bank = {
 
 # Injetar PWA manifest e meta tags no <head>
 pwa_tags = """<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#1e293b">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<meta name="theme-color" content="#070913">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="/assets/icon-192.png">
@@ -44,20 +48,16 @@ s = s.replace('<head>', '<head>\n' + pwa_tags, 1)
 
 s = s.replace('</style>', css + '\n</style>', 1)
 old = '<button class="view" type="button" id="data-tab"'
-new = '<button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button>' + old
+new = '<button class="view" type="button" id="start-tab" role="tab" aria-controls="start-view" aria-selected="false">Por onde começar</button><button class="view" type="button" id="planner-tab" role="tab" aria-controls="planner-view" aria-selected="false">Ciclo de estudos</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button>' + old
 assert old in s
 s = s.replace(old, new, 1)
 
 s = s.replace('</main>', panel + gran_panel + '''
+<section id="start-view" role="tabpanel" aria-labelledby="start-tab" hidden><div id="start-root"></div></section>
+<section id="planner-view" role="tabpanel" aria-labelledby="planner-tab" hidden><div id="planner-root"></div></section>
 <section id="courses-view" class="practice courses" role="tabpanel" aria-labelledby="courses-tab" hidden>
- <div class="eyebrow">SUA PREPARAÇÃO · TJPB / FGV</div>
- <h2>Cursos e aulas</h2>
- <div class="courses-coming"><span class="courses-badge">Em breve</span>
- <h3>Um espaço para aprender cada assunto.</h3>
- <p>Os cursos e as aulas ainda estão em preparação. Enquanto isso, explore os conteúdos no mapa mental e pratique questões.</p>
- <div class="courses-grid"><article><span aria-hidden="true">▤</span><h4>Cursos</h4><p>Em breve</p></article><article><span aria-hidden="true">▷</span><h4>Aulas</h4><p>Em breve</p></article></div>
- <button class="practice-btn primary" type="button" data-view-target="map-view">Explorar mapa mental</button>
- </div>
+ <div id="courses-root"></div>
+ <noscript>Ative o JavaScript para acessar os cursos e as aulas.</noscript>
 </section>
 </main>''', 1)
 research_start = s.index('>', s.index('id="data-view"')) + 1
@@ -81,7 +81,7 @@ start = s.index("document.querySelectorAll('.view').forEach(b=>b.addEventListene
 end = s.index('\nlet currentStudyNode=', start)
 s = s[:start] + '''function showView(id){
  document.querySelectorAll('.view').forEach(tab=>tab.setAttribute('aria-selected',String(tab.getAttribute('aria-controls')===id)));
- ['map-view','data-view','questions-view','gran-view','courses-view'].forEach(key=>document.getElementById(key).hidden=key!==id);
+ ['map-view','data-view','questions-view','gran-view','courses-view','start-view','planner-view'].forEach(key=>document.getElementById(key).hidden=key!==id);
  document.querySelector('.hint').hidden=id!=='map-view';if(id==='map-view')requestAnimationFrame(draw);
 }
 document.querySelectorAll('.view').forEach(tab=>tab.addEventListener('click',()=>showView(tab.getAttribute('aria-controls'))));
@@ -106,6 +106,15 @@ s = s.replace('<script>\nconst nodes=', '<script>\n' + core + '\n</script>\n<scr
 assert core in s
 
 seed = json.dumps(bank, ensure_ascii=False).replace('<', '\\u003c')
-s = s.replace('</body>', '<script type="application/json" id="practice-seed">' + seed + '</script>\n<script>\n' + ui + '\n' + gran_ui + '\n</script>\n</body>', 1)
+s = s.replace('</body>', '<div id="assistant-root"></div><script type="application/json" id="practice-seed">' + seed + '</script>\n<script>\n' + ui + '\n' + gran_ui + '\n</script>\n<script>\n' + courses_ui + '\n</script>\n</body>', 1)
 (ROOT / 'tjpb-mapa-estudo.html').write_text(s)
 print(f'HTML independente gerado: {len(s.encode()):,} bytes com {len(combined_questions)} questões no seed.')
+
+# Linked reports use the same visual tokens; keep all original report content and behavior.
+import re
+report_css = (ROOT / 'assets' / 'cyber-theme.css').read_text() + '\n' + (ROOT / 'assets' / 'report-theme.css').read_text()
+for name in ['relatorio_visual_fgv_ti_tribunais.html', 'tjpb_desenvolvimento_sistemas_relatorio.html']:
+    path = ROOT / name
+    report = re.sub(r'<style id="tjpb-shared-theme">.*?</style>', '', path.read_text(), flags=re.S)
+    report = report.replace('</head>', '<style id="tjpb-shared-theme">' + report_css + '</style></head>', 1)
+    path.write_text(report)

@@ -2,11 +2,16 @@
 """Servidor do app com PWA, sincronização, autenticação de usuários e placar da turma."""
 import argparse
 import json
+import cgi
+import io
 import os
 import sys
+import mimetypes
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
+from library_service import library, LibraryError
+from ai_service import assistant, AIError
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
@@ -25,12 +30,15 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
-    def send_json(self, status, payload):
+    def send_json(self, status, payload, extra_headers=None):
         data = json.dumps(payload, ensure_ascii=False).encode('utf-8')
         self.send_response(status)
         self.send_cors_headers()
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.send_header('Content-Length', str(len(data)))
+        self.send_header('Cache-Control', 'private, no-store')
+        for key, value in (extra_headers or {}).items():
+            self.send_header(key, value)
         self.end_headers()
         self.wfile.write(data)
 
@@ -41,9 +49,54 @@ class Handler(BaseHTTPRequestHandler):
         cookie = self.headers.get('Cookie', '')
         for part in cookie.split(';'):
             part = part.strip()
-            if part.startswith('tjpb_token='):
+            if part.startswith(('tjpb_token=', 'tjpb_library=')):
                 return part.split('=', 1)[1].strip()
         return None
+
+    def library_cookie(self, token='', clear=False):
+        secure = '; Secure' if self.headers.get('X-Forwarded-Proto') == 'https' else ''
+        return 'tjpb_library=' + token + '; Path=/biblioteca; HttpOnly; SameSite=Strict; Max-Age=' + ('0' if clear else '1800') + secure
+
+    def serve_library(self, route, head=False):
+        user = auth_db.get_user_by_token(self.get_token())
+        if not user:
+            self.send_json(401, {'ok': False, 'error': 'Entre na sua conta para acessar os cursos.'})
+            return
+        try:
+            if route == '/biblioteca/api/tree':
+                self.send_json(200, library.catalog())
+                return
+            if not route.startswith('/biblioteca/api/media/'):
+                self.send_json(404, {'ok': False, 'error': 'Recurso não encontrado.'})
+                return
+            file_id = route.removeprefix('/biblioteca/api/media/')
+            with library.stream_slot(user['id']):
+                status, headers, upstream = library.media(file_id, self.headers.get('Range'), head=head)
+                self.send_response(status)
+                for key, value in headers.items(): self.send_header(key, value)
+                self.end_headers()
+                if upstream:
+                    try:
+                        remaining = int(headers['Content-Length'])
+                        while remaining:
+                            chunk = upstream.read(min(64 * 1024, remaining))
+                            if not chunk: break
+                            self.wfile.write(chunk)
+                            remaining -= len(chunk)
+                    except (BrokenPipeError, ConnectionResetError, TimeoutError):
+                        pass
+                    finally:
+                        upstream.close()
+        except LibraryError as error:
+            headers = {'Content-Range': error.content_range} if hasattr(error, 'content_range') else {}
+            self.send_json(error.status, {'ok': False, 'error': error.message}, headers)
+
+    def do_HEAD(self):
+        route = urlsplit(self.path).path
+        if route.startswith('/biblioteca/api/media/'):
+            self.serve_library(route, head=True)
+        else:
+            self.send_error(405)
 
     def do_OPTIONS(self):
         self.send_response(204)
@@ -51,7 +104,20 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        if urlsplit(self.path).path == '/api/ai/status':
+            if not auth_db.get_user_by_token(self.get_token()):
+                self.send_json(401, {'ok': False, 'error': 'Entre para usar o assistente.'})
+                return
+            try:
+                self.send_json(200, assistant.status())
+            except AIError as error:
+                self.send_json(error.status, {'ok': False, 'error': error.message})
+            return
         route = urlsplit(self.path).path
+
+        if route.startswith('/biblioteca/'):
+            self.serve_library(route)
+            return
 
         if route in ['/', '/tjpb-mapa-estudo.html', '/baixar', '/relatorio_visual_fgv_ti_tribunais.html']:
             document = ROOT / 'relatorio_visual_fgv_ti_tribunais.html' if route == '/relatorio_visual_fgv_ti_tribunais.html' else APP
@@ -93,7 +159,7 @@ class Handler(BaseHTTPRequestHandler):
             asset_file = ASSETS / asset_name
             if asset_file.exists() and asset_file.is_file():
                 data = asset_file.read_bytes()
-                mime = 'image/png' if asset_name.endswith('.png') else 'application/octet-stream'
+                mime = mimetypes.guess_type(asset_name)[0] or 'application/octet-stream'
                 self.send_response(200)
                 self.send_header('Content-Type', mime)
                 self.send_header('Content-Length', str(len(data)))
@@ -119,16 +185,67 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         route = urlsplit(self.path).path
-        length = int(self.headers.get('Content-Length', 0))
+        try:
+            length = int(self.headers.get('Content-Length', 0))
+        except ValueError:
+            self.send_json(400, {'ok': False, 'error': 'Tamanho de requisição inválido.'})
+            return
+        if length < 0 or (route in ('/api/ai/chat','/api/ai/plan') and length > 40000):
+            self.send_json(413, {'ok': False, 'error': 'Conversa muito grande. Reduza a mensagem.'})
+            return
         if length > 50 * 1024 * 1024:
             self.send_json(400, {'ok': False, 'error': 'Payload muito grande'})
             return
 
         body = self.rfile.read(length) if length > 0 else b'{}'
+        if route == '/api/ai/transcribe':
+            user = auth_db.get_user_by_token(self.get_token())
+            if not user:
+                self.send_json(401, {'ok': False, 'error': 'Entre para usar o assistente.'})
+                return
+            try:
+                content_type, params = cgi.parse_header(self.headers.get('Content-Type', ''))
+                if content_type != 'multipart/form-data' or 'boundary' not in params:
+                    raise AIError(400, 'Envie uma gravação de áudio válida.')
+                fields = cgi.parse_multipart(io.BytesIO(body), {'boundary': params['boundary'].encode('ascii')})
+                audio = fields.get('audio', [b''])[0]
+                mime = (fields.get('mime', ['audio/webm'])[0] or 'audio/webm').decode('utf-8') if isinstance(fields.get('mime', ['audio/webm'])[0], bytes) else fields.get('mime', ['audio/webm'])[0]
+                if not audio or len(audio) > 10 * 1024 * 1024:
+                    raise AIError(413, 'A gravação está vazia ou muito grande.')
+                self.send_json(200, assistant.transcribe(user['id'], audio, mime))
+            except AIError as error:
+                self.send_json(error.status, {'ok': False, 'error': error.message})
+            except (UnicodeError, ValueError, KeyError, TypeError) as error:
+                self.send_json(400, {'ok': False, 'error': f'Áudio inválido: {error}'})
+            return
         try:
             payload = json.loads(body.decode('utf-8'))
         except Exception:
             payload = {}
+
+        if route in ('/api/ai/chat', '/api/ai/plan'):
+            user = auth_db.get_user_by_token(self.get_token())
+            if not user:
+                self.send_json(401, {'ok': False, 'error': 'Entre para usar o assistente.'})
+                return
+            try:
+                self.send_json(200, assistant.plan(user['id'],payload) if route == '/api/ai/plan' else assistant.chat(user['id'], payload))
+            except AIError as error:
+                headers = {'Retry-After': '60'} if error.status == 429 else None
+                self.send_json(error.status, {'ok': False, 'error': error.message}, headers)
+            return
+
+        if route == '/api/library/logout':
+            self.send_json(200, {'ok': True}, {'Set-Cookie': self.library_cookie(clear=True)})
+            return
+
+        if route == '/api/library/session':
+            user = auth_db.get_user_by_token(self.get_token())
+            if not user:
+                self.send_json(401, {'ok': False, 'error': 'Entre na sua conta para acessar os cursos.'}, {'Set-Cookie': self.library_cookie(clear=True)})
+            else:
+                self.send_json(200, {'ok': True, 'user': user}, {'Set-Cookie': self.library_cookie(self.get_token())})
+            return
 
         if route == '/api/register':
             try:

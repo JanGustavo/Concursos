@@ -143,6 +143,7 @@ async function handleAuthSubmit() {
     currentUser = data.user;
     updateUserUI(currentUser);
     byId('modal-auth').close();
+    window.dispatchEvent(new Event('tjpb-auth-change'));
     practiceStatus(`Bem-vindo, ${currentUser.nome}! Seus dados estão conectados.`);
     syncWithServer();
   } catch (err) {
@@ -152,9 +153,11 @@ async function handleAuthSubmit() {
 }
 
 function logoutUser() {
+  void fetch('/api/library/logout', {method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).catch(()=>{});
   localStorage.removeItem(AUTH_TOKEN_KEY);
   currentUser = null;
   updateUserUI(null);
+  window.dispatchEvent(new Event('tjpb-auth-change'));
   practiceStatus('Você saiu da sua conta.');
 }
 
@@ -312,7 +315,7 @@ renderPracticeOverview();
 if(practiceStore.attempts.length)practiceProgress();
 setPracticePanel('setup');
 if(practiceSession)renderPracticeQuestion();
-const initialViews={questoes:'questions-view',gran:'gran-view',cursos:'courses-view',banca:'data-view'};
+const initialViews={inicio:'start-view',ciclo:'planner-view',questoes:'questions-view',gran:'gran-view',cursos:'courses-view',banca:'data-view'};
 showView(initialViews[new URLSearchParams(location.search).get('view')]||'map-view');
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname.startsWith('192.168.') || location.hostname === '127.0.0.1')) {
@@ -330,3 +333,6 @@ byId('btn-open-leaderboard')?.addEventListener('click', openLeaderboard);
 byId('btn-close-leaderboard')?.addEventListener('click', () => byId('modal-leaderboard').close());
 byId('btn-refresh-leaderboard')?.addEventListener('click', refreshLeaderboard);
 checkCurrentUser();
+// O diálogo de login deve funcionar também quando o módulo de questões está oculto.
+document.body.appendChild(byId('modal-auth'));
+window.addEventListener('tjpb-request-login',()=>openAuthDialog(false));

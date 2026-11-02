@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tjpb-estudo-v3';
+const CACHE_NAME = 'tjpb-estudo-v8';
 const PRECACHE_URLS = [
   '/',
   '/?view=questoes',
@@ -27,7 +27,21 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-  // Network-first for api, cache-first with network fallback for assets
+  const url = new URL(event.request.url);
+  // Conteúdos privados do Drive e respostas autenticadas nunca entram no cache offline.
+  if (url.origin !== self.location.origin || url.pathname.startsWith('/api/') || url.pathname.startsWith('/biblioteca/')) return;
+  // Always refresh the application document; retain a cached copy for offline study.
+  // Otherwise a cached HTML can keep showing old configuration screens after a deploy.
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('.html')) {
+    event.respondWith(fetch(event.request, {cache: 'no-store'}).then(async response => {
+      if (response.ok) {
+        try { const cache = await caches.open(CACHE_NAME); await cache.put(event.request, response.clone()); } catch {}
+      }
+      return response;
+    }).catch(async () => (await caches.match(event.request)) || (await caches.match('/')) || new Response('Sem conexão. Abra o aplicativo uma vez com internet para preparar o modo offline.', {status:503,headers:{'Content-Type':'text/plain; charset=utf-8'}})));
+    return;
+  }
+  // Small static assets may be read from cache while the next version is fetched.
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
       const fetchPromise = fetch(event.request).then(networkResponse => {
