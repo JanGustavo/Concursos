@@ -10,6 +10,7 @@ STATE="$APP/.deploy"
 [[ $(systemctl show "$SERVICE" -p WorkingDirectory --value) == "$APP" ]] || exit 1
 [[ ! -L "$APP/assets" && ! -L "$APP/dados" ]] || exit 1
 mkdir -p "$STATE/backups"
+chmod 700 "$STATE" "$STATE/backups"
 exec 9>"$STATE/lock"
 flock -n 9 || { echo 'Outro deploy TJPB em andamento'; exit 1; }
 snapshot_other(){
@@ -23,7 +24,7 @@ if [[ $MODE == deploy ]]; then
 from pathlib import Path
 import tarfile,sys,shutil
 s=Path(sys.argv[1]);names=(s/'files.txt').read_text().splitlines()
-allowed={'servir.py','auth_db.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png'}
+allowed={'servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','dados/drive_catalog.json','dados/drive_tree.json'}
 if len(names)!=len(allowed) or set(names)!=allowed: raise SystemExit('Lista de arquivos inesperada')
 with tarfile.open(s/'app.tar.gz') as t:
  if len(t.getmembers())!=len(allowed) or any(not m.isfile() or m.name not in allowed for m in t.getmembers()): raise SystemExit('Pacote inválido')
@@ -47,7 +48,7 @@ mkdir "$BACKUP"
 mkdir "$BACKUP/code"
 cp "$FILES" "$BACKUP/files.txt"
 while IFS= read -r name; do
- [[ $name =~ ^(servir.py|auth_db.py|tjpb-mapa-estudo.html|relatorio_visual_fgv_ti_tribunais.html|tjpb_desenvolvimento_sistemas_relatorio.html|manifest.json|service-worker.js|assets/icon-192.png|assets/icon-512.png)$ ]] || exit 1
+ [[ $name =~ ^(servir.py|auth_db.py|library_service.py|ai_service.py|tjpb-mapa-estudo.html|relatorio_visual_fgv_ti_tribunais.html|tjpb_desenvolvimento_sistemas_relatorio.html|manifest.json|service-worker.js|assets/icon-192.png|assets/icon-512.png|dados/drive_catalog.json|dados/drive_tree.json)$ ]] || exit 1
  [[ ! -L "$APP/$name" ]] || exit 1
  if [[ -f $APP/$name ]]; then mkdir -p "$BACKUP/code/$(dirname "$name")"; cp -p "$APP/$name" "$BACKUP/code/$name"; fi
  if [[ -f $SOURCE/$name ]]; then python3 - "$SOURCE/$name" <<'PY'
@@ -76,7 +77,15 @@ MUTATING=1
 sudo -n systemctl stop "$SERVICE"
 # Snapshot consistente de dados, com serviço parado; não será restaurado automaticamente.
 if [[ -d $APP/dados ]]; then cp -a "$APP/dados" "$BACKUP/dados"; fi
-find "$APP/dados" -maxdepth 1 -type f -exec sha256sum {} + | sort > "$STAGE/data-before.txt"
+find "$APP/dados" -maxdepth 1 -type f ! -name drive_catalog.json ! -name drive_tree.json -exec sha256sum {} + | sort > "$STAGE/data-before.txt"
+if [[ -f $STAGE/drive-token.json && ! -s $APP/token.json ]]; then
+ python3 - "$STAGE/drive-token.json" <<'PY'
+import json,sys
+d=json.load(open(sys.argv[1]))
+assert all(d.get(k) for k in ('refresh_token','client_id','client_secret')), 'Autorização do Drive incompleta'
+PY
+ install -m 0600 "$STAGE/drive-token.json" "$APP/token.json"
+fi
 while IFS= read -r name; do
  mkdir -p "$APP/$(dirname "$name")"
  if [[ -f $SOURCE/$name ]]; then
@@ -84,7 +93,7 @@ while IFS= read -r name; do
   mv -f "$APP/$name.deploy-tmp" "$APP/$name"
  else rm -f -- "$APP/$name"; fi
 done < "$FILES"
-find "$APP/dados" -maxdepth 1 -type f -exec sha256sum {} + | sort > "$STAGE/data-after.txt"
+find "$APP/dados" -maxdepth 1 -type f ! -name drive_catalog.json ! -name drive_tree.json -exec sha256sum {} + | sort > "$STAGE/data-after.txt"
 cmp "$STAGE/data-before.txt" "$STAGE/data-after.txt"
 echo 'Dados de produção preservados: checksums idênticos antes/depois da instalação.'
 sudo -n systemctl start "$SERVICE"
@@ -102,6 +111,15 @@ if [[ -f $APP/relatorio_visual_fgv_ti_tribunais.html ]]; then
  cmp "$APP/relatorio_visual_fgv_ti_tribunais.html" "$STAGE/report.html"
 fi
 curl -fsS --max-time 5 http://127.0.0.1:8766/api/me | python3 -c 'import sys,json; d=json.load(sys.stdin); assert d.get("ok") is False and d.get("user") is None; print("API anônima OK")'
+if grep -q '^from library_service import' "$APP/servir.py"; then
+ for path in /biblioteca/api/tree /biblioteca/api/media/invalid; do
+  [[ $(curl -sS --max-time 10 -o "$STAGE/library-denied.json" -w '%{http_code}' "https://$DOMAIN$path") == 401 ]]
+ done
+ for path in /token.json /credentials.json /dados/drive_catalog.json /groq-config.json; do
+  [[ $(curl -sS --max-time 10 -o /dev/null -w '%{http_code}' "https://$DOMAIN$path") == 404 ]]
+ done
+ echo 'Biblioteca protegida: catálogo e mídias exigem login; credenciais não são públicas.'
+fi
 snapshot_other > "$STAGE/others-after.txt"
 if cmp -s "$STAGE/others-before.txt" "$STAGE/others-after.txt"; then
  echo 'Outros serviços e contêineres: mesmos PIDs, IDs e datas de inicialização.'
