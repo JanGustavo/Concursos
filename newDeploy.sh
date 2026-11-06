@@ -39,7 +39,7 @@ if [[ $MODE == deploy ]]; then
 from pathlib import Path
 import sys,hashlib,tarfile,ast
 root,stage=map(Path,sys.argv[1:])
-files=['servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','dados/drive_catalog.json','dados/drive_tree.json']
+files=['servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','assets/pdf-reader.js','assets/pdf-worker.mjs','dados/drive_catalog.json','dados/drive_tree.json','dados/anki_catalog.json']
 for name in ['servir.py','auth_db.py','library_service.py','ai_service.py']: ast.parse((root/name).read_text())
 with tarfile.open(stage/'app.tar.gz','w:gz') as archive:
  for name in files:

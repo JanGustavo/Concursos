@@ -65,3 +65,23 @@ Backup: `20261102T035314Z-33cfc735`. Log: `deploy/logs/20261102T035257Z-deploy.l
 Diagnóstico real: chave existente válida; identificação padrão Python recebia HTTP 403, corrigido com identificação da aplicação. Modelo anterior ausente do catálogo da conta; configurado `openai/gpt-oss-20b` preservando a chave. Após publicar, o status retornou ready/available e uma mensagem neutra recebeu resposta real. O script agora valida acesso e modelo antes de salvar.
 
 Primeiro uso em três etapas, com prévia e distribuição semanal editável; Português/RLM combinados, revisão sábado, redação domingo, descanso opcional. Iniciais/cores por matéria e meta diária ajustada ao perfil. Somente planejamentos automáticos intocados são substituídos ao reaplicar a mesma semana. HTML usa rede primeiro e fallback offline no service worker v8. Validação: lint/build, 40 testes JS e 50 Python; revisão desktop/mobile e alteração de semana/tempo sem duplicação. Deploy confirmou dados preservados e demais serviços sem reinício.
+
+### Publicação de 03/11/2026 — instruções, ranking, PDF e modal de IA
+
+Backup final: `20261104T020115Z-e5a764d1` (identificador em UTC; publicação local em 03/11). Log: `deploy/logs/20261104T020058Z-deploy.log`.
+
+Guia Prova e discursiva baseado no texto enviado e conferido com edital consolidado/2ª retificação. Arquivo histórico recolhido e roteiro de uso didático das provas antigas. Guia antigo também atualizado na URL legada. Ranking fora de seções ocultas, fechamento por X/Escape/clique fora/botão inferior e rolagem própria.
+
+PDF.js lazy com worker local e requisições Bearer para leitura no corpo da página; assets adicionados à lista explícita de deploy e comparados por bytes no endereço público. Modal de IA global via portal, narração opcional, voz/transcrição, JSON validado, prévia e confirmação da importação. Cancelar/fechar não altera o calendário nem envia áudio em captura.
+
+Validação: lint/build, 52 testes JavaScript e 57 Python; renderização real de PDF sintético; proposta real da Groq retornou sete dias e dez sessões, sem escrita no calendário. Testes de DOM confirmaram saída do ranking e confirmação do planejamento. Controle de navegador indisponível nesta sessão: não houve repetição manual em Edge, Chrome, Firefox ou dispositivo móvel. Dados e demais serviços preservados; banco de dados não foi ampliado, conforme pedido.
+
+### Publicação de 03/11/2026 — decks Anki e dúvidas por questão
+
+Backup: `20261104T021657Z-42e7b459` (UTC). Log: `deploy/logs/20261104T021639Z-deploy.log`.
+
+Área Anki em `?view=anki`, com dois decks verificados na pasta fornecida: Português (212.876.304 bytes) e Matemática (1.672.668 bytes). O pacote contém somente catálogo de metadados; downloads autenticados são transmitidos do Drive. Pós-deploy, ambos retornaram HTTP 206 para os primeiros 16 bytes, assinatura ZIP válida e Content-Disposition attachment. Acesso anônimo ao catálogo é negado e o JSON bruto não é servido.
+
+Questões respondidas agora oferecem ChatGPT com URL de prompt e cópia de segurança, e Groq no painel da aplicação com contexto completo. O modo questão não injeta o assunto do calendário. Limites de entrada: 16000 caracteres por mensagem, 40000 por conversa; histórico antigo é removido inteiro para caber, sem truncar a questão atual. A API de chat limita corpo a 180000 bytes.
+
+58 testes JavaScript e 62 Python passaram, além de lint/build. Dados existentes e demais serviços preservados pelo deploy. O catálogo Anki é a única nova exclusão explícita na verificação de dados, pois é um arquivo de configuração intencional da biblioteca, junto aos catálogos Drive já existentes.

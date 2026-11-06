@@ -10,6 +10,7 @@ ui = (ROOT / 'assets' / 'practice-ui.js').read_text()
 css = (ROOT / 'assets' / 'practice.css').read_text()
 css += '\n' + (ROOT / 'assets' / 'courses-app.css').read_text()
 css += '\n' + (ROOT / 'assets' / 'cyber-theme.css').read_text()
+css += '\n' + (ROOT / 'assets' / 'exam-guide.css').read_text()
 courses_ui = (ROOT / 'assets' / 'courses-app.js').read_text()
 panel = (ROOT / 'assets' / 'practice-panel.html').read_text()
 gran_panel = (ROOT / 'assets' / 'gran-panel.html').read_text()
@@ -48,20 +49,26 @@ s = s.replace('<head>', '<head>\n' + pwa_tags, 1)
 
 s = s.replace('</style>', css + '\n</style>', 1)
 old = '<button class="view" type="button" id="data-tab"'
-new = '<button class="view" type="button" id="start-tab" role="tab" aria-controls="start-view" aria-selected="false">Por onde começar</button><button class="view" type="button" id="planner-tab" role="tab" aria-controls="planner-view" aria-selected="false">Ciclo de estudos</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button>' + old
+new = '<button class="view" type="button" id="start-tab" role="tab" aria-controls="start-view" aria-selected="false">Por onde começar</button><button class="view" type="button" id="planner-tab" role="tab" aria-controls="planner-view" aria-selected="false">Ciclo de estudos</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button><button class="view" type="button" id="anki-tab" role="tab" aria-controls="anki-view" aria-selected="false">Anki</button>' + old
 assert old in s
 s = s.replace(old, new, 1)
 
 s = s.replace('</main>', panel + gran_panel + '''
 <section id="start-view" role="tabpanel" aria-labelledby="start-tab" hidden><div id="start-root"></div></section>
 <section id="planner-view" role="tabpanel" aria-labelledby="planner-tab" hidden><div id="planner-root"></div></section>
+<section id="support-view" role="tabpanel" aria-labelledby="support-tab" hidden><div id="support-root"></div></section>
+<section id="anki-view" role="tabpanel" aria-labelledby="anki-tab" hidden><div id="anki-root"></div></section>
 <section id="courses-view" class="practice courses" role="tabpanel" aria-labelledby="courses-tab" hidden>
  <div id="courses-root"></div>
  <noscript>Ative o JavaScript para acessar os cursos e as aulas.</noscript>
 </section>
 </main>''', 1)
 research_start = s.index('>', s.index('id="data-view"')) + 1
-s = s[:research_start] + report_summary + '\n<h2>Dados e referências do concurso</h2>' + s[research_start:]
+research_end = s.index('</section>', research_start)
+old_research = s[research_start:research_end]
+exam_guide = (ROOT / 'assets' / 'exam-guide.html').read_text()
+s = s[:research_start] + '<div id="exam-guide">' + exam_guide + '</div><div id="exam-ai-root"></div>' + '<details class="past-papers"><summary>Provas anteriores: como transformar em treino</summary>' + report_summary + '</details><details><summary>Arquivo histórico de concursos · pesquisa de 25/10/2026</summary>' + '<p class="practice-caption">Pesquisa histórica anterior à 2ª retificação. Para as regras atuais de prova e discursiva, use o guia acima e o edital consolidado.</p>' + old_research + '</details>' + s[research_end:]
+s = s.replace('>Banca e dados</button>', '>Prova e discursiva</button><button class="view support-nav" type="button" id="support-tab" role="tab" aria-controls="support-view" aria-selected="false"><span aria-hidden="true">💜</span> Apoiar</button>', 1)
 s = s.replace('<div class="detail-body"><div class="study-context">', '<div class="detail-body"><div class="gran-block-launch"><a class="practice-btn primary" id="gran-block-link" target="_blank" rel="noopener noreferrer">Questões no Gran ↗</a><small>Abre o filtro FGV deste assunto. Requer internet e acesso ao Gran.</small></div><div class="practice-block-launch"><button type="button" class="practice-btn" id="practice-block-button">Praticar neste bloco</button><small id="practice-block-note"></small></div><div class="study-context">', 1)
 old = "currentStudyNode=id; renderGranSearch(id);"
 assert old in s
@@ -81,7 +88,7 @@ start = s.index("document.querySelectorAll('.view').forEach(b=>b.addEventListene
 end = s.index('\nlet currentStudyNode=', start)
 s = s[:start] + '''function showView(id){
  document.querySelectorAll('.view').forEach(tab=>tab.setAttribute('aria-selected',String(tab.getAttribute('aria-controls')===id)));
- ['map-view','data-view','questions-view','gran-view','courses-view','start-view','planner-view'].forEach(key=>document.getElementById(key).hidden=key!==id);
+ ['map-view','data-view','questions-view','gran-view','courses-view','start-view','planner-view','anki-view','support-view'].forEach(key=>document.getElementById(key).hidden=key!==id);
  document.querySelector('.hint').hidden=id!=='map-view';if(id==='map-view')requestAnimationFrame(draw);
 }
 document.querySelectorAll('.view').forEach(tab=>tab.addEventListener('click',()=>showView(tab.getAttribute('aria-controls'))));
@@ -101,6 +108,8 @@ s = s.replace("else if(!d.tentativas)h+='<small>'+d.questoes+' questões no banc
 s = s.replace('Progresso de ', 'Progresso carregado em ')
 s = s.replace('se o Chrome bloquear, digite <code>allow pasting</code>', 'use apenas scripts que você tenha revisado')
 s = s.replace('A prática nesta etapa acontece no Gran.', 'Você pode praticar no Gran ou importar um JSON para a aba Questões.')
+s = s.replace('40 pontos · até 30 linhas','40 pontos · estudo de caso')
+s = s.replace('edital-tjpb_19.10.pdf', 'edital-retificado-tjpb_29.10.pdf')
 s = s.replace('background:#b67515}.p-low', 'background:#88600f}.p-low')
 s = s.replace('<script>\nconst nodes=', '<script>\n' + core + '\n</script>\n<script>\nconst nodes=', 1)
 assert core in s
@@ -109,6 +118,9 @@ seed = json.dumps(bank, ensure_ascii=False).replace('<', '\\u003c')
 s = s.replace('</body>', '<div id="assistant-root"></div><script type="application/json" id="practice-seed">' + seed + '</script>\n<script>\n' + ui + '\n' + gran_ui + '\n</script>\n<script>\n' + courses_ui + '\n</script>\n</body>', 1)
 (ROOT / 'tjpb-mapa-estudo.html').write_text(s)
 print(f'HTML independente gerado: {len(s.encode()):,} bytes com {len(combined_questions)} questões no seed.')
+
+guide_style = '.research{max-width:1100px;margin:24px auto;padding:0 24px}' + (ROOT / 'assets' / 'practice.css').read_text() + (ROOT / 'assets' / 'cyber-theme.css').read_text() + (ROOT / 'assets' / 'exam-guide.css').read_text()
+(ROOT / 'tjpb_desenvolvimento_sistemas_relatorio.html').write_text('<!doctype html><html lang="pt-BR" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TJPB · Instruções de prova e estudo de caso</title><style>' + guide_style + '</style></head><body><main class="research"><p><a href="/?view=banca">← Voltar ao aplicativo de estudos</a></p>' + exam_guide + '</main></body></html>')
 
 # Linked reports use the same visual tokens; keep all original report content and behavior.
 import re

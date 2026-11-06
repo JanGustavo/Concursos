@@ -47,8 +47,8 @@
     <label class="practice-confidence">Sua confiança<select id="question-confidence"><option value="duvida">Fiquei em dúvida</option><option value="certeza">Tenho certeza</option><option value="chute">Foi um chute</option></select></label>
     <button type="button" id="question-answer" class="practice-btn primary" disabled>Confirmar resposta</button>
     <div id="question-feedback" class="question-feedback" aria-live="polite" hidden></div>
-    <div id="question-after" class="practice-actions" hidden><button type="button" id="question-next" class="practice-btn primary">Próxima questão</button><button type="button" id="question-explain" class="practice-btn">Preparar dúvida para o ChatGPT</button></div>
-    <div id="question-ai" hidden><label>Prompt com a questão e seu raciocínio<textarea id="question-ai-prompt" rows="7" readonly></textarea></label><div class="practice-actions"><button type="button" id="question-ai-copy" class="practice-btn">Copiar dúvida</button><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="practice-btn">Abrir ChatGPT ↗</a></div></div>
+    <div id="question-after" class="practice-actions" hidden><button type="button" id="question-next" class="practice-btn primary">Próxima questão</button><a id="question-chatgpt" class="practice-btn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT com esta questão ↗</a><button type="button" id="question-local-ai" class="practice-btn primary">Perguntar à IA · Groq ✧</button><button type="button" id="question-explain" class="practice-btn">Ver / copiar prompt</button></div>
+    <p id="question-ai-status" class="practice-caption" role="status"></p><div id="question-ai" hidden><label>Prompt com a questão e seu raciocínio<textarea id="question-ai-prompt" rows="7" readonly></textarea></label><div class="practice-actions"><button type="button" id="question-ai-copy" class="practice-btn">Copiar dúvida</button><a id="question-ai-open" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="practice-btn">Abrir ChatGPT com prompt ↗</a></div></div>
   
   <!-- Modal Autenticação -->
   <dialog id="modal-auth" class="practice-dialog">
@@ -78,10 +78,10 @@
   </dialog>
 
   <!-- Modal Placar da Turma -->
-  <dialog id="modal-leaderboard" class="practice-dialog leaderboard-dialog">
+  <dialog id="modal-leaderboard" class="practice-dialog leaderboard-dialog" aria-labelledby="leaderboard-title">
     <div class="dialog-content">
       <div class="dialog-head">
-        <h3>🏆 Placar Geral da Turma</h3>
+        <h3 id="leaderboard-title">🏆 Placar Geral da Turma</h3>
         <button type="button" class="dialog-close" id="btn-close-leaderboard" aria-label="Fechar ranking">×</button>
       </div>
       <p class="practice-caption">Aproveitamento e frequência dos participantes nos simulados do TJPB.</p>
@@ -103,7 +103,7 @@
         </table>
       </div>
       <div class="practice-actions" style="margin-top:15px;">
-        <button type="button" id="btn-refresh-leaderboard" class="practice-btn primary">Atualizar Placar</button>
+        <button type="button" id="btn-refresh-leaderboard" class="practice-btn primary">Atualizar Placar</button><button type="button" class="practice-btn" id="btn-dismiss-leaderboard">Fechar placar</button>
       </div>
     </div>
   </dialog>

@@ -92,6 +92,21 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual(e.exception.status,416)
 
 
+class AnkiLibraryTests(unittest.TestCase):
+    setUp=LibraryTests.setUp
+    tearDown=LibraryTests.tearDown
+    def test_deck_has_attachment_and_streams_without_loading_file_into_memory(self):
+        (self.root/'dados/anki_catalog.json').write_text(json.dumps({'decks':[{'id':'deck1','name':'Português.apkg','bytes':212876304}]}))
+        self.library.load();self.assertEqual(len(self.library.catalog()['decks']),1)
+        status,headers,upstream=self.library.media('deck1',None,head=True)
+        self.assertEqual(status,200);self.assertEqual(headers['Content-Type'],'application/octet-stream');self.assertTrue(headers['Content-Disposition'].startswith('attachment;'));self.assertEqual(headers['Content-Length'],'212876304');self.assertIsNone(upstream)
+    def test_deck_is_not_in_video_or_pdf_counts(self):
+        (self.root/'dados/anki_catalog.json').write_text(json.dumps({'decks':[{'id':'deck1','name':'Matematica.apkg','bytes':100}]}));data=self.library.catalog();self.assertEqual((data['videos'],data['pdfs']),(1,1));self.assertEqual(data['decks'][0]['name'],'Matematica.apkg')
+    def test_non_anki_file_is_not_authorized_by_deck_catalog(self):
+        (self.root/'dados/anki_catalog.json').write_text(json.dumps({'decks':[{'id':'deck1','name':'script.html','bytes':100}]}))
+        with self.assertRaises(LibraryError):self.library.catalog()
+
+
 class LibraryHTTPTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -121,7 +136,7 @@ class LibraryHTTPTests(unittest.TestCase):
     def test_logout_expires_media_cookie(self):
         with urlopen(Request(self.base+'/api/library/logout',data=b'{}')) as r:self.assertIn('Max-Age=0',r.headers['Set-Cookie'])
     def test_credentials_are_not_public(self):
-        for path in ['/token.json','/credentials.json','/dados/drive_catalog.json','/groq-config.json']:
+        for path in ['/token.json','/credentials.json','/dados/drive_catalog.json','/groq-config.json','/dados/anki_catalog.json']:
             with self.subTest(path=path),self.assertRaises(HTTPError) as e:urlopen(self.base+path)
             self.assertEqual(e.exception.code,404)
 
@@ -134,7 +149,7 @@ class LibraryHTTPTests(unittest.TestCase):
             with urlopen(Request(self.base+'/api/ai/status',headers={'Authorization':'Bearer test-session'})) as r:
                 self.assertFalse(json.load(r)['configured']);self.assertIn('no-store',r.headers['Cache-Control'])
     def test_ai_rejects_oversized_body(self):
-        with self.assertRaises(HTTPError) as e:urlopen(Request(self.base+'/api/ai/chat',data=b'x'*40001,headers={'Authorization':'Bearer test-session'}))
+        with self.assertRaises(HTTPError) as e:urlopen(Request(self.base+'/api/ai/chat',data=b'x'*180001,headers={'Authorization':'Bearer test-session'}))
         self.assertEqual(e.exception.code,413)
 
 
@@ -151,5 +166,30 @@ class LibraryHTTPTests(unittest.TestCase):
             req=Request(self.base+'/api/ai/chat',data=b'{}',headers={'Authorization':'Bearer test-session'})
             with self.assertRaises(HTTPError) as e:urlopen(req)
             self.assertEqual(e.exception.code,503)
+
+    def test_pdf_without_cookie_accepts_bearer_and_keeps_private_headers(self):
+        import io
+        content=b'%PDF-1.7\nFixture'
+        headers={'Content-Type':'application/pdf','Content-Length':str(len(content)),'Cache-Control':'private, no-store','Accept-Ranges':'bytes'}
+        with patch.object(servir.library,'media',return_value=(200,headers,io.BytesIO(content))) as media:
+            with urlopen(Request(self.base+'/biblioteca/api/media/pdf1',headers={'Authorization':'Bearer test-session'})) as response:
+                self.assertEqual(response.read(),content);self.assertEqual(response.headers['Content-Type'],'application/pdf');self.assertIn('no-store',response.headers['Cache-Control'])
+            media.assert_called_once_with('pdf1',None,head=False)
+    def test_ai_plan_uses_authenticated_user_and_does_not_write_to_database(self):
+        payload={'request':'Três dias de TI e revisão no sábado','minutes':120}
+        with patch.object(servir.assistant,'plan',return_value={'ok':True,'plan':{'days':[]}}) as plan:
+            with urlopen(Request(self.base+'/api/ai/plan',data=json.dumps(payload).encode(),headers={'Authorization':'Bearer test-session'})) as response:self.assertTrue(json.load(response)['ok'])
+            plan.assert_called_once_with(1,payload)
+    def test_pdf_worker_has_javascript_mime(self):
+        with urlopen(self.base+'/assets/pdf-worker.mjs') as response:
+            self.assertIn('javascript',response.headers['Content-Type']);self.assertGreater(len(response.read()),1000)
+
+    def test_anki_requires_login(self):
+        with self.assertRaises(HTTPError) as e:urlopen(self.base+'/biblioteca/api/anki')
+        self.assertEqual(e.exception.code,401)
+    def test_anki_catalog_does_not_expose_tokens_or_external_media_urls(self):
+        with patch.object(servir.library,'catalog',return_value={'decks':[{'id':'deck1','name':'Portugues.apkg','bytes':250}]}):
+            with urlopen(Request(self.base+'/biblioteca/api/anki',headers={'Authorization':'Bearer test-session'})) as response:
+                data=json.load(response);self.assertEqual(data['decks'][0]['id'],'deck1');self.assertIn('no-store',response.headers['Cache-Control']);self.assertNotIn('token',json.dumps(data))
 
 if __name__=='__main__':unittest.main()

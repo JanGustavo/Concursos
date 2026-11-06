@@ -17,3 +17,5 @@ token*.tmp
 groq-config.json
 .env
 .env.*
+
+dados/anki_catalog.json

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tjpb-estudo-v8';
+const CACHE_NAME = 'tjpb-estudo-v15';
 const PRECACHE_URLS = [
   '/',
   '/?view=questoes',
@@ -29,7 +29,7 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
   // Conteúdos privados do Drive e respostas autenticadas nunca entram no cache offline.
-  if (url.origin !== self.location.origin || url.pathname.startsWith('/api/') || url.pathname.startsWith('/biblioteca/')) return;
+  if (url.origin !== self.location.origin || url.pathname.startsWith('/api/') || url.pathname.startsWith('/biblioteca/') || url.pathname === '/support/pix') return;
   // Always refresh the application document; retain a cached copy for offline study.
   // Otherwise a cached HTML can keep showing old configuration screens after a deploy.
   if (event.request.mode === 'navigate' || url.pathname.endsWith('.html')) {

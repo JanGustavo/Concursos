@@ -5,11 +5,13 @@ import json
 import cgi
 import io
 import os
+import re
 import sys
 import mimetypes
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlsplit
+from urllib.request import urlopen
 from library_service import library, LibraryError
 from ai_service import assistant, AIError
 
@@ -63,6 +65,9 @@ class Handler(BaseHTTPRequestHandler):
             self.send_json(401, {'ok': False, 'error': 'Entre na sua conta para acessar os cursos.'})
             return
         try:
+            if route == '/biblioteca/api/anki':
+                self.send_json(200,{'ok':True,'decks':library.catalog().get('decks',[])})
+                return
             if route == '/biblioteca/api/tree':
                 self.send_json(200, library.catalog())
                 return
@@ -103,7 +108,33 @@ class Handler(BaseHTTPRequestHandler):
         self.send_cors_headers()
         self.end_headers()
 
+    def serve_pix(self, query):
+        amounts = parse_qs(query).get('amount', [])
+        if (len(amounts) != 1 or not re.fullmatch(r'[0-9]{1,5}(\.[0-9]{1,2})?', amounts[0])
+                or float(amounts[0]) < 1):
+            self.send_json(422, {'detail': 'Informe um valor entre R$ 1 e R$ 99.999,99.'})
+            return
+        try:
+            # KanbanDoro gera o código com a configuração do recebedor em produção.
+            with urlopen('https://api.kanbandoro.jangustavo.me/support/pix?amount=' + amounts[0], timeout=5) as response:
+                raw = response.read(65537)
+            if len(raw) > 65536:
+                raise ValueError('Oversized Pix response')
+            data = json.loads(raw)
+            payload = data['payload']
+            qr = data['qrCode']
+            if not isinstance(payload, str) or not payload or not isinstance(qr, str) or not qr.startswith('data:image/png;base64,'):
+                raise ValueError('Invalid Pix response')
+        except (OSError, ValueError, TypeError, KeyError):
+            self.send_json(503, {'detail': 'Pix indisponível no momento. Tente novamente.'})
+            return
+        self.send_json(200, {'payload': payload, 'qrCode': qr})
+
     def do_GET(self):
+        request = urlsplit(self.path)
+        if request.path == '/support/pix':
+            self.serve_pix(request.query)
+            return
         if urlsplit(self.path).path == '/api/ai/status':
             if not auth_db.get_user_by_token(self.get_token()):
                 self.send_json(401, {'ok': False, 'error': 'Entre para usar o assistente.'})
@@ -119,8 +150,8 @@ class Handler(BaseHTTPRequestHandler):
             self.serve_library(route)
             return
 
-        if route in ['/', '/tjpb-mapa-estudo.html', '/baixar', '/relatorio_visual_fgv_ti_tribunais.html']:
-            document = ROOT / 'relatorio_visual_fgv_ti_tribunais.html' if route == '/relatorio_visual_fgv_ti_tribunais.html' else APP
+        if route in ['/', '/tjpb-mapa-estudo.html', '/baixar', '/relatorio_visual_fgv_ti_tribunais.html', '/tjpb_desenvolvimento_sistemas_relatorio.html']:
+            document = ROOT / route.removeprefix('/') if route in ('/relatorio_visual_fgv_ti_tribunais.html','/tjpb_desenvolvimento_sistemas_relatorio.html') else APP
             data = document.read_bytes()
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
@@ -190,7 +221,7 @@ class Handler(BaseHTTPRequestHandler):
         except ValueError:
             self.send_json(400, {'ok': False, 'error': 'Tamanho de requisição inválido.'})
             return
-        if length < 0 or (route in ('/api/ai/chat','/api/ai/plan') and length > 40000):
+        if length < 0 or (route == '/api/ai/chat' and length > 180000) or (route == '/api/ai/plan' and length > 40000):
             self.send_json(413, {'ok': False, 'error': 'Conversa muito grande. Reduza a mensagem.'})
             return
         if length > 50 * 1024 * 1024:

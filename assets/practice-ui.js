@@ -162,15 +162,21 @@ function logoutUser() {
 }
 
 async function openLeaderboard() {
-  byId('modal-leaderboard').showModal();
-  refreshLeaderboard();
+  const dialog=byId('modal-leaderboard');
+  if(!dialog.open)dialog.showModal();
+  byId('btn-close-leaderboard').focus();
+  void refreshLeaderboard();
 }
 
+let leaderboardController=null;
 async function refreshLeaderboard() {
+  leaderboardController?.abort();
+  const controller=new AbortController();leaderboardController=controller;
+  const timeout=setTimeout(()=>controller.abort(),10000);
   const tbody = byId('leaderboard-body');
   tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:15px;">Atualizando ranking...</td></tr>';
   try {
-    const res = await fetch('/api/leaderboard');
+    const res = await fetch('/api/leaderboard',{signal:controller.signal,cache:'no-store'});
     const data = await res.json();
     if (!data.ok || !data.leaderboard.length) {
       tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:15px;">Nenhum participante pontuou ainda. Seja o primeiro!</td></tr>';
@@ -183,7 +189,7 @@ async function refreshLeaderboard() {
       else if (item.posicao === 3) badge = '<span class="badge-bronze">🥉 3º</span>';
       
       const isMe = currentUser && currentUser.username === item.username;
-      const highlightStyle = isMe ? 'style="font-weight:bold;background:rgba(37,99,235,0.1);"' : '';
+      const highlightStyle = isMe ? 'style="font-weight:bold;background:rgba(139,92,246,0.12);"' : '';
       return `<tr ${highlightStyle}>
         <td>${badge}</td>
         <td>${esc(item.nome)} <small style="color:var(--muted)">(@${esc(item.username)})</small></td>
@@ -194,8 +200,9 @@ async function refreshLeaderboard() {
       </tr>`;
     }).join('');
   } catch {
+    if(!byId('modal-leaderboard').open)return;
     tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:15px;color:red;">Não foi possível carregar o placar.</td></tr>';
-  }
+  } finally { clearTimeout(timeout); }
 }
 
 async function syncWithServer() {
@@ -245,7 +252,8 @@ function renderPracticeFeedback(attempt){
   byId('question-why').value=attempt.justificativa;byId('question-why').disabled=true;byId('question-confidence').value=attempt.confianca;byId('question-confidence').disabled=true;
   byId('question-answer').hidden=true;byId('question-feedback').hidden=false;byId('question-after').hidden=false;
   const title=attempt.correta?'Resposta correta.':'Resposta incorreta.';
-  byId('question-feedback').innerHTML=`<strong>${title}</strong>Você marcou ${esc(attempt.resposta)}. Gabarito importado: ${esc(attempt.gabarito)}.<small>Resposta e justificativa salvas neste navegador. A explicação conceitual pode ser estudada no mapa ou preparada para o ChatGPT.</small>`;
+  byId('question-feedback').innerHTML=`<strong>${title}</strong>Você marcou ${esc(attempt.resposta)}. Gabarito importado: ${esc(attempt.gabarito)}.<small>Resposta e justificativa salvas neste navegador. Você pode estudar a explicação no mapa, abrir o ChatGPT ou conversar com a Groq.</small>`;
+  preparePracticeAI();
   byId('question-next').textContent=practiceSession.index===practiceSession.ids.length-1?'Ver resultado':'Próxima questão';
 }
 function gradePractice(){
@@ -271,6 +279,16 @@ function buildPracticeDoubt(){
   const q=practiceStore.questions[practiceSession.ids[practiceSession.index]],a=currentPracticeAttempt();
   return `Sou candidato ao TJPB, Analista Judiciário de TI – Desenvolvimento de Sistemas, banca FGV. Quero entender e aplicar o conceito, com um exemplo simples e uma pergunta de transferência depois da explicação.\n\nAssunto: ${q.assunto.join(' > ')}\nQuestão: ${q.id}\nProva informada no arquivo: ${q.prova}\n${q.texto?'Texto associado:\n'+q.texto+'\n\n':''}Enunciado:\n${q.enunciado}\n\n${Object.entries(q.alternativas).map(([k,v])=>k+') '+v).join('\n')}\n\nMinha resposta: ${a.resposta}.\nGabarito importado: ${a.gabarito} (ainda não conferido na fonte).\nMeu raciocínio: ${a.justificativa||'Não registrei.'}\nConfiança: ${a.confianca}.\n\nExplique o conceito e por que cada alternativa funciona ou falha. Avalie meu raciocínio sem presumir minha dificuldade. Se o gabarito parecer inconsistente ou faltar um destaque no texto, aponte a dúvida. Não invente comentário oficial ou frequência de cobrança da FGV. Ao citar questões reais, informe a fonte. Espere minha resposta à pergunta de transferência.`;
 }
+function practiceChatGPTUrl(prompt){return 'https://chatgpt.com/?q='+encodeURIComponent(prompt)}
+function preparePracticeAI(){
+ if(!practiceSession||!currentPracticeAttempt())return null;
+ const prompt=buildPracticeDoubt();byId('question-ai-prompt').value=prompt;
+ const url=practiceChatGPTUrl(prompt),long=url.length>16000;
+ for(const id of ['question-chatgpt','question-ai-open'])byId(id).href=long?'https://chatgpt.com/':url;
+ byId('question-ai-status').textContent=long?'O prompt é longo: ao abrir o ChatGPT, copie e cole o texto completo abaixo.':'O ChatGPT abre com o prompt no link. Também tentaremos copiá-lo caso o aplicativo móvel não preencha. Na Groq, você revisa a dúvida antes de enviar.';
+ return prompt;
+}
+function practiceQuestionToGroq(){const prompt=preparePracticeAI();if(prompt)window.dispatchEvent(new CustomEvent('tjpb-ask-ai',{detail:{prompt,source:'question'}}))}
 async function copyPracticeText(field){
   try{await navigator.clipboard.writeText(field.value);practiceStatus('Prompt copiado. Cole na conversa do ChatGPT.');return}catch{}
   field.focus();field.select();try{if(document.execCommand('copy')){practiceStatus('Prompt copiado.');return}}catch{}
@@ -290,7 +308,9 @@ byId('question-options').addEventListener('change',()=>{byId('question-answer').
 byId('question-answer').addEventListener('click',gradePractice);
 byId('practice-stop').addEventListener('click',finishPractice);
 byId('question-next').addEventListener('click',()=>{if(practiceSession.index+1>=practiceSession.ids.length)finishPractice();else{practiceSession.index++;saveSession();renderPracticeQuestion()}});
-byId('question-explain').addEventListener('click',()=>{byId('question-ai-prompt').value=buildPracticeDoubt();byId('question-ai').hidden=false;byId('question-ai').scrollIntoView({block:'nearest'})});
+byId('question-explain').addEventListener('click',()=>{preparePracticeAI();byId('question-ai').hidden=false;byId('question-ai').scrollIntoView({block:'nearest'})});
+byId('question-local-ai').addEventListener('click',practiceQuestionToGroq);
+for(const id of ['question-chatgpt','question-ai-open'])byId(id).addEventListener('click',e=>{if(!preparePracticeAI()){e.preventDefault();return}void copyPracticeText(byId('question-ai-prompt'));if(e.currentTarget.href==='https://chatgpt.com/'){byId('question-ai').hidden=false;byId('question-ai-prompt').scrollIntoView({block:'nearest'})}});
 byId('question-ai-copy').addEventListener('click',()=>copyPracticeText(byId('question-ai-prompt')));
 byId('bank-sync')?.addEventListener('click',syncWithServer);
 byId('bank-import').addEventListener('click',()=>byId('bank-file').click());
@@ -315,7 +335,7 @@ renderPracticeOverview();
 if(practiceStore.attempts.length)practiceProgress();
 setPracticePanel('setup');
 if(practiceSession)renderPracticeQuestion();
-const initialViews={inicio:'start-view',ciclo:'planner-view',questoes:'questions-view',gran:'gran-view',cursos:'courses-view',banca:'data-view'};
+const initialViews={apoio:'support-view',anki:'anki-view',inicio:'start-view',ciclo:'planner-view',questoes:'questions-view',gran:'gran-view',cursos:'courses-view',banca:'data-view'};
 showView(initialViews[new URLSearchParams(location.search).get('view')]||'map-view');
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname.startsWith('192.168.') || location.hostname === '127.0.0.1')) {
@@ -331,8 +351,17 @@ byId('form-auth')?.addEventListener('submit', (e) => { e.preventDefault(); handl
 byId('btn-logout')?.addEventListener('click', logoutUser);
 byId('btn-open-leaderboard')?.addEventListener('click', openLeaderboard);
 byId('btn-close-leaderboard')?.addEventListener('click', () => byId('modal-leaderboard').close());
+byId('btn-dismiss-leaderboard')?.addEventListener('click',()=>byId('modal-leaderboard').close());
 byId('btn-refresh-leaderboard')?.addEventListener('click', refreshLeaderboard);
 checkCurrentUser();
 // O diálogo de login deve funcionar também quando o módulo de questões está oculto.
-document.body.appendChild(byId('modal-auth'));
+for(const id of ['modal-auth','modal-leaderboard']){
+ const dialog=byId(id);document.body.appendChild(dialog);
+ dialog.addEventListener('cancel',event=>{event.preventDefault();dialog.close()});
+ let outside=false;
+ dialog.addEventListener('pointerdown',event=>{outside=event.target===dialog});
+ dialog.addEventListener('click',event=>{if(outside&&event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close()}outside=false});
+ dialog.addEventListener('close',()=>{if(id==='modal-leaderboard')leaderboardController?.abort();const opener=byId(id==='modal-auth'?'btn-open-auth':'btn-open-leaderboard');if(opener?.getClientRects().length)opener.focus()});
+}
+
 window.addEventListener('tjpb-request-login',()=>openAuthDialog(false));

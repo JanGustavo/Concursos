@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {assistantMessages,requestPrompt} from './assistant-context.js';
+test('questão completa chega à IA sem virar um tópico truncado',()=>{const prompt='Questão completa: '+'x'.repeat(5000)+'\nMinha resposta B. Gabarito importado C.';const request=requestPrompt({prompt,source:'question'});assert.equal(request.context,'question');assert.equal(request.text,prompt);assert.equal(assistantMessages([],prompt)[0].content,prompt)});
+test('histórico é limitado removendo mensagens antigas sem cortar a questão atual',()=>{const prompt='x'.repeat(15000),messages=assistantMessages(Array.from({length:6},()=>({role:'user',content:'z'.repeat(15000)})),prompt);assert(messages.reduce((n,m)=>n+m.content.length,0)<=40000);assert.equal(messages.at(-1).content,prompt)});
+test('limite explícito impede envio silencioso de questão incompleta',()=>assert.throws(()=>assistantMessages([],'x'.repeat(16001))));

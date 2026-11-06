@@ -60,3 +60,21 @@ O quadro também suporta checklist de até 12 etapas, prioridade, onde parei/pr�
 `StudyOnboarding.jsx` oferece o primeiro uso em três etapas: ritmo, distribuição semanal e prévia. `planner-profile.js` gera sete dias a partir da data escolhida, com três dias de TI, Português/RLM combinados, sábado revisão e domingo redação por padrão. Cada dia permite descanso e minutos próprios. O complemento usa até 25 minutos do total, sem somar tempo extra. A confirmação mescla sessões sem apagar histórico e salva preferências por conta/navegador (`:preferences`); backups incluem preferências opcionais e mantêm compatibilidade com versões anteriores. As cores e iniciais das matérias são compartilhadas no formulário, prévia, calendário e cartões; a meta do dia respeita o perfil.
 
 Ao reaplicar uma semana, somente sessões automáticas ainda planejadas e intocadas dessa semana são substituídas. Editar um cartão, suas etapas ou mover seu estado o torna independente da geração automática; histórico e sessões em estudo/concluídas ficam preservados. A navegação HTML do service worker agora usa rede primeiro, com fallback para cópia offline, evitando telas antigas após deploy.
+
+## Correções de instruções, modais e PDFs (03/11/2026)
+
+A seção Prova e discursiva vem de `assets/exam-guide.html`, baseada no material enviado e no edital consolidado/segunda retificação. A proposta pedagógica de 30 linhas é identificada como sugestão; não há pesos inventados de correção. Provas anteriores ficam em uma seção recolhível com roteiro de resolver, corrigir e aplicar em estudo de caso. O endereço legado `tjpb_desenvolvimento_sistemas_relatorio.html` também recebe o guia atualizado.
+
+`AiPlanModal.jsx` é montado com portal diretamente no body e usa showModal, fechamento e confirmação separados. A API retorna JSON validado; o calendário só é alterado no último botão de confirmação. Voz usa MediaRecorder e a rota de transcrição existente da Groq, com fallback do navegador; fechar interrompe captura e cancela uploads. A fala explicativa é opcional pelo botão Ouvir como funciona. Planos automáticos legados de origem `ai-plan` e atuais de origem `weekly-profile` seguem a mesma proteção de registros editados/em andamento/concluídos.
+
+O ranking também é movido ao body. Fecha por botão superior, botão inferior, Escape ou clique fora, e a tabela tem rolagem própria. Há teste de DOM para evitar regressão de um modal dentro de uma seção oculta.
+
+`PdfViewer.jsx` carrega PDF.js apenas ao selecionar PDF. `pdf-reader.js` e `pdf-worker.mjs` são assets locais públicos de código, sem credenciais. Requisições privadas do arquivo enviam o Bearer da conta explicitamente e não dependem do visualizador nativo do navegador. O leitor tem páginas, zoom, texto extraível e download autenticado. PDFs não entram no cache offline nem são publicados em um serviço externo. Build gera os dois assets, incluídos explicitamente no deploy.
+
+Testes de DOM usam jsdom; não substituem conferir permissões reais de microfone ou diferenças visuais de cada navegador. O teste do motor PDF usa um documento sintético e renderiza a página com o PDF.js real.
+
+## Anki e ações por questão
+
+`AnkiLibrary.jsx` monta uma área autenticada de decks. `dados/anki_catalog.json` registra somente IDs, nomes e tamanhos dos dois arquivos verificados na pasta fornecida. Não inclui os pacotes de 213 MB/1,7 MB no build e não muda compartilhamento no Drive. A biblioteca serve apenas IDs permitidos pelo catálogo, com MIME binário, Content-Disposition attachment e streaming de 64 KiB; Range e login seguem as regras da biblioteca. O download renova a sessão antes de navegar ao arquivo, sem criar Blob de centenas de megabytes no aparelho. Progresso de cartões permanece no Anki.
+
+Os botões após responder uma questão oferecem ChatGPT com o prompt no link e Groq no painel local da aplicação. Ver/copiar prompt continua disponível. Contexto completo da questão não é substituído pelas sugestões do calendário.

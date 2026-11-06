@@ -71,6 +71,8 @@ class DriveLibrary:
         paths = [self.root / 'dados' / name for name in ('drive_tree.json', 'drive_catalog.json')]
         try:
             signature = tuple((p.stat().st_mtime_ns, p.stat().st_size) for p in paths)
+            anki_path=self.root/'dados'/'anki_catalog.json'
+            signature += ((anki_path.stat().st_mtime_ns,anki_path.stat().st_size) if anki_path.exists() else (0,0),)
         except OSError:
             raise LibraryError(503, 'A biblioteca ainda não foi configurada no servidor.')
         with self._catalog_lock:
@@ -115,7 +117,16 @@ class DriveLibrary:
                     for c in node.get('children', []): visit(c)
                 for course in courses: visit(course['tree'])
                 self.items = {key: value for key, value in valid.items() if key in reachable}
-                self._payload = {'courses': courses, 'videos': sum(c['videos'] for c in courses),
+                decks=[]
+                if anki_path.exists():
+                    raw_decks=json.loads(anki_path.read_text(encoding='utf-8'))
+                    for deck in raw_decks.get('decks',[]):
+                        if not isinstance(deck,dict) or not isinstance(deck.get('id'),str) or not re.fullmatch(r'[A-Za-z0-9_-]{5,160}',deck['id']) or not isinstance(deck.get('name'),str) or not deck['name'].lower().endswith(('.apkg','.colpkg')) or type(deck.get('bytes')) is not int or deck['bytes']<=0:
+                            raise ValueError('Invalid deck metadata')
+                        if deck['id'] in self.items: raise ValueError('Duplicate deck id')
+                        decks.append({'id':deck['id'],'name':deck['name'],'bytes':deck['bytes']})
+                        self.items[deck['id']]={'id':deck['id'],'nome':deck['name'],'categoria':'anki','mimeType':'application/octet-stream','tamanho':deck['bytes']}
+                self._payload = {'decks':decks,'courses': courses, 'videos': sum(c['videos'] for c in courses),
                                  'pdfs': sum(c['pdfs'] for c in courses), 'source': 'Google Drive',
                                  'catalogUpdatedAt': dt.datetime.fromtimestamp(paths[1].stat().st_mtime, dt.timezone.utc).isoformat()}
                 self._signature = signature
@@ -170,12 +181,13 @@ class DriveLibrary:
                 error.content_range = f'bytes */{size}'
             raise
         mime = item.get('mimeType', '') if item['categoria'] == 'video' else 'application/pdf'
-        if not mime.startswith('video/') and mime != 'application/pdf':
+        if item['categoria']=='anki':mime='application/octet-stream'
+        if not mime.startswith('video/') and mime != 'application/pdf' and item['categoria']!='anki':
             raise LibraryError(415, 'Formato de mídia não suportado.')
         headers = {'Content-Type': mime, 'Content-Length': str(end - start + 1),
                    'Accept-Ranges': 'bytes', 'Cache-Control': 'private, no-store',
                    'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer',
-                   'Content-Disposition': "inline; filename*=UTF-8''" + quote(item['nome'], safe='')}
+                   'Content-Disposition': ("attachment; filename*=UTF-8''" if item['categoria']=='anki' else "inline; filename*=UTF-8''") + quote(item['nome'], safe='')}
         if status == 206:
             headers['Content-Range'] = f'bytes {start}-{end}/{size}'
         if head:

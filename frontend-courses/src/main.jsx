@@ -15,3 +15,15 @@ import './assistant.css';
 const assistant=document.getElementById('assistant-root');if(assistant)createRoot(assistant).render(<StudyAssistant/>);
 
 import './onboarding.css';
+
+import './ai-plan.css';
+
+import {AnkiLibrary} from './AnkiLibrary.jsx';
+import './anki.css';
+const anki=document.getElementById('anki-root');if(anki)createRoot(anki).render(<AnkiLibrary/>);
+
+import {SupportPix} from './SupportPix.jsx';
+const support=document.getElementById('support-root');if(support)createRoot(support).render(<SupportPix/>);
+
+import {ExamAssistant} from './ExamAssistant.jsx';
+const examAssistant=document.getElementById('exam-ai-root');if(examAssistant)createRoot(examAssistant).render(<ExamAssistant/>);

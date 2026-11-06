@@ -24,7 +24,7 @@ if [[ $MODE == deploy ]]; then
 from pathlib import Path
 import tarfile,sys,shutil
 s=Path(sys.argv[1]);names=(s/'files.txt').read_text().splitlines()
-allowed={'servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','dados/drive_catalog.json','dados/drive_tree.json'}
+allowed={'servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','assets/pdf-reader.js','assets/pdf-worker.mjs','dados/drive_catalog.json','dados/drive_tree.json','dados/anki_catalog.json'}
 if len(names)!=len(allowed) or set(names)!=allowed: raise SystemExit('Lista de arquivos inesperada')
 with tarfile.open(s/'app.tar.gz') as t:
  if len(t.getmembers())!=len(allowed) or any(not m.isfile() or m.name not in allowed for m in t.getmembers()): raise SystemExit('Pacote inválido')
@@ -48,7 +48,7 @@ mkdir "$BACKUP"
 mkdir "$BACKUP/code"
 cp "$FILES" "$BACKUP/files.txt"
 while IFS= read -r name; do
- [[ $name =~ ^(servir.py|auth_db.py|library_service.py|ai_service.py|tjpb-mapa-estudo.html|relatorio_visual_fgv_ti_tribunais.html|tjpb_desenvolvimento_sistemas_relatorio.html|manifest.json|service-worker.js|assets/icon-192.png|assets/icon-512.png|dados/drive_catalog.json|dados/drive_tree.json)$ ]] || exit 1
+ [[ $name =~ ^(servir.py|auth_db.py|library_service.py|ai_service.py|tjpb-mapa-estudo.html|relatorio_visual_fgv_ti_tribunais.html|tjpb_desenvolvimento_sistemas_relatorio.html|manifest.json|service-worker.js|assets/icon-192.png|assets/icon-512.png|assets/pdf-reader.js|assets/pdf-worker.mjs|dados/drive_catalog.json|dados/drive_tree.json|dados/anki_catalog.json)$ ]] || exit 1
  [[ ! -L "$APP/$name" ]] || exit 1
  if [[ -f $APP/$name ]]; then mkdir -p "$BACKUP/code/$(dirname "$name")"; cp -p "$APP/$name" "$BACKUP/code/$name"; fi
  if [[ -f $SOURCE/$name ]]; then python3 - "$SOURCE/$name" <<'PY'
@@ -77,7 +77,7 @@ MUTATING=1
 sudo -n systemctl stop "$SERVICE"
 # Snapshot consistente de dados, com serviço parado; não será restaurado automaticamente.
 if [[ -d $APP/dados ]]; then cp -a "$APP/dados" "$BACKUP/dados"; fi
-find "$APP/dados" -maxdepth 1 -type f ! -name drive_catalog.json ! -name drive_tree.json -exec sha256sum {} + | sort > "$STAGE/data-before.txt"
+find "$APP/dados" -maxdepth 1 -type f ! -name drive_catalog.json ! -name drive_tree.json ! -name anki_catalog.json -exec sha256sum {} + | sort > "$STAGE/data-before.txt"
 if [[ -f $STAGE/drive-token.json && ! -s $APP/token.json ]]; then
  python3 - "$STAGE/drive-token.json" <<'PY'
 import json,sys
@@ -93,7 +93,7 @@ while IFS= read -r name; do
   mv -f "$APP/$name.deploy-tmp" "$APP/$name"
  else rm -f -- "$APP/$name"; fi
 done < "$FILES"
-find "$APP/dados" -maxdepth 1 -type f ! -name drive_catalog.json ! -name drive_tree.json -exec sha256sum {} + | sort > "$STAGE/data-after.txt"
+find "$APP/dados" -maxdepth 1 -type f ! -name drive_catalog.json ! -name drive_tree.json ! -name anki_catalog.json -exec sha256sum {} + | sort > "$STAGE/data-after.txt"
 cmp "$STAGE/data-before.txt" "$STAGE/data-after.txt"
 echo 'Dados de produção preservados: checksums idênticos antes/depois da instalação.'
 sudo -n systemctl start "$SERVICE"
@@ -106,6 +106,10 @@ done
 systemctl is-active --quiet "$SERVICE"
 curl -fsS --max-time 15 "https://$DOMAIN/" -o "$STAGE/public.html"
 cmp "$APP/tjpb-mapa-estudo.html" "$STAGE/public.html"
+for file in assets/pdf-reader.js assets/pdf-worker.mjs tjpb_desenvolvimento_sistemas_relatorio.html; do
+ curl -fsS --max-time 15 "https://$DOMAIN/$file" -o "$STAGE/$(basename "$file")"
+ cmp "$APP/$file" "$STAGE/$(basename "$file")"
+done
 if [[ -f $APP/relatorio_visual_fgv_ti_tribunais.html ]]; then
  curl -fsS --max-time 15 "https://$DOMAIN/relatorio_visual_fgv_ti_tribunais.html" -o "$STAGE/report.html"
  cmp "$APP/relatorio_visual_fgv_ti_tribunais.html" "$STAGE/report.html"
@@ -115,7 +119,7 @@ if grep -q '^from library_service import' "$APP/servir.py"; then
  for path in /biblioteca/api/tree /biblioteca/api/media/invalid; do
   [[ $(curl -sS --max-time 10 -o "$STAGE/library-denied.json" -w '%{http_code}' "https://$DOMAIN$path") == 401 ]]
  done
- for path in /token.json /credentials.json /dados/drive_catalog.json /groq-config.json; do
+ for path in /token.json /credentials.json /dados/drive_catalog.json /dados/anki_catalog.json /groq-config.json; do
   [[ $(curl -sS --max-time 10 -o /dev/null -w '%{http_code}' "https://$DOMAIN$path") == 404 ]]
  done
  echo 'Biblioteca protegida: catálogo e mídias exigem login; credenciais não são públicas.'
