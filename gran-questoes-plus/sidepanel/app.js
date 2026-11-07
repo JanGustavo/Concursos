@@ -965,7 +965,7 @@
           return;
         }
         if ((name === 'href' || name === 'src') &&
-            !/^(https?:|mailto:|#|data:image\\/)/i.test(attrValue)) {
+            !(/^(https?:|mailto:|#)/i.test(attrValue) || attrValue.startsWith('data:image/'))) {
           node.removeAttribute(attribute.name);
         }
       });
