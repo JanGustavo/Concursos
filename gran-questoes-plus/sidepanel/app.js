@@ -33,14 +33,6 @@
         showEmpty();
       }
 
-      function setFooterVersion() {
-        if (!els.footerVersion || typeof chrome === 'undefined' || !chrome.runtime) return;
-        const manifest = chrome.runtime.getManifest();
-        if (manifest && manifest.version) {
-          els.footerVersion.textContent = `v${manifest.version}`;
-        }
-      }
-
       await renderHistory();
       await renderBizus();
       await renderPerformance();
@@ -63,15 +55,24 @@
       chrome.storage.onChanged.addListener(handleStorageChange);
     }
 
-    function registerRuntimeListener() {
-      if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.onMessage) {
-        chrome.runtime.onMessage.addListener((message) => {
-          if (message && message.type === 'QUESTION_READY' && message.question) {
-            renderQuestion(message.question);
-            switchTab('question');
-          }
-        });
-      }
+  }
+
+  function setFooterVersion() {
+    if (!els.footerVersion || typeof chrome === 'undefined' || !chrome.runtime) return;
+    const manifest = chrome.runtime.getManifest();
+    if (manifest && manifest.version) {
+      els.footerVersion.textContent = `v${manifest.version}`;
+    }
+  }
+
+  function registerRuntimeListener() {
+    if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.onMessage) {
+      chrome.runtime.onMessage.addListener((message) => {
+        if (message && message.type === 'QUESTION_READY' && message.question) {
+          renderQuestion(message.question);
+          switchTab('question');
+        }
+      });
     }
   }
 
