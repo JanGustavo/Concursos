@@ -152,48 +152,49 @@
         closeSettings();
       }
 
-      async function checkForUpdates(force) {
-        els.checkUpdateBtn.disabled = true;
-        if (force) els.updateStatus.textContent = 'Verificando...';
-        const result = await sendMessage({ type: 'CHECK_FOR_UPDATE', force });
-        els.checkUpdateBtn.disabled = false;
+    });
+  }
 
-        if (!result || !result.status) {
-          els.updateBanner.hidden = true;
-          els.updateStatus.textContent = 'Servidor de atualização indisponível no momento.';
-        } else if (result.status === 'update') {
-          els.updateBannerTitle.textContent = `Nova versão v${result.remoteVersion} disponível`;
-          els.updateBanner.hidden = false;
-          els.downloadUpdateBtn.dataset.downloadUrl = result.downloadUrl;
-          els.updateStatus.textContent = '';
-        } else if (result.status === 'error') {
-          els.updateBanner.hidden = true;
-          els.updateStatus.textContent = result.message;
-        } else {
-          els.updateBanner.hidden = true;
-          els.updateStatus.textContent = force ? 'Você já está na versão mais recente.' : '';
-        }
+  async function checkForUpdates(force) {
+    els.checkUpdateBtn.disabled = true;
+    if (force) els.updateStatus.textContent = 'Verificando...';
+    const result = await sendMessage({ type: 'CHECK_FOR_UPDATE', force });
+    els.checkUpdateBtn.disabled = false;
+
+    if (!result || !result.status) {
+      els.updateBanner.hidden = true;
+      els.updateStatus.textContent = 'Servidor de atualização indisponível no momento.';
+    } else if (result.status === 'update') {
+      els.updateBannerTitle.textContent = `Nova versão v${result.remoteVersion} disponível`;
+      els.updateBanner.hidden = false;
+      els.downloadUpdateBtn.dataset.downloadUrl = result.downloadUrl;
+      els.updateStatus.textContent = '';
+    } else if (result.status === 'error') {
+      els.updateBanner.hidden = true;
+      els.updateStatus.textContent = result.message;
+    } else {
+      els.updateBanner.hidden = true;
+      els.updateStatus.textContent = force ? 'Você já está na versão mais recente.' : '';
+    }
+  }
+
+  function handleDownloadUpdate() {
+    const url = els.downloadUpdateBtn.dataset.downloadUrl;
+    if (!url || typeof chrome === 'undefined' || !chrome.downloads) {
+      showToast('Não foi possível iniciar o download.', 'error');
+      return;
+    }
+
+    chrome.downloads.download({
+      url,
+      filename: 'gran-questoes-plus.zip',
+      saveAs: true
+    }, () => {
+      if (chrome.runtime.lastError) {
+        showToast('Não foi possível iniciar o download.', 'error');
+        return;
       }
-
-      function handleDownloadUpdate() {
-        const url = els.downloadUpdateBtn.dataset.downloadUrl;
-        if (!url || typeof chrome === 'undefined' || !chrome.downloads) {
-          showToast('Não foi possível iniciar o download.', 'error');
-          return;
-        }
-
-        chrome.downloads.download({
-          url,
-          filename: 'gran-questoes-plus.zip',
-          saveAs: true
-        }, () => {
-          if (chrome.runtime.lastError) {
-            showToast('Não foi possível iniciar o download.', 'error');
-            return;
-          }
-          showToast('Baixe o ZIP e recarregue em chrome://extensions.');
-        });
-      }
+      showToast('Baixe o ZIP e recarregue em chrome://extensions.');
     });
   }
 
