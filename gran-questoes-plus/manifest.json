@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "name": "Gran Questões Plus",
+  "version": "0.1.0",
+  "description": "Capture questões, filtros e desempenho local do Gran Questões, com revisão por IA e bizus por disciplina.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "sidePanel",
+    "clipboardWrite",
+    "downloads"
+  ],
+  "host_permissions": [
+    "*://questoes.grancursosonline.com.br/*",
+    "https://rota-api.grancursosonline.com.br/*",
+    "https://api.github.com/*",
+    "https://raw.githubusercontent.com/*",
+    "https://github.com/*",
+    "*://chatgpt.com/*",
+    "*://*.chatgpt.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "action": {
+    "default_title": "Abrir Gran Questões Plus",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://questoes.grancursosonline.com.br/*"
+      ],
+      "js": [
+        "content/api-interceptor.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://questoes.grancursosonline.com.br/*"
+      ],
+      "js": [
+        "utils/storage.js",
+        "content/gran-scraper.js"
+      ],
+      "css": [
+        "content/styles.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://chatgpt.com/*",
+        "*://*.chatgpt.com/*"
+      ],
+      "js": [
+        "utils/storage.js",
+        "content/chatgpt-injector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

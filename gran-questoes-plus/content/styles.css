@@ -1,0 +1,217 @@
+/* ============================================================
+ * Gran Questões Plus — estilos injetados no Gran Questões
+ * ============================================================ */
+
+.gqp-ai-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 4px;
+  animation: gqp-fade-in 0.22s ease-out both;
+}
+
+.gqp-ai-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 55%, #4f46e5 100%);
+  color: #ffffff;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow:
+    0 6px 18px rgba(124, 58, 237, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.gqp-ai-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow:
+    0 9px 24px rgba(124, 58, 237, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.gqp-ai-btn:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.gqp-ai-btn:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 2px;
+}
+
+.gqp-ai-btn[data-loading="true"] {
+  pointer-events: none;
+  opacity: 0.78;
+}
+
+.gqp-ai-btn__spark {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.gqp-ai-spinner {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: gqp-spin 0.7s linear infinite;
+}
+
+.gqp-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483647;
+  max-width: min(360px, calc(100vw - 40px));
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #151824;
+  color: #f4f4f5;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.gqp-toast::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #7c3aed;
+  vertical-align: 1px;
+}
+
+.gqp-toast[data-type="error"]::before {
+  background: #ef4444;
+}
+
+.gqp-toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes gqp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gqp-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------------------------------------
+ * Botão flutuante para abrir o side panel
+ * ------------------------------------------------------------ */
+
+.gqp-fab {
+  all: unset;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483646;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 52px;
+  height: 46px;
+  padding: 0 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 55%, #4f46e5 100%);
+  color: #ffffff;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow:
+    0 10px 28px rgba(124, 58, 237, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.gqp-fab:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow:
+    0 14px 34px rgba(124, 58, 237, 0.55),
+    0 3px 10px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+.gqp-fab:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.gqp-fab:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 3px;
+}
+
+.gqp-fab[data-loading="true"] {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.gqp-fab__spark {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.gqp-fab__label {
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+  .gqp-fab {
+    right: 14px;
+    bottom: 14px;
+    height: 44px;
+    padding: 0 13px;
+  }
+}

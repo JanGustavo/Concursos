@@ -1,0 +1,28 @@
+name: Empacotar e publicar extensão
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Empacotar extensão
+        run: |
+          cd gran-questoes-plus
+          zip -r ../gran-questoes-plus.zip \
+            manifest.json background content sidepanel utils icons
+
+      - name: Criar GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: gran-questoes-plus.zip
+          generate_release_notes: true
