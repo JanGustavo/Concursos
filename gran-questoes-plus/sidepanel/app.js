@@ -737,7 +737,7 @@
     content.className = 'bizu-card__content';
     if (bizu.contentFormat === 'html') {
       content.classList.add('bizu-card__content--html');
-      content.appendChild(createSafeHtmlFragment(bizu.content || ''));
+      content.appendChild(createSafeHtmlFrame(bizu.content || '', bizu.title || 'Bizu'));
     } else {
       content.textContent = bizu.content || '';
     }
@@ -928,31 +928,84 @@
     reader.readAsText(file);
   }
 
-  function createSafeHtmlFragment(value) {
-    const template = document.createElement('template');
-    const parser = new DOMParser();
-    const parsed = parser.parseFromString(String(value || ''), 'text/html');
+  function createSafeHtmlFrame(value, title) {
+    // Isola o documento (inclusive <style> e estilos inline) do CSS do painel.
+    // O iframe não recebe permissão para executar scripts, formulários ou abrir pop-ups.
+    const frame = document.createElement('iframe');
+    frame.className = 'bizu-html-frame';
+    frame.title = title;
+    frame.setAttribute('sandbox', 'allow-same-origin');
+    frame.setAttribute('referrerpolicy', 'no-referrer');
+    frame.setAttribute('scrolling', 'no');
+    frame.style.cssText = 'display:block;width:100%;height:120px;border:0;background:transparent;overflow:hidden';
 
-    parsed.querySelectorAll('script,style,iframe,object,embed,form,input,button,textarea,select').forEach((node) => {
-      node.remove();
-    });
+    const parsed = new DOMParser().parseFromString(String(value || ''), 'text/html');
+
+    // O próprio documento incorporado bloqueia scripts e recursos externos.
+    // CSS inline continua permitido para os cartões e layouts dos bizus.
+    const csp = parsed.createElement('meta');
+    csp.setAttribute('http-equiv', 'Content-Security-Policy');
+    csp.setAttribute('content',
+      "default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src 'none'; " +
+      "script-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'; " +
+      "object-src 'none'; frame-src 'none'");
+    parsed.head.prepend(csp);
+
+    parsed.querySelectorAll(
+      'script,iframe,object,embed,form,input,button,textarea,select,link,base,' +
+      'meta[http-equiv="refresh"]'
+    ).forEach((node) => node.remove());
 
     parsed.querySelectorAll('*').forEach((node) => {
       Array.from(node.attributes).forEach((attribute) => {
         const name = attribute.name.toLowerCase();
         const attrValue = attribute.value.trim();
-        if (name.startsWith('on') || name === 'srcdoc' || name === 'style') {
+        if (name.startsWith('on') || name === 'srcdoc') {
           node.removeAttribute(attribute.name);
           return;
         }
-        if ((name === 'href' || name === 'src') && !/^(https?:|mailto:|#|data:image\/)/i.test(attrValue)) {
+        if ((name === 'href' || name === 'src') &&
+            !(/^(https?:|mailto:|#)/i.test(attrValue) || attrValue.startsWith('data:image/'))) {
           node.removeAttribute(attribute.name);
         }
       });
     });
 
-    template.content.append(...Array.from(parsed.body.childNodes).map((node) => node.cloneNode(true)));
-    return template.content;
+    // Mantém <head>, <style>, @media e os estilos inline originais.
+    frame.srcdoc = '<!DOCTYPE html>\\n' + parsed.documentElement.outerHTML;
+
+    const resize = () => {
+      try {
+        const doc = frame.contentDocument;
+        if (!doc || !doc.body) return;
+        const height = Math.max(
+          doc.body.scrollHeight, doc.body.offsetHeight,
+          doc.documentElement.scrollHeight, doc.documentElement.offsetHeight
+        );
+        if (height > 0) frame.style.height = height + 'px';
+      } catch (error) {
+        // Se o navegador impedir a medição, o iframe permanece isolado.
+      }
+    };
+
+    frame.addEventListener('load', () => {
+      resize();
+      try {
+        const doc = frame.contentDocument;
+        if (doc && doc.body && typeof ResizeObserver !== 'undefined') {
+          const observer = new ResizeObserver(resize);
+          observer.observe(doc.body);
+          // Observador descartado junto ao iframe quando o cartão for removido.
+        }
+      } catch (error) {
+        // Falha de medição não altera a proteção do sandbox.
+      }
+    });
+
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(resize).observe(frame);
+    }
+    return frame;
   }
 
   async function handleDeleteBizu(bizu) {
