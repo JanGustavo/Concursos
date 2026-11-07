@@ -134,16 +134,16 @@ async function handleOpenChatGPT(message) {
     return { ok: false, error: 'URL do ChatGPT não informada.' };
   }
 
-  async function handleCheckForUpdates(message) {
-    return GranUpdater.checkForUpdates({ force: Boolean(message && message.force) });
-  }
-
   try {
     await openChatGPT(message.url);
     return { ok: true };
   } catch (error) {
     return { ok: false, error: error.message };
   }
+}
+
+async function handleCheckForUpdates(message) {
+  return GranUpdater.checkForUpdates({ force: Boolean(message && message.force) });
 }
 
 chrome.runtime.onInstalled.addListener(async () => {
