@@ -18,6 +18,7 @@
   async function init() {
     cacheElements();
     bindEvents();
+    setFooterVersion();
 
     try {
       settings = await GranStorage.getSettings();
@@ -28,6 +29,14 @@
         renderQuestion(lastQuestion);
       } else {
         showEmpty();
+      }
+
+      function setFooterVersion() {
+        if (!els.footerVersion || typeof chrome === 'undefined' || !chrome.runtime) return;
+        const manifest = chrome.runtime.getManifest();
+        if (manifest && manifest.version) {
+          els.footerVersion.textContent = `v${manifest.version}`;
+        }
       }
 
       await renderHistory();
@@ -110,7 +119,8 @@
       updateBannerTitle: $('#updateBannerTitle'),
       downloadUpdateBtn: $('#downloadUpdateBtn'),
       checkUpdateBtn: $('#checkUpdateBtn'),
-      updateStatus: $('#updateStatus')
+      updateStatus: $('#updateStatus'),
+      footerVersion: $('#footerVersion')
     };
   }
 

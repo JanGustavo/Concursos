@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="title desc">
+  <title id="title">Gran Questões Plus - G+</title>
+  <desc id="desc">Ícone quadrado escuro com borda violeta e monograma G+ em gradiente rosa, violeta e azul.</desc>
+  <defs>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#DA6FF2"/>
+      <stop offset="0.55" stop-color="#A85BF4"/>
+      <stop offset="1" stop-color="#6467ED"/>
+    </linearGradient>
+    <linearGradient id="letter" x1="0" y1="0" x2="1" y2="0.9">
+      <stop offset="0" stop-color="#FF73A8"/>
+      <stop offset="0.48" stop-color="#D45AE6"/>
+      <stop offset="1" stop-color="#7785FA"/>
+    </linearGradient>
+  </defs>
+  <rect x="5" y="5" width="118" height="118" rx="27" fill="#191A25" stroke="url(#border)" stroke-width="4"/>
+  <path fill="url(#letter)" d="M66.5 31.5c-19.1 0-34.3 14.8-34.3 33.1 0 18.5 15 33.4 34 33.4 14.8 0 26.6-8.2 32.5-19.8V61.6H65v11.8h19.4c-3.1 8.1-9.7 12.5-18 12.5-11.7 0-20.6-9.3-20.6-21.3S54.7 43.4 66.5 43.4c6.5 0 11.9 2.3 16.3 6.7l9.4-9.3c-6.9-6.4-15.4-9.6-25.7-9.6z"/>
+  <path d="M97 43v9.5h-9.5V59H97v9.5h6.5V59h9.5v-6.5h-9.5V43z" fill="#E78CFB"/>
+</svg>
