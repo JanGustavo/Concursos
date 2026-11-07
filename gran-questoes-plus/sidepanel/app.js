@@ -20,6 +20,7 @@
     bindEvents();
     setFooterVersion();
     registerStorageListener();
+    registerRuntimeListener();
 
     try {
       settings = await GranStorage.getSettings();
@@ -60,6 +61,17 @@
   function registerStorageListener() {
     if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.onChanged) {
       chrome.storage.onChanged.addListener(handleStorageChange);
+    }
+
+    function registerRuntimeListener() {
+      if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.onMessage) {
+        chrome.runtime.onMessage.addListener((message) => {
+          if (message && message.type === 'QUESTION_READY' && message.question) {
+            renderQuestion(message.question);
+            switchTab('question');
+          }
+        });
+      }
     }
   }
 

@@ -122,6 +122,17 @@ async function handleOpenSidePanel(message, sender) {
     console.warn('[Gran Questões Plus] Falha ao salvar a questão capturada:', error);
   }
 
+  if (question) {
+    try {
+      await chrome.runtime.sendMessage({
+        type: 'QUESTION_READY',
+        question
+      });
+    } catch (error) {
+      // O painel pode ainda não ter terminado de carregar; o storage é o fallback.
+    }
+  }
+
   if (tab && Number.isInteger(tab.id)) {
     showBadge(tab.id);
   }
