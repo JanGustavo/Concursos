@@ -19,6 +19,7 @@
     cacheElements();
     bindEvents();
     setFooterVersion();
+    registerStorageListener();
 
     try {
       settings = await GranStorage.getSettings();
@@ -54,6 +55,9 @@
       showToast('Não foi possível carregar os dados salvos.', 'error');
     }
 
+  }
+
+  function registerStorageListener() {
     if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.onChanged) {
       chrome.storage.onChanged.addListener(handleStorageChange);
     }
