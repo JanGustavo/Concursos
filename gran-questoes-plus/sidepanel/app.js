@@ -129,6 +129,7 @@
       performancePercent: $('#performancePercent'),
       performanceBar: $('#performanceBar'),
       performanceDetails: $('#performanceDetails'),
+      performanceChart: $('#performanceChart'),
       clearSessionBtn: $('#clearSessionBtn'),
       syncTotalsBtn: $('#syncTotalsBtn'),
       syncedTotals: $('#syncedTotals'),
@@ -618,9 +619,53 @@
     els.performancePercent.textContent = `${percent}%`;
     els.performanceBar.style.width = `${percent}%`;
     if (els.performanceDetails) els.performanceDetails.textContent =
-      `${acertos} acertos • ${erros} erros • Média de acertos: ${percent}%`;
+      `${acertos} acertos • ${erros} erros • Taxa de acerto: ${percent}%`;
+    renderPerformanceChart(items);
     els.syncTotalsBtn.hidden = !active || !filters.searchUrl;
     els.clearSessionBtn.hidden = false;
+  }
+
+  function renderPerformanceChart(items) {
+    if (!els.performanceChart) return;
+    els.performanceChart.replaceChildren();
+    const days = performancePeriod === '30' ? 30 : 7;
+    const today = new Date();
+    const groups = new Map();
+    for (let offset = days - 1; offset >= 0; offset--) {
+      const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - offset);
+      const key = [day.getFullYear(), String(day.getMonth() + 1).padStart(2, '0'),
+        String(day.getDate()).padStart(2, '0')].join('-');
+      groups.set(key, { date: day, acertos: 0, erros: 0 });
+    }
+    items.forEach((entry) => {
+      const date = new Date(Number(entry.timestamp));
+      if (!Number.isFinite(date.getTime())) return;
+      const key = [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'),
+        String(date.getDate()).padStart(2, '0')].join('-');
+      const day = groups.get(key);
+      if (day) day[entry.acertou ? 'acertos' : 'erros']++;
+    });
+    const max = Math.max(1, ...Array.from(groups.values(), day => day.acertos + day.erros));
+    groups.forEach((day) => {
+      const column = document.createElement('div');
+      column.className = 'performance-chart__day';
+      const total = day.acertos + day.erros;
+      const bar = document.createElement('div');
+      bar.className = 'performance-chart__column';
+      bar.title = `${day.date.toLocaleDateString('pt-BR')}: ${day.acertos} acertos, ${day.erros} erros`;
+      bar.setAttribute('aria-label', bar.title);
+      const correct = document.createElement('div');
+      correct.className = 'performance-chart__correct';
+      correct.style.height = `${day.acertos / max * 100}%`;
+      const wrong = document.createElement('div');
+      wrong.className = 'performance-chart__wrong';
+      wrong.style.height = `${day.erros / max * 100}%`;
+      bar.append(wrong, correct);
+      const label = document.createElement('span');
+      label.textContent = day.date.getDate();
+      column.append(bar, label);
+      els.performanceChart.append(column);
+    });
   }
 
   async function handleClearSession() {
