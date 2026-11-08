@@ -726,9 +726,42 @@
         fetchFilterTotal(data.currentFilters, 'CERTAS', token),
         fetchFilterTotal(data.currentFilters, 'ERRADAS', token)
       ]);
-      els.syncedTotals.textContent = `Total da conta neste filtro: ${acertos} certas • ${erros} erradas`;
+      // O endpoint pode ignorar o parâmetro "resolucao" e devolver a mesma
+      // contagem total em ambas as chamadas. Compara com a consulta sem esse
+      // parâmetro antes de atribuir rótulos de acerto/erro.
+      const url = new URL(data.currentFilters.searchUrl);
+      url.searchParams.delete('resolucao');
+      url.searchParams.set('perPage', '1');
+      const rawResponse = await fetch(url.toString(), {
+        method: 'GET',
+        headers: { Authorization: token },
+        credentials: 'include'
+      });
+      if (!rawResponse.ok) throw new Error('Não foi possível validar o total geral.');
+      const totalGeral = getTotalFromResponse(await rawResponse.json());
+      if (totalGeral == null) throw new Error('A API não informou o total geral.');
+
+      // Se os dois resultados são idênticos ao total geral, não há evidência
+      // de que os filtros CERTAS/ERRADAS funcionaram. Não inventar estatísticas.
+      if (acertos === totalGeral && erros === totalGeral && totalGeral > 0) {
+        els.syncedTotals.textContent =
+          `Não foi possível validar acertos/erros da conta. A API retornou ${totalGeral} nas duas consultas e no total sem filtro. As estatísticas locais continuam independentes.`;
+        els.syncedTotals.hidden = false;
+        if (!silent) showToast('A API não confirmou os filtros de acertos/erros.', 'error');
+        return;
+      }
+
+      if (acertos + erros > totalGeral) {
+        els.syncedTotals.textContent =
+          'Os totais retornados pela API são inconsistentes. Não serão exibidos como estatísticas verificadas.';
+        els.syncedTotals.hidden = false;
+        if (!silent) showToast('Totais da API inconsistentes.', 'error');
+        return;
+      }
+
+      els.syncedTotals.textContent = `Total da conta neste filtro (API, sujeito à validação do filtro): ${acertos} certas • ${erros} erradas`;
       els.syncedTotals.hidden = false;
-      if (!silent) showToast('Totais do filtro sincronizados.');
+      if (!silent) showToast('Totais consultados. Confira os filtros no Gran.');
     } catch (error) {
       console.error('[Gran Questões Plus] Falha ao sincronizar totais:', error);
       if (!silent) showToast('Não foi possível sincronizar os totais deste filtro.', 'error');
