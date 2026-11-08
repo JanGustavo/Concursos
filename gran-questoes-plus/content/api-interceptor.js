@@ -129,7 +129,7 @@
         try {
           const headers = new Headers((init && init.headers) || (input && input.headers) || {});
           const token = headers.get('authorization');
-          if (token && /^Bearer\\s+\\S+/i.test(token)) post('AUTH_TOKEN', { token });
+          if (token && /^Bearer\s+\S+/i.test(token)) post('AUTH_TOKEN', { token });
         } catch (error) {
           // A leitura de cabeçalhos é opcional.
         }
