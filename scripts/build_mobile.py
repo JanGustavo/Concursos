@@ -49,7 +49,7 @@ s = s.replace('<head>', '<head>\n' + pwa_tags, 1)
 
 s = s.replace('</style>', css + '\n</style>', 1)
 old = '<button class="view" type="button" id="data-tab"'
-new = '<button class="view" type="button" id="start-tab" role="tab" aria-controls="start-view" aria-selected="false">Por onde começar</button><button class="view" type="button" id="planner-tab" role="tab" aria-controls="planner-view" aria-selected="false">Ciclo de estudos</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button><button class="view" type="button" id="anki-tab" role="tab" aria-controls="anki-view" aria-selected="false">Anki</button>' + old
+new = '<button class="view" type="button" id="start-tab" role="tab" aria-controls="start-view" aria-selected="false">Por onde começar</button><button class="view" type="button" id="planner-tab" role="tab" aria-controls="planner-view" aria-selected="false">Ciclo de estudos</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button><button class="view" type="button" id="anki-tab" role="tab" aria-controls="anki-view" aria-selected="false">Estudo+</button>' + old
 assert old in s
 s = s.replace(old, new, 1)
 
@@ -62,12 +62,17 @@ footer_start = s.index('<footer class="bottom">')
 footer_end = s.index('</footer>', footer_start) + len('</footer>')
 s = s[:footer_start] + '<footer class="bottom site-footer"><div><strong>TJPB Estudos</strong><p>Um assunto de cada vez. Uma preparação com direção.</p><small>Projeto independente de estudos · confira as regras nas fontes oficiais.</small></div><div class="footer-links"><a href="https://conhecimento.fgv.br/sites/default/files/concursos/edital-retificado-tjpb_29.10.pdf" target="_blank" rel="noopener noreferrer">Consultar edital ↗</a><button type="button" id="footer-tutorial">Rever tutorial</button><a href="?view=apoio">Apoiar o projeto 💜</a></div></footer>' + s[footer_end:]
 
-gran_panel = '<section class="extension-release"><h2>Extensão Gran Questões Plus</h2><p>Capture questões do Gran e converse sobre a revisão com ChatGPT ou Groq usando sua conta do TJPB.</p><a class="practice-btn primary" href="https://github.com/JanGustavo/Concursos/releases/latest" target="_blank" rel="noopener noreferrer">Baixar a release mais recente ↗</a><p class="practice-caption">Baixe o ZIP da release e carregue a pasta extraída como extensão no navegador.</p></section>' + gran_panel
 s = s.replace('</main>', panel + gran_panel + '''
 <section id="start-view" role="tabpanel" aria-labelledby="start-tab" hidden><div id="start-root"></div></section>
 <section id="planner-view" role="tabpanel" aria-labelledby="planner-tab" hidden><div id="planner-root"></div></section>
 <section id="support-view" role="tabpanel" aria-labelledby="support-tab" hidden><div id="support-root"></div></section>
-<section id="anki-view" role="tabpanel" aria-labelledby="anki-tab" hidden><div id="anki-root"></div></section>
+<section id="anki-view" role="tabpanel" aria-labelledby="anki-tab" hidden>
+  <div class="study-plus-shell">
+    <div class="study-plus-head"><span class="eyebrow">Ferramentas para estudar</span><h2>Estudo+</h2><p>Revise com os baralhos e leve suas questões para a extensão no navegador.</p></div>
+    <div class="extension-release"><div class="extension-release-icon" aria-hidden="true">✦</div><div><span class="eyebrow">Extensão para o navegador</span><h3>Gran Questões Plus</h3><p>Capture questões do Gran e revise com ChatGPT ou com a Groq usando sua conta do TJPB.</p><a class="practice-btn primary" href="https://github.com/JanGustavo/Concursos/releases/latest/download/gran-questoes-plus.zip" target="_blank" rel="noopener noreferrer">Baixar extensão ↓</a><small>Baixe o ZIP da release e carregue a pasta extraída como extensão no navegador.</small></div></div>
+    <div id="anki-root"></div>
+  </div>
+</section>
 <section id="courses-view" class="practice courses" role="tabpanel" aria-labelledby="courses-tab" hidden>
  <div id="courses-root"></div>
  <noscript>Ative o JavaScript para acessar os cursos e as aulas.</noscript>

@@ -16,3 +16,15 @@ dialog,.practice-dialog{background:var(--bg-panel-solid);border:1px solid var(--
 .extension-release{margin:1rem auto 2rem;padding:1.5rem;border:1px solid #7049a5;border-radius:16px;background:#1c1530;color:#f5f3ff}
 .extension-release p{line-height:1.6}
 .extension-release .practice-btn{display:inline-block;margin:.5rem 0}
+
+.study-plus-shell{max-width:1100px;margin:36px auto;padding:0 20px}
+.study-plus-head{margin:0 0 20px}
+.study-plus-head h2{font-size:clamp(28px,3vw,38px);margin:10px 0 6px;color:var(--ink)}
+.study-plus-head p{color:var(--muted);line-height:1.6;margin:0}
+.extension-release{display:flex;align-items:center;gap:24px;max-width:none;margin:0 0 34px;padding:24px 28px;border:1px solid #7049a5;border-radius:18px;background:linear-gradient(115deg,#241737,#151728);color:#f5f3ff}
+.extension-release-icon{flex:0 0 58px;display:grid;place-items:center;width:58px;height:58px;border:1px solid #a855f766;border-radius:16px;background:#7c3aed2c;color:#d8b4fe;font-size:28px}
+.extension-release h3{font-size:22px;margin:6px 0}
+.extension-release p{line-height:1.6;margin:0 0 14px;color:#c4b5d9}
+.extension-release .practice-btn{display:inline-block;margin:0 16px 0 0}
+.extension-release small{display:inline-block;color:#a9a2bb;line-height:1.5}
+@media(max-width:650px){.study-plus-shell{padding:0 16px}.extension-release{align-items:flex-start;padding:20px;gap:14px}.extension-release-icon{flex-basis:40px;width:40px;height:40px;font-size:21px}.extension-release .practice-btn{margin:0 0 12px}}

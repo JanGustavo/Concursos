@@ -275,15 +275,15 @@
 
   <section id="groqPanel" class="groq-panel" hidden aria-label="Conversa com a Groq">
     <div class="groq-panel__head"><strong>Revisão com Groq</strong><button id="groqCloseBtn" type="button" aria-label="Fechar conversa">×</button></div>
+    <p class="groq-intro">Revise a questão com a IA e continue a conversa por aqui.</p>
     <div id="groqMessages" class="groq-messages" role="log" aria-live="polite"></div>
     <form id="groqLogin" class="groq-login"><p>Entre com sua conta do TJPB para conversar.</p>
       <label>Usuário<input id="groqUsername" autocomplete="username" required></label>
       <label>Senha<input id="groqPassword" type="password" autocomplete="current-password" required></label>
       <button class="button button--primary" type="submit">Entrar</button>
     </form>
-    <form id="groqForm" hidden><label for="groqInput">Sua dúvida</label><textarea id="groqInput" rows="3" maxlength="16000" required></textarea>
-      <button id="groqSendBtn" class="button button--primary" type="submit">Enviar</button>
-      <button id="groqLogoutBtn" type="button">Sair da conta</button>
+    <form id="groqForm" hidden><label for="groqInput">Sua dúvida ou questão preparada</label><textarea id="groqInput" rows="5" maxlength="16000" required></textarea>
+      <div class="groq-actions"><button id="groqSendBtn" class="button button--primary" type="submit">Enviar pergunta ↗</button><button id="groqLogoutBtn" type="button">Sair</button></div>
     </form>
     <p id="groqStatus" role="status"></p>
   </section>
