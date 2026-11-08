@@ -50,7 +50,8 @@
 
   function firstValue(object, keys) {
     if (!object || typeof object !== 'object') return '';
-    const key = Object.keys(object).find((item) => keys.includes(item.toLowerCase()));
+    const normalized = keys.map((key) => key.toLowerCase());
+    const key = Object.keys(object).find((item) => normalized.includes(item.toLowerCase()));
     return key ? object[key] : '';
   }
 
@@ -107,8 +108,8 @@
         : /^(true|1|sim|acert|corret|certo)/.test(rawText) ||
           (!rawText && /acert|corret|certo/.test(text) && !/errad|incorret/.test(text));
 
-    const hasOutcome = rawCorrect !== '' ||
-      /acert|errad|corret|incorret/.test(text);
+    const hasOutcome = rawCorrect !== '' && rawCorrect !== null && rawCorrect !== undefined;
+    // Evita contar respostas sem resultado explícito como erro por engano.
     if (!hasOutcome) return null;
     return { acertou, questaoId: id || '', gabarito: gabarito || '', respostaUsuario: respostaUsuario || '' };
   }
