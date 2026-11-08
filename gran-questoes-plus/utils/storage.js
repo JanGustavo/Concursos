@@ -389,7 +389,8 @@
       ? { total: Number(previousStats.total) || 0, acertos: Number(previousStats.acertos) || 0, erros: Number(previousStats.erros) || 0, filterKey }
       : { total: 0, acertos: 0, erros: 0, filterKey };
     const history = Array.isArray(current[KEYS.historyLog]) ? current[KEYS.historyLog] : [];
-    const id = String(answer && (answer.questaoId || answer.id) || `sem-id-${Date.now()}`);
+    const id = String(answer && (answer.questaoId || answer.id) || `sem-id-${Date.now()}`)
+      .replace(/^Q(?=\d)/i, '');
     const entry = {
       id,
       timestamp: Date.now(),
