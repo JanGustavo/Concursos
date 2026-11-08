@@ -9,6 +9,17 @@
   let token = '';
   let history = [];
   let busy = false;
+  async function readApiResponse(response) {
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.toLowerCase().includes('application/json')) {
+      throw Error('O servidor enviou uma página em vez da resposta da IA (HTTP ' + response.status + '). Tente novamente em instantes.');
+    }
+    try {
+      return await response.json();
+    } catch {
+      throw Error('A resposta do servidor veio incompleta. Tente novamente.');
+    }
+  }
   const readToken = async () => (await chrome.storage.local.get('gqp_tjpb_token')).gqp_tjpb_token || '';
   const showAuth = () => { login.hidden = Boolean(token); form.hidden = !token; };
   const message = (role, text) => {
@@ -35,7 +46,7 @@
     try {
       const response = await fetch(api + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: document.getElementById('groqUsername').value, password: document.getElementById('groqPassword').value }) });
-      const data = await response.json();
+      const data = await readApiResponse(response);
       if (!response.ok || !data.user?.token) throw Error(data.error || 'Não foi possível entrar.');
       token = data.user.token;
       await chrome.storage.local.set({ gqp_tjpb_token: token });
@@ -64,7 +75,7 @@
       const response = await fetch(api + '/api/ai/chat', { method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
         body: JSON.stringify({ messages }) });
-      const data = await response.json();
+      const data = await readApiResponse(response);
       if (response.status === 401) { token = ''; await chrome.storage.local.remove('gqp_tjpb_token'); showAuth(); throw Error('Sessão expirada. Entre novamente.'); }
       if (!response.ok) throw Error(data.error || 'A Groq não respondeu.');
       history = messages.concat({ role: 'assistant', content: data.answer }).slice(-8);
