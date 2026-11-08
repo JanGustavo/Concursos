@@ -128,6 +128,7 @@
       performanceScore: $('#performanceScore'),
       performancePercent: $('#performancePercent'),
       performanceBar: $('#performanceBar'),
+      performanceDetails: $('#performanceDetails'),
       clearSessionBtn: $('#clearSessionBtn'),
       syncTotalsBtn: $('#syncTotalsBtn'),
       syncedTotals: $('#syncedTotals'),
@@ -602,6 +603,7 @@
     const acertos = performancePeriod === 'session' && data.sessionStats.filterKey === filters.filterKey
       ? Number(data.sessionStats.acertos) || 0
       : items.filter((item) => item.acertou).length;
+    const erros = Math.max(0, total - acertos);
     const percent = total ? Math.round((acertos / total) * 100) : 0;
 
     const labels = [
@@ -615,6 +617,8 @@
     els.performanceScore.textContent = `${acertos} / ${total}`;
     els.performancePercent.textContent = `${percent}%`;
     els.performanceBar.style.width = `${percent}%`;
+    if (els.performanceDetails) els.performanceDetails.textContent =
+      `${acertos} acertos • ${erros} erros • Média de acertos: ${percent}%`;
     els.syncTotalsBtn.hidden = !active || !filters.searchUrl;
     els.clearSessionBtn.hidden = false;
   }
