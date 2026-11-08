@@ -461,9 +461,9 @@
       // Considera apenas o resultado confirmado no feedback atual.
       // A alternativa selecionada não é obrigatória: alguns layouts do Gran
       // retiram a classe "--selected" depois da correção.
-      const isCorrect = /\\b(acertou|acertamos|resposta correta|você acertou|correto|certa)\\b/i.test(result) &&
-        !/\\b(errada|incorreta|você errou|errou)\\b/i.test(result);
-      const isIncorrect = /\\b(errada|incorreta|você errou|errou)\\b/i.test(result);
+      const isCorrect = /\b(acertou|acertamos|resposta correta|você acertou|correto|certa)\b/i.test(result) &&
+        !/\b(errada|incorreta|você errou|errou)\b/i.test(result);
+      const isIncorrect = /\b(errada|incorreta|você errou|errou)\b/i.test(result);
       const id = String(question.code || '').trim();
       if (id && (isCorrect || isIncorrect)) {
         const key = id + ':' + (isCorrect ? '1' : '0');
