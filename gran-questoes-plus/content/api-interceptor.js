@@ -114,6 +114,45 @@
     return { acertou, questaoId: id || '', gabarito: gabarito || '', respostaUsuario: respostaUsuario || '' };
   }
 
+  // O Gran pode usar fetch em vez de XMLHttpRequest. Observa somente as
+  // respostas do domínio Gran, sem consumir nem modificar a Response original.
+  if (typeof window.fetch === 'function') {
+    const originalFetch = window.fetch;
+    window.fetch = function (input, init) {
+      const url = typeof input === 'string' ? input : input && input.url;
+      const method = String(
+        (init && init.method) || (input && input.method) || 'GET'
+      ).toUpperCase();
+      const requestIsGran = isGranApi(url);
+      const result = originalFetch.apply(this, arguments);
+      if (requestIsGran) {
+        try {
+          const headers = new Headers((init && init.headers) || (input && input.headers) || {});
+          const token = headers.get('authorization');
+          if (token && /^Bearer\\s+\\S+/i.test(token)) post('AUTH_TOKEN', { token });
+        } catch (error) {
+          // A leitura de cabeçalhos é opcional.
+        }
+        result.then((response) => {
+          if (!response.ok) return;
+          response.clone().json().then((data) => {
+            if (method === 'GET' && String(url).includes(SEARCH_PATH)) {
+              post('FILTERS_UPDATED', {
+                searchUrl: String(url),
+                ...queryFilters(String(url)),
+                ...readableFilters(data)
+              });
+            } else if (method === 'POST') {
+              const answer = parseAnswer(data);
+              if (answer) post('QUESTION_ANSWERED', answer);
+            }
+          }).catch(() => {});
+        }).catch(() => {});
+      }
+      return result;
+    };
+  }
+
   const originalOpen = XMLHttpRequest.prototype.open;
   const originalSetRequestHeader = XMLHttpRequest.prototype.setRequestHeader;
   const originalSend = XMLHttpRequest.prototype.send;
