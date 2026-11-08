@@ -58,7 +58,9 @@
           <span id="performancePercent">0%</span>
         </div>
         <div class="performance-card__bar"><span id="performanceBar"></span></div>
-        <p id="performanceDetails" class="performance-card__totals" aria-live="polite">0 acertos • 0 erros • Média de acertos: 0%</p>
+        <p id="performanceDetails" class="performance-card__totals" aria-live="polite">0 acertos • 0 erros • Taxa de acerto: 0%</p>
+        <div class="performance-chart__legend"><span>● Acertos</span><span>● Erros</span></div>
+        <div id="performanceChart" class="performance-chart" role="img" aria-label="Histórico diário de acertos e erros"></div>
         <div id="syncedTotals" class="performance-card__totals" hidden></div>
         <button id="clearSessionBtn" class="performance-card__clear" type="button">Zerar sessão</button>
       </section>
