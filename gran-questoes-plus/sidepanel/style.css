@@ -1560,3 +1560,13 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* Histórico visual dos últimos 7 ou 30 dias. */
+.performance-chart__legend { display:flex; gap:14px; margin:12px 0 6px; font-size:10px; color:var(--text-muted); }
+.performance-chart__legend span:first-child { color:#34d399; }
+.performance-chart__legend span:last-child { color:#fb7185; }
+.performance-chart { display:flex; gap:3px; align-items:stretch; height:72px; min-width:0; overflow:hidden; }
+.performance-chart__day { flex:1 1 0; min-width:0; display:flex; align-items:center; flex-direction:column; font-size:9px; color:var(--text-muted); }
+.performance-chart__column { width:100%; max-width:18px; height:56px; display:flex; flex-direction:column; justify-content:flex-end; background:rgba(255,255,255,.04); border-radius:3px; overflow:hidden; }
+.performance-chart__correct { background:#34d399; flex-shrink:0; }
+.performance-chart__wrong { background:#fb7185; flex-shrink:0; }
