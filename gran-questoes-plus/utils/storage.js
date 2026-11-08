@@ -372,7 +372,15 @@
     return { ...normalized, filterKey, changed: previous.filterKey !== filterKey };
   }
 
-  async function recordQuestionAnswered(answer) {
+  let pendingAnswerWrite = Promise.resolve();
+
+  function recordQuestionAnswered(answer) {
+    const write = pendingAnswerWrite.then(() => recordQuestionAnsweredNow(answer));
+    pendingAnswerWrite = write.catch(() => {});
+    return write;
+  }
+
+  async function recordQuestionAnsweredNow(answer) {
     const current = await storageGet([KEYS.currentFilters, KEYS.sessionStats, KEYS.historyLog]);
     const filters = current[KEYS.currentFilters] || {};
     const filterKey = filters.filterKey || hashFilter({});
@@ -385,9 +393,9 @@
     const entry = {
       id,
       timestamp: Date.now(),
-      disciplina: (filters.disciplinas || [])[0] || '',
-      assunto: (filters.assuntos || []).join(' / '),
-      banca: (filters.bancas || [])[0] || '',
+      disciplina: answer.disciplina || (filters.disciplinas || [])[0] || '',
+      assunto: answer.assunto || (filters.assuntos || []).join(' / '),
+      banca: answer.banca || (filters.bancas || [])[0] || '',
       acertou: Boolean(answer && answer.acertou),
       filterKey
     };
@@ -398,6 +406,9 @@
         stats.acertos += entry.acertou ? 1 : -1;
         stats.erros += entry.acertou ? -1 : 1;
       }
+      // A mesma questão pode ser capturada pela API e pelo DOM.
+      // Preserva a data original e evita duplicar a questão na série histórica.
+      entry.timestamp = old.timestamp;
       history[index] = entry;
     } else {
       history.unshift(entry);
