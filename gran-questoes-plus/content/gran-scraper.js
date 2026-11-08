@@ -56,6 +56,7 @@
 
   let scanTimer = null;
   let toastTimer = null;
+  const seenDomAnswers = new Set();
 
   function handleApiMessage(event) {
     if (event.source !== window || !event.data || event.data.source !== 'GRAN_PLUS_API') return;
@@ -453,6 +454,29 @@
       }
 
       injectButton(feedbackElement, questionElement, question);
+
+      // Fallback da API: o feedback visual também confirma que uma resposta foi corrigida.
+      // Não conta a mera seleção de alternativa nem um gabarito sem resultado.
+      const result = cleanText(question.resultText).toLowerCase();
+      const isCorrect = /acert|corret|certo/.test(result) && !/errad|errou|incorret/.test(result);
+      const isIncorrect = /errad|errou|incorret/.test(result);
+      const id = String(question.code || '').trim();
+      if (id && question.userAnswer && (isCorrect || isIncorrect)) {
+        const key = id + ':' + question.userAnswer + ':' + (isCorrect ? '1' : '0');
+        if (!seenDomAnswers.has(key)) {
+          seenDomAnswers.add(key);
+          GranStorage.recordQuestionAnswered({
+            questaoId: id,
+            acertou: isCorrect,
+            disciplina: question.discipline,
+            assunto: question.topic,
+            banca: question.banca
+          }).catch((error) => {
+            seenDomAnswers.delete(key);
+            console.warn('[Gran Questões Plus] Falha ao salvar resultado do DOM:', error);
+          });
+        }
+      }
     });
   }
 
