@@ -458,11 +458,15 @@
       // Fallback da API: o feedback visual também confirma que uma resposta foi corrigida.
       // Não conta a mera seleção de alternativa nem um gabarito sem resultado.
       const result = cleanText(question.resultText).toLowerCase();
-      const isCorrect = /acert|corret|certo/.test(result) && !/errad|errou|incorret/.test(result);
-      const isIncorrect = /errad|errou|incorret/.test(result);
+      // Considera apenas o resultado confirmado no feedback atual.
+      // A alternativa selecionada não é obrigatória: alguns layouts do Gran
+      // retiram a classe "--selected" depois da correção.
+      const isCorrect = /\\b(acertou|acertamos|resposta correta|você acertou|correto|certa)\\b/i.test(result) &&
+        !/\\b(errada|incorreta|você errou|errou)\\b/i.test(result);
+      const isIncorrect = /\\b(errada|incorreta|você errou|errou)\\b/i.test(result);
       const id = String(question.code || '').trim();
-      if (id && question.userAnswer && (isCorrect || isIncorrect)) {
-        const key = id + ':' + question.userAnswer + ':' + (isCorrect ? '1' : '0');
+      if (id && (isCorrect || isIncorrect)) {
+        const key = id + ':' + (isCorrect ? '1' : '0');
         if (!seenDomAnswers.has(key)) {
           seenDomAnswers.add(key);
           GranStorage.recordQuestionAnswered({
