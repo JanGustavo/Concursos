@@ -1599,3 +1599,15 @@ a:focus-visible {
 #groqStatus{flex:0 0 auto;min-height:20px;margin:0;padding:0 16px 12px;color:#fda4af;font-size:12px;line-height:1.5}
 .groq-login{padding:12px 0}
 .groq-panel[hidden],.groq-panel form[hidden]{display:none}
+
+.groq-message{white-space:normal}
+.groq-message__author{display:block;margin-bottom:8px;color:#d8b4fe;font-size:12px}
+.groq-message p{margin:8px 0;white-space:pre-wrap}
+.groq-message h3{font-size:14px;margin:16px 0 8px;color:#f5f3ff}
+.groq-message ul,.groq-message ol{margin:8px 0;padding-left:20px}
+.groq-message li{margin:6px 0}
+.groq-message code{background:#0d0d1a;border-radius:4px;padding:1px 4px}
+.groq-table-scroll{max-width:100%;overflow-x:auto;margin:12px 0}
+.groq-table-scroll table{border-collapse:collapse;min-width:100%;font-size:12px;line-height:1.45}
+.groq-table-scroll th,.groq-table-scroll td{border:1px solid #594771;padding:8px;text-align:left;vertical-align:top;min-width:75px}
+.groq-table-scroll th{background:#38264f;color:#f3e8ff}

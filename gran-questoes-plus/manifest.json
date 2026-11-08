@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Gran Questões Plus",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Capture questões, filtros e desempenho local do Gran Questões, com revisão por IA e bizus por disciplina.",
   "minimum_chrome_version": "116",
   "permissions": [

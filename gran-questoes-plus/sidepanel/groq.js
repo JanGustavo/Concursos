@@ -22,10 +22,88 @@
   }
   const readToken = async () => (await chrome.storage.local.get('gqp_tjpb_token')).gqp_tjpb_token || '';
   const showAuth = () => { login.hidden = Boolean(token); form.hidden = !token; };
+  function inline(parent, text) {
+    const pattern = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+    let last = 0;
+    for (const match of text.matchAll(pattern)) {
+      parent.append(document.createTextNode(text.slice(last, match.index)));
+      const token = match[0];
+      const element = document.createElement(token.startsWith('**') ? 'strong' : 'code');
+      element.textContent = token.startsWith('**') ? token.slice(2, -2) : token.slice(1, -1);
+      parent.append(element);
+      last = match.index + token.length;
+    }
+    parent.append(document.createTextNode(text.slice(last)));
+  }
+  function renderMarkdown(parent, text) {
+    const lines = String(text).replace(/\r/g, '').split('\n');
+    let index = 0;
+    while (index < lines.length) {
+      const line = lines[index].trim();
+      if (!line) { index++; continue; }
+      if (line.includes('|') && index + 1 < lines.length && /^\s*\|?[\s:-]+(?:\|[\s:-]+)+\|?\s*$/.test(lines[index + 1])) {
+        const cells = row => row.trim().replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
+        const headers = cells(line);
+        const table = document.createElement('table');
+        const head = table.createTHead().insertRow();
+        headers.forEach(value => { const th = document.createElement('th'); inline(th, value); head.append(th); });
+        const body = table.createTBody();
+        index += 2;
+        while (index < lines.length && lines[index].includes('|') && lines[index].trim()) {
+          const row = body.insertRow();
+          cells(lines[index]).forEach(value => { const td = row.insertCell(); inline(td, value); });
+          index++;
+        }
+        const scroll = document.createElement('div');
+        scroll.className = 'groq-table-scroll';
+        scroll.append(table);
+        parent.append(scroll);
+        continue;
+      }
+      const heading = line.match(/^#{1,3}\s+(.+)$/);
+      if (heading) {
+        const title = document.createElement('h3');
+        inline(title, heading[1]);
+        parent.append(title);
+        index++;
+        continue;
+      }
+      const list = line.match(/^(?:[-*]\s+|\d+\.\s+)/);
+      if (list) {
+        const ordered = /^\d/.test(line);
+        const element = document.createElement(ordered ? 'ol' : 'ul');
+        while (index < lines.length && (ordered ? /^\d+\.\s+/ : /^[-*]\s+/).test(lines[index].trim())) {
+          const item = document.createElement('li');
+          inline(item, lines[index].trim().replace(ordered ? /^\d+\.\s+/ : /^[-*]\s+/, ''));
+          element.append(item);
+          index++;
+        }
+        parent.append(element);
+        continue;
+      }
+      const paragraph = document.createElement('p');
+      const content = [];
+      while (index < lines.length && lines[index].trim() && !/^#{1,3}\s+/.test(lines[index]) && !/^(?:[-*]\s+|\d+\.\s+)/.test(lines[index])) {
+        content.push(lines[index].trim());
+        index++;
+      }
+      inline(paragraph, content.join(' '));
+      parent.append(paragraph);
+    }
+  }
   const message = (role, text) => {
-    const item = document.createElement('p');
+    const item = document.createElement('article');
     item.className = 'groq-message groq-message--' + role;
-    item.textContent = (role === 'user' ? 'Você: ' : 'Groq: ') + text;
+    const author = document.createElement('strong');
+    author.className = 'groq-message__author';
+    author.textContent = role === 'user' ? 'Você' : 'Groq';
+    item.append(author);
+    if (role === 'assistant') renderMarkdown(item, text);
+    else {
+      const content = document.createElement('p');
+      content.textContent = text;
+      item.append(content);
+    }
     log.append(item);
     item.scrollIntoView({ block: 'nearest' });
   };
