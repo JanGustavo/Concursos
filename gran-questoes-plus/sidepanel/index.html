@@ -129,6 +129,7 @@
             Abrir no ChatGPT
           </button>
 
+          <button id="openGroqBtn" class="button button--secondary" type="button">Perguntar à Groq</button>
           <button id="copyBtn" class="button button--secondary" type="button">
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="9" y="9" width="12" height="12" rx="2"></rect>
@@ -230,6 +231,7 @@
       <span>Gran Questões Plus</span>
       <span class="footer__dot" aria-hidden="true">•</span>
       <span id="footerVersion">v0.1.2</span>
+      <a href="https://github.com/JanGustavo/Concursos/releases/latest" target="_blank" rel="noopener noreferrer">Última release ↗</a>
       <button id="checkUpdateBtn" class="footer__update" type="button">Verificar atualizações</button>
       <span id="updateStatus" class="footer__update-status" role="status" aria-live="polite"></span>
     </footer>
@@ -271,9 +273,24 @@
     </div>
   </div>
 
+  <section id="groqPanel" class="groq-panel" hidden aria-label="Conversa com a Groq">
+    <div class="groq-panel__head"><strong>Revisão com Groq</strong><button id="groqCloseBtn" type="button" aria-label="Fechar conversa">×</button></div>
+    <div id="groqMessages" class="groq-messages" role="log" aria-live="polite"></div>
+    <form id="groqLogin" class="groq-login"><p>Entre com sua conta do TJPB para conversar.</p>
+      <label>Usuário<input id="groqUsername" autocomplete="username" required></label>
+      <label>Senha<input id="groqPassword" type="password" autocomplete="current-password" required></label>
+      <button class="button button--primary" type="submit">Entrar</button>
+    </form>
+    <form id="groqForm" hidden><label for="groqInput">Sua dúvida</label><textarea id="groqInput" rows="3" maxlength="16000" required></textarea>
+      <button id="groqSendBtn" class="button button--primary" type="submit">Enviar</button>
+      <button id="groqLogoutBtn" type="button">Sair da conta</button>
+    </form>
+    <p id="groqStatus" role="status"></p>
+  </section>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script src="../utils/storage.js"></script>
+  <script src="groq.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

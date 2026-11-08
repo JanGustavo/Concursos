@@ -55,7 +55,7 @@ function getUpdateUrls() {
   const base = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}`;
   return {
     release: `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`,
-    manifest: `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/manifest.json`,
+    manifest: `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/gran-questoes-plus/manifest.json`,
     download: `${base}/releases/latest/download/gran-questoes-plus.zip`
   };
 }

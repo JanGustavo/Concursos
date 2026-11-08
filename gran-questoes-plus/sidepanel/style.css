@@ -1570,3 +1570,13 @@ a:focus-visible {
 .performance-chart__column { width:100%; max-width:18px; height:56px; display:flex; flex-direction:column; justify-content:flex-end; background:rgba(255,255,255,.04); border-radius:3px; overflow:hidden; }
 .performance-chart__correct { background:#34d399; flex-shrink:0; }
 .performance-chart__wrong { background:#fb7185; flex-shrink:0; }
+.groq-panel{position:fixed;inset:5% 3%;z-index:100;background:#171527;color:#f5f3ff;border:1px solid #9254cf;border-radius:16px;padding:16px;overflow:auto;box-shadow:0 20px 60px #000a}
+.groq-panel[hidden],.groq-panel form[hidden]{display:none}
+.groq-panel__head{display:flex;justify-content:space-between;align-items:center}
+.groq-panel__head button{min-width:40px;min-height:40px;background:transparent;color:inherit;border:0;font-size:24px}
+.groq-panel form{display:grid;gap:10px}
+.groq-panel label{display:grid;gap:5px}
+.groq-panel input,.groq-panel textarea{width:100%;box-sizing:border-box;background:#0b0d1d;color:#fff;border:1px solid #8153aa;border-radius:8px;padding:10px}
+.groq-messages{max-height:45vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.groq-message{background:#241e38;padding:10px;border-radius:9px;line-height:1.5}
+.groq-message--user{background:#392451}

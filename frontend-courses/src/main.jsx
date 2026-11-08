@@ -27,3 +27,5 @@ const support=document.getElementById('support-root');if(support)createRoot(supp
 
 import {ExamAssistant} from './ExamAssistant.jsx';
 const examAssistant=document.getElementById('exam-ai-root');if(examAssistant)createRoot(examAssistant).render(<ExamAssistant/>);
+
+import './tutorial.js';

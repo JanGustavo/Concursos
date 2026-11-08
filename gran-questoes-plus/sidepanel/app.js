@@ -275,6 +275,7 @@
 
     const isNewQuestion = !currentQuestion || currentQuestion.code !== question.code;
     currentQuestion = question;
+    window.groqQuestion = question;
 
     els.emptyState.hidden = true;
     els.questionView.hidden = false;

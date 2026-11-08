@@ -53,6 +53,16 @@ new = '<button class="view" type="button" id="start-tab" role="tab" aria-control
 assert old in s
 s = s.replace(old, new, 1)
 
+s = s.replace('O mapa da sua preparação.', 'Seu próximo passo começa aqui.', 1)
+s = s.replace('Do conceito básico à aplicação. Encontre um assunto, enxergue as conexões e aprofunde.', 'Entenda os assuntos, pratique e organize sua preparação para Desenvolvimento de Sistemas.', 1)
+s = s.replace('<div class="toolbar-tools">', '<div class="toolbar-tools"><button type="button" class="theme-toggle" id="tutorial-button">? Ver tutorial</button>', 1)
+s = s.replace('</div></nav>', '<a class="kanbandoro-link" href="https://github.com/JanGustavo/KanbanDoro" target="_blank" rel="noopener noreferrer">Conheça o KanbanDoro ↗</a></div></nav>', 1)
+s = s.replace('</nav>\n', '</nav><aside class="browser-study-note"><span aria-hidden="true">ⓘ</span> Dica de estudo: salve este site nos favoritos. Cursos e IA precisam de internet; seu progresso de materiais fica neste navegador.</aside>\n', 1)
+footer_start = s.index('<footer class="bottom">')
+footer_end = s.index('</footer>', footer_start) + len('</footer>')
+s = s[:footer_start] + '<footer class="bottom site-footer"><div><strong>TJPB Estudos</strong><p>Um assunto de cada vez. Uma preparação com direção.</p><small>Projeto independente de estudos · confira as regras nas fontes oficiais.</small></div><div class="footer-links"><a href="https://conhecimento.fgv.br/sites/default/files/concursos/edital-retificado-tjpb_29.10.pdf" target="_blank" rel="noopener noreferrer">Consultar edital ↗</a><button type="button" id="footer-tutorial">Rever tutorial</button><a href="?view=apoio">Apoiar o projeto 💜</a></div></footer>' + s[footer_end:]
+
+gran_panel = '<section class="extension-release"><h2>Extensão Gran Questões Plus</h2><p>Capture questões do Gran e converse sobre a revisão com ChatGPT ou Groq usando sua conta do TJPB.</p><a class="practice-btn primary" href="https://github.com/JanGustavo/Concursos/releases/latest" target="_blank" rel="noopener noreferrer">Baixar a release mais recente ↗</a><p class="practice-caption">Baixe o ZIP da release e carregue a pasta extraída como extensão no navegador.</p></section>' + gran_panel
 s = s.replace('</main>', panel + gran_panel + '''
 <section id="start-view" role="tabpanel" aria-labelledby="start-tab" hidden><div id="start-root"></div></section>
 <section id="planner-view" role="tabpanel" aria-labelledby="planner-tab" hidden><div id="planner-root"></div></section>

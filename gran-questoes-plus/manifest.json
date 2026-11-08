@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Gran Questões Plus",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Capture questões, filtros e desempenho local do Gran Questões, com revisão por IA e bizus por disciplina.",
   "minimum_chrome_version": "116",
   "permissions": [
@@ -19,7 +19,8 @@
     "https://raw.githubusercontent.com/*",
     "https://github.com/*",
     "*://chatgpt.com/*",
-    "*://*.chatgpt.com/*"
+    "*://*.chatgpt.com/*",
+    "https://tjpb.jangustavo.me/*"
   ],
   "background": {
     "service_worker": "background/service-worker.js"

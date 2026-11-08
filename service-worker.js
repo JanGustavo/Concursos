@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tjpb-estudo-v15';
+const CACHE_NAME = 'tjpb-estudo-v17';
 const PRECACHE_URLS = [
   '/',
   '/?view=questoes',
