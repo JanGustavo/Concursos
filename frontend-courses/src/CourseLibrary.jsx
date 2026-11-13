@@ -1,4 +1,5 @@
 import {PdfViewer} from './PdfViewer.jsx';
+import {StageBadge} from './StageBadge.jsx';
 import React,{useState,useEffect,useMemo,useRef,useCallback} from 'react';
 import {flattenTree,filterTree,relatedResources,readProgress} from './model.js';
 const authHeaders=()=>({'Content-Type':'application/json',Authorization:'Bearer '+(localStorage.getItem('tjpb-auth-token-v1')||'')});
@@ -69,15 +70,15 @@ export function CourseLibrary({courseId=null,apiBase='/biblioteca/api'}){
  return <div className="course-library">
   <div className="course-topline"><span className="eyebrow">BIBLIOTECA DO DRIVE · {user?.nome}</span><span className="course-access">Acesso autenticado</span></div>
   {!course?<>
-   <h2>Cursos e aulas</h2><p className="practice-lead">Escolha uma área, abra um módulo e estude no seu ritmo.</p>
-   <div className="course-stats"><div><strong>{catalog.courses.length}</strong><span>áreas de estudo</span></div><div><strong>{catalog.videos}</strong><span>videoaulas</span></div><div><strong>{catalog.pdfs}</strong><span>materiais em PDF</span></div><div><strong>{allDone}</strong><span>materiais concluídos neste navegador</span></div></div>
+   <h2>Aulas e materiais</h2><p className="practice-lead">Escolha uma área, abra um módulo e estude no seu ritmo.</p>
+   <div className="course-stats"><div><strong>{catalog.courses.length}</strong><span>áreas de estudo</span></div><div><strong>{catalog.videos}</strong><span>videoaulas</span></div><div><strong>{catalog.pdfs}</strong><span>materiais em PDF</span></div><div><strong>{allDone}</strong><span>{allDone===1?'material concluído':'materiais concluídos'} neste navegador</span></div></div>
    <div className="course-discovery"><label className="course-search-label">Encontrar curso ou assunto<input value={query} onChange={e=>setQuery(e.target.value)} type="search" placeholder="Ex.: banco de dados, crase, Scrum…"/></label><MaterialFilter value={materialType} onChange={chooseType}/></div>
    <p className="practice-caption" role="status">{filteredCourses.length} cursos com materiais neste filtro.</p>
-   <div className="course-grid">{filteredCourses.map((c,i)=>{const done=flattenTree(c.tree).filter(e=>progress[e.id]?.done).length;return <button key={c.id} className="course-card" onClick={()=>chooseCourse(c)}><span className="course-card-number">{String(i+1).padStart(2,'0')} <span aria-hidden="true">↗</span></span><h3>{clean(c.title)}</h3><p>{materialType==='pdf'?c.pdfs+' PDFs':materialType==='video'?c.videos+' vídeos':c.videos+' vídeos · '+c.pdfs+' PDFs'}</p><div className="course-progress-track"><i style={{width:((c.videos+c.pdfs)?done/(c.videos+c.pdfs)*100:0)+'%'}}/></div><small>{done+' de '+(c.videos+c.pdfs)+' materiais concluídos'}</small></button>})}</div>
+   <div className="course-grid">{filteredCourses.map((c,i)=>{const done=flattenTree(c.tree).filter(e=>progress[e.id]?.done).length;const total=c.videos+c.pdfs;return <button key={c.id} className="course-card" onClick={()=>chooseCourse(c)}><span className="course-card-number">{String(i+1).padStart(2,'0')} <span aria-hidden="true">→</span></span><h3>{clean(c.title)}</h3><StageBadge stage={done===0?'new':done===total?'done':'active'}/><p>{materialType==='pdf'?c.pdfs+' PDFs':materialType==='video'?c.videos+' vídeos':c.videos+' vídeos · '+c.pdfs+' PDFs'}</p><div className="course-progress-track"><i style={{width:(total?done/total*100:0)+'%'}}/></div><small>{done+' de '+total+' '+(done===1?'material concluído':'materiais concluídos')}</small></button>})}</div>
    {!filteredCourses.length&&<p className="module-note">Nenhum curso encontrado. Tente outro assunto ou tipo de material.</p>}
   </>:<>
    {!courseId&&<button className="course-back" onClick={()=>{setSelectedCourse(null);setEntryId(null);setQuery('');try{localStorage.removeItem(lastKey.current)}catch{}}}>← Todos os cursos</button>}
-   <h2>{clean(course.title)}</h2><p className="practice-lead">{course.videos} videoaulas · {course.pdfs} PDFs · {completed} materiais concluídos</p>
+   <h2>{clean(course.title)}</h2><p className="practice-lead">{course.videos} videoaulas · {course.pdfs} PDFs · {completed} {completed===1?'material concluído':'materiais concluídos'}</p>
    <div className="course-material-toolbar"><p className="practice-caption" role="status">{visibleEntries.length} materiais na lista.</p><MaterialFilter value={materialType} onChange={chooseType}/></div>
    <div className="course-workspace"><aside className="course-sidebar"><label className="course-search-label">Buscar neste curso<input value={query} onChange={e=>setQuery(e.target.value)} type="search" placeholder="Aula, módulo ou material…"/></label><nav aria-label="Módulos e aulas">{visibleTree?<ul className="course-tree"><TreeNode node={visibleTree} selected={selected} progress={progress} onSelect={chooseEntry} forceOpen={Boolean(query.trim())}/></ul>:<p>Nenhuma aula encontrada.</p>}</nav></aside>
    <section className="course-stage" aria-label="Conteúdo da aula">{selected?<>

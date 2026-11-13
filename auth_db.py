@@ -50,6 +50,32 @@ def init_db():
         ''')
         con.execute('CREATE INDEX IF NOT EXISTS idx_attempts_user ON user_attempts(user_id);')
         con.execute('CREATE INDEX IF NOT EXISTS idx_attempts_quando ON user_attempts(quando);')
+        con.execute('''CREATE TABLE IF NOT EXISTS published_games (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            subject TEXT NOT NULL,
+            description TEXT NOT NULL,
+            html TEXT NOT NULL,
+            created_by INTEGER NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(created_by) REFERENCES users(id)
+        )''')
+
+def list_games():
+    with get_db() as con:
+        return [dict(row) for row in con.execute(
+            'SELECT id, title, subject, description, created_at FROM published_games ORDER BY id DESC')]
+
+def get_game(game_id):
+    with get_db() as con:
+        row = con.execute('SELECT html FROM published_games WHERE id = ?', (game_id,)).fetchone()
+        return row['html'] if row else None
+
+def publish_game(user_id, title, subject, description, html):
+    with get_db() as con:
+        cursor = con.execute('INSERT INTO published_games (title, subject, description, html, created_by) VALUES (?, ?, ?, ?, ?)',
+                             (title, subject, description, html, user_id))
+        return cursor.lastrowid
 
 def hash_password(password, salt=None):
     if not salt:

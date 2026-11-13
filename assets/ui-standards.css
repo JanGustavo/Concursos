@@ -1,0 +1,67 @@
+/* One visual rhythm for every module. Loaded after module styles. */
+:root,:root[data-theme="dark"]{--content-width:1120px;--page-gutter:24px;--link:var(--purple-300);--card-shadow:0 12px 32px rgba(3,4,18,.36)}
+:root[data-theme="light"]{--link:#6930ae}
+body{font-size:14px;font-family:'Space Grotesk',Inter,'Segoe UI',sans-serif}
+main{padding-bottom:100px}
+header{display:flex;align-items:center;gap:16px;padding:18px max(var(--page-gutter),calc((100% - var(--content-width))/2));min-height:100px}
+header .top{max-width:none;width:auto;flex:1;min-width:0;margin:0}
+header .top>div:first-child{min-width:0}
+header h1{font-size:clamp(23px,2.5vw,30px)}
+header .exam{gap:10px}
+header .exam div{padding-left:12px}
+header .exam strong{font-size:15px}
+header .exam span{font-size:12px}
+.header-actions{display:flex;gap:6px;align-items:center;flex:none}
+.header-action{display:grid;place-items:center;width:40px;height:40px;min-width:40px;border:1px solid var(--border-subtle);border-radius:10px;background:rgba(139,92,246,.08);color:var(--link);text-decoration:none;font:700 18px/1 'IBM Plex Mono',monospace;cursor:pointer}
+.header-action:hover{border-color:var(--border-active);background:#7c3aed24}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.toolbar{position:sticky;top:0;z-index:30;display:block;width:100%;max-width:none;margin:0;padding:10px var(--page-gutter);background:rgba(11,13,29,.96);border-bottom:1px solid var(--border-subtle);backdrop-filter:blur(10px)}
+.views{display:flex;flex-wrap:nowrap;gap:4px;width:100%;max-width:var(--content-width);margin:0 auto;overflow-x:auto;scrollbar-width:thin;white-space:nowrap}
+.view{flex:0 0 auto;font-size:12px;min-height:40px;padding:8px 12px}
+.browser-study-note{position:relative;display:flex;align-items:center;gap:10px;width:calc(100% - 2*var(--page-gutter));max-width:var(--content-width);margin:12px auto 0;padding:10px 48px 10px 14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-panel);color:var(--muted);font-size:12px}
+.browser-study-note[hidden]{display:none}
+.browser-study-note>span:first-child{color:var(--purple-300);font-size:16px}
+.browser-study-note button{position:absolute;right:6px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:22px}
+.browser-study-note button:hover{background:#7c3aed24;color:var(--ink)}
+.map-view-heading,.map-area,.routes,.practice,.research,.study-hub,.study-plus-shell,.game-lab{width:calc(100% - 2*var(--page-gutter));max-width:var(--content-width);margin-left:auto;margin-right:auto;padding-left:0;padding-right:0}
+.map-view-heading{margin-top:24px;margin-bottom:18px}
+.map-area{padding-bottom:20px;overflow:visible}
+.routes{margin-top:20px;margin-bottom:28px}
+.study-hub,.game-lab,.practice,.research{margin-top:24px}
+#data-view.research{max-width:var(--content-width);width:calc(100% - 2*var(--page-gutter));padding-inline:0}
+.course-library{max-width:none;width:100%;margin-inline:0}
+.study-plus-shell{margin-top:24px}
+.study-plus-shell .study-hub{width:100%;max-width:none;margin-inline:0;padding-inline:0}
+.support-pix{width:calc(100% - 2*var(--page-gutter));max-width:var(--content-width);margin:24px auto;padding:0}
+.study-plus-head,.game-lab-hero{max-width:none}
+.glass-panel,.practice-card,.course-card,.course-sidebar,.course-stage,.course-gate,.stat,.practice-metric,.course-stats>div,.research details,.routes,.node,.report-exam,.user-bar,.start-choice,.start-banner,.learning-path,.extension-release,.exam-facts article,.case-path article,.case-outline>div,.exam-guide-alert,.kanban-column,.study-ticket,.gran-module-card,.anki-card,.support-story,.support-impact article{border:1px solid var(--border-subtle);border-radius:16px;background:var(--bg-panel);box-shadow:var(--card-shadow)}
+.node,.stat,.practice-metric,.course-stats>div,.planner-metrics>div,.exam-facts article,.exam-guide-alert{border-left:1px solid var(--border-subtle)}
+.node{min-height:132px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:14px;position:relative}
+.node strong{font-size:14px;line-height:1.35}
+.node small{font-size:12px;line-height:1.45}
+.node .more{position:absolute;right:12px;top:12px;color:var(--purple-300)}
+.stage-badge{display:inline-flex;align-items:center;align-self:flex-start;margin-top:auto;padding:4px 9px;border:1px solid var(--border-subtle);border-radius:999px;background:#7c3aed18;color:var(--text-secondary);font:700 11px/1.25 'IBM Plex Mono',monospace;letter-spacing:.02em}
+.stage-badge[data-stage="active"]{border-color:#10b98166;background:#10b9811c;color:#6ee7b7}
+.stage-badge[data-stage="done"]{border-color:#10b98166;background:#10b9811c;color:#6ee7b7}
+:root[data-theme="light"] .stage-badge[data-stage="active"]{color:#065f46}
+.course-card .stage-badge{margin:0 0 14px}
+.start-subjects{padding:14px;border:1px solid var(--border-subtle);border-radius:16px;background:var(--bg-panel);box-shadow:var(--card-shadow)}
+.eyebrow,.tech-badge,.group-label,.course-card-number,.course-access,.courses-badge{font-size:11px;line-height:1.4}
+small,.practice-caption,.course-footnote,.course-card small,.course-file small,.course-breadcrumb,.course-stats span,.stat span,.report-sources,.pdf-toolbar>span,.exam-facts article>span{font-size:12px}
+main p:not(.practice-caption):not(.planner-notice):not(.course-footnote):not(.course-breadcrumb),main li{font-size:14px}
+.planner-metrics span,.exam-facts article>span,.course-access,.tech-badge{font-size:11px}
+.practice-lead,.course-card p,.course-empty p,.case-path p,.exam-facts p,.study-ticket p,.routine-grid p,.planner-metrics p,.module-note,.browser-study-note{line-height:1.6}
+a,.course-back,.inline-module-link,.pdf-text summary{color:var(--link)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--purple-300);outline-offset:3px}
+.hint i,.calendar-day.today>span{color:var(--purple-300);text-decoration-color:var(--purple-300)}
+.plan-ai-preview h4,.kanban-column.active>h4,.calendar-day small{color:var(--purple-300)}
+select:not([multiple]){appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='m3 6 5 5 5-5' stroke='%23c084fc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:38px!important;background-color:var(--bg-primary);color:var(--ink);border:1px solid var(--border-subtle);border-radius:10px}
+.course-tree summary,.research details>summary,.gran-unverified summary,.pdf-text summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer}
+.course-tree summary::-webkit-details-marker,.research details>summary::-webkit-details-marker,.gran-unverified summary::-webkit-details-marker,.pdf-text summary::-webkit-details-marker{display:none}
+.course-tree summary::after,.research details>summary::after,.gran-unverified summary::after,.pdf-text summary::after{content:'';flex:none;width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='m3 6 5 5 5-5' stroke='%23c084fc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .15s}
+.course-tree details[open]>summary::after,.research details[open]>summary::after,.gran-unverified[open]>summary::after,.pdf-text[open]>summary::after{transform:rotate(180deg)}
+.course-stage video{width:100%;max-width:100%}
+footer.site-footer{padding-left:max(var(--page-gutter),calc((100% - var(--content-width))/2));padding-right:max(var(--page-gutter),calc((100% - var(--content-width))/2));padding-bottom:100px}
+@media(max-width:850px){header{flex-wrap:wrap}.top{width:100%;flex-basis:100%}.header-actions{margin-left:auto}.exam{flex-wrap:wrap}.layout{gap:18px}}
+@media(max-width:560px){:root{--page-gutter:16px}header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:12px 16px}header .top{display:contents}header .top>div:first-child{grid-column:1/-1}.top h1{font-size:22px}header .exam{grid-column:1;grid-row:2;gap:6px;margin:0;min-width:0}header .exam div{padding:0;border:0}header .exam strong{font-size:11px;white-space:nowrap}header .exam span{display:none}.header-actions{grid-column:2;grid-row:2;width:auto;gap:4px;justify-content:flex-end;margin:0}.header-action{width:32px;height:32px;min-width:32px;font-size:15px}.toolbar{padding:8px 16px}.views{display:flex;grid-template-columns:none;width:100%;overflow-x:auto}.view{flex:0 0 auto;font-size:12px}.node,.ti-groups .node{min-height:130px;padding:12px}.node strong{font-size:14px}.node small{font-size:12px}.map-area,.map-view-heading,.routes,.practice,.research,.study-hub,.study-plus-shell,.game-lab,#data-view.research{width:calc(100% - 32px);padding-inline:0}.browser-study-note{width:calc(100% - 32px)}footer.site-footer{padding-inline:16px}}
+@media(max-width:360px){header{grid-template-columns:1fr}header .exam{grid-column:1;grid-row:2}.header-actions{grid-column:1;grid-row:3;justify-content:flex-start}}

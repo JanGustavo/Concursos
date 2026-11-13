@@ -1,7 +1,7 @@
 {
-  "name": "TJPB Estudo & Questões",
-  "short_name": "TJPB Estudo",
-  "description": "Mapa de estudo e treino de questões offline para Analista Judiciário TJPB - FGV",
+  "name": "TJPB Estudos",
+  "short_name": "TJPB Estudos",
+  "description": "Mapa, ciclo, questões, aulas e jogos para estudar Desenvolvimento de Sistemas",
   "start_url": "/?view=questoes",
   "scope": "/",
   "display": "standalone",

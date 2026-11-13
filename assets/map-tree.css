@@ -1,0 +1,56 @@
+/* Hierarchy is visible even when the connector SVG is outside the viewport. */
+.map-area{padding-top:12px}
+.map-area .root{margin-bottom:36px;border:1px solid var(--border-active);border-radius:16px}
+.map-area .wires{z-index:0}
+.map-area .wire{stroke-width:2.4;opacity:.7;stroke-linecap:round;stroke-linejoin:round}
+.map-area .wire.cross{stroke-width:2.7;opacity:.9;stroke-dasharray:7 5}
+.map-area .layout{position:relative;z-index:1;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,2.3fr);gap:16px}
+.map-area .branch{min-width:0;padding:14px;background:var(--bg-panel);border:1px solid var(--border-subtle);border-radius:16px;box-shadow:var(--card-shadow)}
+.map-area .subject{min-height:70px;padding:14px;border-radius:12px;background:linear-gradient(135deg,#432177,#261a4d);border:1px solid var(--border-active);box-shadow:0 4px 14px #07091366}
+.map-area .subject strong{font-size:16px;line-height:1.3}
+.map-area .subject-sub,.map-area .qty span{font-size:12px;line-height:1.4}
+.map-area .node-list{position:relative;display:grid;grid-template-columns:1fr;gap:10px;padding:18px 0 0 16px}
+.map-area .node-list:before{content:'';position:absolute;left:5px;top:0;bottom:18px;width:2px;border-radius:2px;background:linear-gradient(var(--purple-400),var(--border-subtle))}
+.map-area .node-list .node:before{content:'';position:absolute;top:26px;left:-12px;width:12px;height:2px;background:var(--purple-400)}
+.map-area .node{min-height:108px;padding:12px 14px;gap:4px;border-color:var(--border-subtle)}
+.map-area .node .num{color:var(--purple-300);font-size:12px;font-weight:800;letter-spacing:.08em}
+.map-area .node strong{font-size:14px}
+.map-area .node small{font-size:12px;margin:0}
+.map-area .node .stage-badge{margin-top:auto}
+.map-area .node.dim{opacity:.5}
+.map-area .node.active-path{background:#7c3aed26;border-color:var(--border-active);box-shadow:0 0 0 2px #a855f744}
+.map-area .node:hover,.map-area .node:focus-visible{transform:translateY(-2px);border-color:var(--purple-400);box-shadow:0 8px 22px var(--purple-glow)}
+.map-area .ti-groups{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:14px}
+.map-area .ti-groups>div{padding:12px;background:#0b0d1d80;border:1px solid var(--border-subtle);border-radius:14px;min-width:0}
+.map-area .group-label{min-height:36px;padding:0 3px;color:var(--purple-300);font-size:12px;line-height:1.35}
+.map-area .study-note{margin:16px 0 0;padding:12px;border:1px solid var(--border-subtle);border-radius:10px;background:#7c3aed12;font-size:13px}
+.routes{padding:18px}
+.route[aria-pressed="true"]{background:#7c3aed31;border-color:var(--border-active);color:var(--text-primary)}
+/* Diagnosis tree uses the same visible trunk and branch vocabulary. */
+.pm-tree{display:grid;gap:12px;margin:18px 0 24px}
+.pm-tree>.pm-branch{margin:0;padding:0;border:1px solid var(--border-subtle);border-radius:16px;background:var(--bg-panel);box-shadow:var(--card-shadow);overflow:hidden}
+.pm-tree .pm-branch{position:relative}
+.pm-tree .pm-branch .pm-branch{margin:10px 0 10px 14px;padding:0 0 0 15px;border-left:2px solid var(--purple-400)}
+.pm-tree .pm-branch summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;padding:12px 14px;color:var(--text-primary);font-size:14px;list-style:none}
+.pm-tree .pm-branch summary::-webkit-details-marker{display:none}
+.pm-tree .pm-branch summary:before{content:'›';display:inline-block;color:var(--purple-300);font-size:22px;line-height:1;transition:transform .15s}
+.pm-tree .pm-branch[open]>summary:before{transform:rotate(90deg)}
+.pm-tree .pm-branch summary span{flex:1;font-weight:700}
+.pm-tree .pm-branch summary small{flex:none;font-size:12px;color:var(--text-secondary)}
+.pm-tree .pm-branch[open]>summary{background:#7c3aed18;border-bottom:1px solid var(--border-subtle)}
+.pm-tree .pm-children{padding:6px 14px 12px}
+.pm-tree .pm-branch .pm-branch>.pm-children{padding-left:6px}
+.pm-tree .pm-row{position:relative;display:flex;align-items:center;gap:16px;padding:12px 0 12px 18px;border-top:1px solid var(--border-subtle)}
+.pm-tree .pm-row:before{content:'';position:absolute;left:0;top:50%;width:11px;height:2px;background:var(--purple-400)}
+.pm-tree .pm-topic{display:flex;align-items:baseline;gap:10px;flex:1;min-width:0;line-height:1.5}
+.pm-tree .pm-topic b{flex:none;min-width:28px;color:var(--purple-300);font:700 12px 'IBM Plex Mono',monospace}
+.pm-tree .pm-row select{flex:0 0 156px}
+.pm-tree-tools{display:flex;align-items:end;gap:8px;flex-wrap:wrap;margin-top:22px}
+.pm-tree-tools label{flex:1 1 240px;margin:0}
+.pm-tree-tools input{display:block;width:100%;min-height:42px;margin-top:6px}
+.pm-map-guide{margin-top:16px;padding-top:14px;border-top:1px solid var(--border-subtle)}
+.pm-map-guide p{margin:0 0 12px;color:var(--text-secondary)}
+.pm-map-jumps{display:flex;gap:8px;flex-wrap:wrap}
+.map-area .subject{scroll-margin-top:100px}
+@media(max-width:1100px){.map-area .layout{grid-template-columns:repeat(2,minmax(0,1fr))}.map-area .branch.ti{grid-column:1/-1}}
+@media(max-width:700px){.map-area .layout{grid-template-columns:1fr}.map-area .branch.ti{grid-column:auto}.map-area .ti-groups{grid-template-columns:1fr}.map-area .node-list{grid-template-columns:1fr}.map-area .subject{min-height:58px}.pm-tree .pm-row{align-items:stretch;flex-direction:column;gap:8px}.pm-tree .pm-row select{flex-basis:auto;width:100%}.pm-tree .pm-branch summary{align-items:flex-start}.pm-tree .pm-branch summary small{white-space:nowrap}}

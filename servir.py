@@ -132,6 +132,28 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         request = urlsplit(self.path)
+        route = request.path
+        if route == '/api/games':
+            user = auth_db.get_user_by_token(self.get_token())
+            admin_name = os.environ.get('TJPB_GAMES_ADMIN_USERNAME', 'jangustavo').strip().lower()
+            self.send_json(200, {'ok': True, 'games': auth_db.list_games(), 'can_publish': bool(user and admin_name and user['username'] == admin_name)})
+            return
+        game_match = re.fullmatch(r'/api/games/([1-9][0-9]*)/play', route)
+        if game_match:
+            game_html = auth_db.get_game(int(game_match.group(1)))
+            if game_html is None:
+                self.send_error(404)
+                return
+            data = game_html.encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(data)))
+            self.send_header('Content-Security-Policy', "sandbox allow-scripts; default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'")
+            self.send_header('X-Content-Type-Options', 'nosniff')
+            self.send_header('Cache-Control', 'no-store')
+            self.end_headers()
+            self.wfile.write(data)
+            return
         if request.path == '/support/pix':
             self.serve_pix(request.query)
             return
@@ -150,13 +172,13 @@ class Handler(BaseHTTPRequestHandler):
             self.serve_library(route)
             return
 
-        if route in ['/', '/tjpb-mapa-estudo.html', '/baixar', '/relatorio_visual_fgv_ti_tribunais.html', '/tjpb_desenvolvimento_sistemas_relatorio.html']:
-            document = ROOT / route.removeprefix('/') if route in ('/relatorio_visual_fgv_ti_tribunais.html','/tjpb_desenvolvimento_sistemas_relatorio.html') else APP
+        if route in ['/', '/tjpb-mapa-estudo.html', '/baixar', '/relatorio_visual_fgv_ti_tribunais.html', '/tjpb_desenvolvimento_sistemas_relatorio.html', '/privacidade.html', '/termos.html']:
+            document = ROOT / route.removeprefix('/') if route in ('/relatorio_visual_fgv_ti_tribunais.html','/tjpb_desenvolvimento_sistemas_relatorio.html','/privacidade.html','/termos.html') else APP
             data = document.read_bytes()
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
             self.send_header('Content-Length', str(len(data)))
-            self.send_header('Cache-Control', 'no-store')
+            self.send_header('Cache-Control', 'no-store, no-transform' if route in ('/privacidade.html', '/termos.html') else 'no-store')
             self.send_header('X-Content-Type-Options', 'nosniff')
             self.send_header('Referrer-Policy', 'no-referrer')
             if route == '/baixar':
@@ -253,6 +275,24 @@ class Handler(BaseHTTPRequestHandler):
             payload = json.loads(body.decode('utf-8'))
         except Exception:
             payload = {}
+
+        if route == '/api/games':
+            user = auth_db.get_user_by_token(self.get_token())
+            admin_name = os.environ.get('TJPB_GAMES_ADMIN_USERNAME', 'jangustavo').strip().lower()
+            if not user or not admin_name or user['username'] != admin_name:
+                self.send_json(403, {'ok': False, 'error': 'Somente o responsável pode publicar jogos.'})
+                return
+            title = str(payload.get('title', '')).strip()
+            subject = str(payload.get('subject', '')).strip()
+            description = str(payload.get('description', '')).strip()
+            game_html = str(payload.get('html', '')).strip()
+            if not (3 <= len(title) <= 100 and 3 <= len(subject) <= 100 and len(description) <= 300
+                    and 30 <= len(game_html) <= 200000 and re.search(r'<html\b', game_html, re.I)):
+                self.send_json(422, {'ok': False, 'error': 'Informe título, assunto e um HTML completo de até 200 mil caracteres.'})
+                return
+            game_id = auth_db.publish_game(user['id'], title, subject, description, game_html)
+            self.send_json(201, {'ok': True, 'id': game_id})
+            return
 
         if route in ('/api/ai/chat', '/api/ai/plan'):
             user = auth_db.get_user_by_token(self.get_token())

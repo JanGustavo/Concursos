@@ -11,6 +11,8 @@ css = (ROOT / 'assets' / 'practice.css').read_text()
 css += '\n' + (ROOT / 'assets' / 'courses-app.css').read_text()
 css += '\n' + (ROOT / 'assets' / 'cyber-theme.css').read_text()
 css += '\n' + (ROOT / 'assets' / 'exam-guide.css').read_text()
+css += '\n' + (ROOT / 'assets' / 'ui-standards.css').read_text()
+css += '\n' + (ROOT / 'assets' / 'map-tree.css').read_text()
 courses_ui = (ROOT / 'assets' / 'courses-app.js').read_text()
 panel = (ROOT / 'assets' / 'practice-panel.html').read_text()
 gran_panel = (ROOT / 'assets' / 'gran-panel.html').read_text()
@@ -46,26 +48,42 @@ pwa_tags = """<link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/assets/icon-192.png">
 """
 s = s.replace('<head>', '<head>\n' + pwa_tags, 1)
+s = s.replace('<title>TJPB · Mapa mental de estudos</title>', '<title>TJPB Estudos · sua preparação</title>', 1)
 
 s = s.replace('</style>', css + '\n</style>', 1)
 old = '<button class="view" type="button" id="data-tab"'
-new = '<button class="view" type="button" id="start-tab" role="tab" aria-controls="start-view" aria-selected="false">Por onde começar</button><button class="view" type="button" id="planner-tab" role="tab" aria-controls="planner-view" aria-selected="false">Ciclo de estudos</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Questões importadas</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Filtros do Gran</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Cursos e aulas</button><button class="view" type="button" id="anki-tab" role="tab" aria-controls="anki-view" aria-selected="false">Estudo+</button>' + old
+new = '<button class="view" type="button" id="start-tab" role="tab" aria-controls="start-view" aria-selected="false">Começar</button><button class="view" type="button" id="planner-tab" role="tab" aria-controls="planner-view" aria-selected="false">Meu ciclo</button><button class="view" type="button" id="questions-tab" role="tab" aria-controls="questions-view" aria-selected="false">Praticar</button><button class="view" type="button" id="gran-tab" role="tab" aria-controls="gran-view" aria-selected="false">Questões FGV</button><button class="view" type="button" id="courses-tab" role="tab" aria-controls="courses-view" aria-selected="false">Aulas e materiais</button><button class="view" type="button" id="anki-tab" role="tab" aria-controls="anki-view" aria-selected="false">Estudo+</button><button class="view" type="button" id="games-tab" role="tab" aria-controls="games-view" aria-selected="false">Aprender jogando</button>' + old
 assert old in s
 s = s.replace(old, new, 1)
+s = s.replace('>Mapa mental</button>', '>Mapa de estudos</button>', 1)
+s = s.replace('<span class="more" aria-hidden="true">↗</span></button>', '<span class="stage-badge" data-stage="new">Nunca estudei</span><span class="more" aria-hidden="true">→</span></button>', 1)
+s = s.replace('${esc(nodes[id].title)} ↗</button>', '${esc(nodes[id].title)} →</button>', 1)
+s = s.replace('<div id="map-view" role="tabpanel" aria-labelledby="map-tab">', '<div id="map-view" role="tabpanel" aria-labelledby="map-tab"><div class="map-view-heading"><span class="eyebrow">Conteúdo conectado</span><h2>Mapa de estudos</h2><p>Veja as frentes da prova e abra um assunto para estudar suas conexões.</p></div><div id="personal-map"></div>', 1)
 
 s = s.replace('O mapa da sua preparação.', 'Seu próximo passo começa aqui.', 1)
 s = s.replace('Do conceito básico à aplicação. Encontre um assunto, enxergue as conexões e aprofunde.', 'Entenda os assuntos, pratique e organize sua preparação para Desenvolvimento de Sistemas.', 1)
-s = s.replace('<div class="toolbar-tools">', '<div class="toolbar-tools"><button type="button" class="theme-toggle" id="tutorial-button">? Ver tutorial</button>', 1)
-s = s.replace('</div></nav>', '<a class="kanbandoro-link" href="https://github.com/JanGustavo/KanbanDoro" target="_blank" rel="noopener noreferrer">Conheça o KanbanDoro ↗</a></div></nav>', 1)
-s = s.replace('</nav>\n', '</nav><aside class="browser-study-note"><span aria-hidden="true">ⓘ</span> Dica de estudo: salve este site nos favoritos. Cursos e IA precisam de internet; seu progresso de materiais fica neste navegador.</aside>\n', 1)
+toolbar_start = s.index('<div class="toolbar-tools">')
+toolbar_end = s.index('</div></nav>', toolbar_start) + len('</div>')
+toolbar = '''<div class="header-actions" aria-label="Ferramentas">
+<button type="button" class="header-action" id="tutorial-button" title="Ver tutorial" aria-label="Ver tutorial"><span aria-hidden="true">?</span></button>
+<button type="button" class="header-action" id="progress-btn" title="Carregar progresso" aria-label="Carregar progresso"><span aria-hidden="true">▥</span><span class="sr-only" id="progress-label">Carregar progresso</span></button>
+<input type="file" id="progress-file" accept="application/json,.json" hidden>
+<button type="button" class="header-action" id="theme-toggle" title="Alternar tema" aria-label="Modo escuro" aria-pressed="true"><span class="theme-icon" aria-hidden="true">☾</span><span class="sr-only" id="theme-label">Modo escuro</span></button>
+<a class="header-action" href="https://github.com/JanGustavo/KanbanDoro" title="Conheça o KanbanDoro" aria-label="Conheça o KanbanDoro, link externo" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◈</span></a>
+</div>'''
+s = s[:toolbar_start] + s[toolbar_end:]
+s = s.replace('</div></header>', '</div>' + toolbar + '</header>', 1)
+s = s.replace('</nav>\n', '</nav><aside class="browser-study-note" id="study-note"><span aria-hidden="true">ⓘ</span><span>Dica: salve este site nos favoritos. Aulas e IA precisam de internet; seu progresso de materiais fica neste navegador.</span><button type="button" id="dismiss-study-note" aria-label="Dispensar dica" title="Dispensar dica">×</button></aside>\n', 1)
 footer_start = s.index('<footer class="bottom">')
 footer_end = s.index('</footer>', footer_start) + len('</footer>')
-s = s[:footer_start] + '<footer class="bottom site-footer"><div><strong>TJPB Estudos</strong><p>Um assunto de cada vez. Uma preparação com direção.</p><small>Projeto independente de estudos · confira as regras nas fontes oficiais.</small></div><div class="footer-links"><a href="https://conhecimento.fgv.br/sites/default/files/concursos/edital-retificado-tjpb_29.10.pdf" target="_blank" rel="noopener noreferrer">Consultar edital ↗</a><button type="button" id="footer-tutorial">Rever tutorial</button><a href="?view=apoio">Apoiar o projeto 💜</a></div></footer>' + s[footer_end:]
+footer = '<footer class="bottom site-footer"><div class="footer-brand"><strong>TJPB Estudos</strong><p>Um assunto de cada vez. Uma preparação com direção.</p><small>Projeto independente · confirme regras e datas nas fontes oficiais.</small></div><div class="footer-nav"><div><span>Estudar</span><button type="button" data-view-target="start-view">Começar</button><button type="button" data-view-target="planner-view">Meu ciclo</button><button type="button" data-view-target="games-view">Aprender jogando</button></div><div><span>Projeto</span><a href="https://conhecimento.fgv.br/sites/default/files/concursos/edital-retificado-tjpb_29.10.pdf" target="_blank" rel="noopener noreferrer">Consultar edital ↗</a><button type="button" id="footer-tutorial">Rever tutorial</button><a href="?view=apoio">Apoiar o projeto</a></div><div><span>Informações</span><a href="/privacidade.html">Privacidade</a><a href="/termos.html">Termos</a></div></div></footer>'
+s = s[:footer_start] + s[footer_end:]
 
 s = s.replace('</main>', panel + gran_panel + '''
 <section id="start-view" role="tabpanel" aria-labelledby="start-tab" hidden><div id="start-root"></div></section>
 <section id="planner-view" role="tabpanel" aria-labelledby="planner-tab" hidden><div id="planner-root"></div></section>
 <section id="support-view" role="tabpanel" aria-labelledby="support-tab" hidden><div id="support-root"></div></section>
+<section id="games-view" role="tabpanel" aria-labelledby="games-tab" hidden><div id="games-root"></div></section>
 <section id="anki-view" role="tabpanel" aria-labelledby="anki-tab" hidden>
   <div class="study-plus-shell">
     <div class="study-plus-head"><span class="eyebrow">Ferramentas para estudar</span><h2>Estudo+</h2><p>Revise com os baralhos e leve suas questões para a extensão no navegador.</p></div>
@@ -77,7 +95,7 @@ s = s.replace('</main>', panel + gran_panel + '''
  <div id="courses-root"></div>
  <noscript>Ative o JavaScript para acessar os cursos e as aulas.</noscript>
 </section>
-</main>''', 1)
+</main>''' + footer, 1)
 research_start = s.index('>', s.index('id="data-view"')) + 1
 research_end = s.index('</section>', research_start)
 old_research = s[research_start:research_end]
@@ -103,8 +121,8 @@ start = s.index("document.querySelectorAll('.view').forEach(b=>b.addEventListene
 end = s.index('\nlet currentStudyNode=', start)
 s = s[:start] + '''function showView(id){
  document.querySelectorAll('.view').forEach(tab=>tab.setAttribute('aria-selected',String(tab.getAttribute('aria-controls')===id)));
- ['map-view','data-view','questions-view','gran-view','courses-view','start-view','planner-view','anki-view','support-view'].forEach(key=>document.getElementById(key).hidden=key!==id);
- document.querySelector('.hint').hidden=id!=='map-view';if(id==='map-view')requestAnimationFrame(draw);
+ ['map-view','data-view','questions-view','gran-view','courses-view','start-view','planner-view','anki-view','games-view','support-view'].forEach(key=>document.getElementById(key).hidden=key!==id);
+ if(id==='map-view')requestAnimationFrame(draw);
 }
 document.querySelectorAll('.view').forEach(tab=>tab.addEventListener('click',()=>showView(tab.getAttribute('aria-controls'))));
 document.querySelectorAll('[data-view-target]').forEach(button=>button.addEventListener('click',()=>{showView(button.dataset.viewTarget);document.querySelector('.view[aria-controls="'+button.dataset.viewTarget+'"]').focus()}));
@@ -116,7 +134,19 @@ document.querySelector('.views').addEventListener('keydown',e=>{
 });
 ''' + s[end:]
 
-s = s.replace('function loadProgress(o){\n granProgress=o;', 'function loadProgress(o){\n o=PracticeCore.normalizeProgress(o);\n granProgress=o;', 1)
+s = s.replace('function loadProgress(o){\n granProgress=o;', '''function updateNodeStages(){
+ document.querySelectorAll('.node[data-node]').forEach(card=>{
+  const badge=card.querySelector('.stage-badge');
+  const data=granProgress?.blocos?.[card.dataset.node];
+  const active=Boolean(data?.tentativas);
+  badge.dataset.stage=active?'active':'new';
+  badge.textContent=active?'Em estudo':'Nunca estudei';
+ });
+}
+function loadProgress(o){
+ o=PracticeCore.normalizeProgress(o);
+ granProgress=o;''', 1)
+s = s.replace(' applyProgress();\n if(currentStudyNode', ' applyProgress();\n updateNodeStages();\n if(currentStudyNode', 1)
 assert 'o=PracticeCore.normalizeProgress(o)' in s
 
 s = s.replace("else if(!d.tentativas)h+='<small>'+d.questoes+' questões no banco, sem tentativas. Rode: python estudo.py simulado -b '+esc(id)+'</small>';", "else if(!d.tentativas)h+='<small>'+d.questoes+' questões no banco, sem tentativas. Use Praticar neste bloco para começar pelo navegador.</small>';")
@@ -131,10 +161,17 @@ assert core in s
 
 seed = json.dumps(bank, ensure_ascii=False).replace('<', '\\u003c')
 s = s.replace('</body>', '<div id="assistant-root"></div><script type="application/json" id="practice-seed">' + seed + '</script>\n<script>\n' + ui + '\n' + gran_ui + '\n</script>\n<script>\n' + courses_ui + '\n</script>\n</body>', 1)
+s = s.replace('</body>', '''<script>
+try { if (localStorage.getItem('tjpb-study-note-dismissed') === '1') document.getElementById('study-note').hidden = true; } catch {}
+document.getElementById('dismiss-study-note').addEventListener('click', () => {
+ document.getElementById('study-note').hidden = true;
+ try { localStorage.setItem('tjpb-study-note-dismissed', '1'); } catch {}
+});
+</script></body>''', 1)
 (ROOT / 'tjpb-mapa-estudo.html').write_text(s)
 print(f'HTML independente gerado: {len(s.encode()):,} bytes com {len(combined_questions)} questões no seed.')
 
-guide_style = '.research{max-width:1100px;margin:24px auto;padding:0 24px}' + (ROOT / 'assets' / 'practice.css').read_text() + (ROOT / 'assets' / 'cyber-theme.css').read_text() + (ROOT / 'assets' / 'exam-guide.css').read_text()
+guide_style = '.research{max-width:1100px;margin:24px auto;padding:0 24px}' + (ROOT / 'assets' / 'practice.css').read_text() + (ROOT / 'assets' / 'cyber-theme.css').read_text() + (ROOT / 'assets' / 'exam-guide.css').read_text() + (ROOT / 'assets' / 'ui-standards.css').read_text()
 (ROOT / 'tjpb_desenvolvimento_sistemas_relatorio.html').write_text('<!doctype html><html lang="pt-BR" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TJPB · Instruções de prova e estudo de caso</title><style>' + guide_style + '</style></head><body><main class="research"><p><a href="/?view=banca">← Voltar ao aplicativo de estudos</a></p>' + exam_guide + '</main></body></html>')
 
 # Linked reports use the same visual tokens; keep all original report content and behavior.

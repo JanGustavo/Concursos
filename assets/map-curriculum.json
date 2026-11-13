@@ -1,0 +1,1210 @@
+[
+ {
+  "id": "portugues",
+  "title": "Língua Portuguesa",
+  "subtitle": "Conhecimentos gerais · 10 questões",
+  "questionCount": 10,
+  "children": [
+   {
+    "type": "group",
+    "id": "pt-textos",
+    "title": "Compreensão, interpretação e gêneros textuais",
+    "ref": "Itens 1–2",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "pt-1",
+      "code": "1",
+      "label": "Compreensão e interpretação de textos de gêneros variados."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-2",
+      "code": "2",
+      "label": "Reconhecimento de tipos e gêneros textuais."
+     }
+    ]
+   },
+   {
+    "type": "group",
+    "id": "pt-ortografia",
+    "title": "Ortografia oficial",
+    "ref": "Item 3",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "pt-3",
+      "code": "3",
+      "label": "Domínio da ortografia oficial."
+     }
+    ]
+   },
+   {
+    "type": "group",
+    "id": "pt-coesao",
+    "title": "Mecanismos de coesão textual",
+    "ref": "Item 4",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "pt-4-1",
+      "code": "4.1",
+      "label": "Emprego de elementos de referenciação, substituição e repetição, de conectores e de outros elementos de sequenciação textual."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-4-2",
+      "code": "4.2",
+      "label": "Emprego de tempos e modos verbais."
+     }
+    ]
+   },
+   {
+    "type": "group",
+    "id": "pt-morfossintaxe",
+    "title": "Estrutura morfossintática do período",
+    "ref": "Item 5",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "pt-5-1",
+      "code": "5.1",
+      "label": "Emprego das classes de palavras."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-5-2",
+      "code": "5.2",
+      "label": "Relações de coordenação entre orações e entre termos da oração."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-5-3",
+      "code": "5.3",
+      "label": "Relações de subordinação entre orações e entre termos da oração."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-5-4",
+      "code": "5.4",
+      "label": "Emprego dos sinais de pontuação."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-5-5",
+      "code": "5.5",
+      "label": "Concordância verbal e nominal."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-5-6",
+      "code": "5.6",
+      "label": "Regência verbal e nominal."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-5-7",
+      "code": "5.7",
+      "label": "Emprego do sinal indicativo de crase."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-5-8",
+      "code": "5.8",
+      "label": "Colocação dos pronomes átonos."
+     }
+    ]
+   },
+   {
+    "type": "group",
+    "id": "pt-reescrita",
+    "title": "Reescrita de frases, parágrafos e redação oficial",
+    "ref": "Item 6",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "pt-6-1",
+      "code": "6.1",
+      "label": "Significação das palavras."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-6-2",
+      "code": "6.2",
+      "label": "Substituição de palavras ou de trechos de texto."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-6-3",
+      "code": "6.3",
+      "label": "Reorganização da estrutura de orações e de períodos do texto."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-6-4",
+      "code": "6.4",
+      "label": "Reescrita de textos de diferentes gêneros e níveis de formalidade."
+     },
+     {
+      "type": "leaf",
+      "id": "pt-6-5",
+      "code": "6.5",
+      "label": "Redação Oficial."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rlm",
+  "title": "Matemática e Raciocínio Lógico",
+  "subtitle": "Nome oficial: Raciocínio Lógico e Matemático · 10 questões",
+  "questionCount": 10,
+  "children": [
+   {
+    "type": "group",
+    "id": "rlm-matematica",
+    "title": "Matemática",
+    "ref": "Itens 1–12",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "rlm-1",
+      "code": "1",
+      "label": "Conjuntos numéricos."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-2",
+      "code": "2",
+      "label": "Razões e proporções."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-3",
+      "code": "3",
+      "label": "Regra de três simples e composta."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-4",
+      "code": "4",
+      "label": "Porcentagem."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-5",
+      "code": "5",
+      "label": "Juros simples e compostos."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-6",
+      "code": "6",
+      "label": "Equações, inequações e sistemas de equações."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-7",
+      "code": "7",
+      "label": "Funções."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-8",
+      "code": "8",
+      "label": "Sequências."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-9",
+      "code": "9",
+      "label": "Matrizes e determinantes."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-10",
+      "code": "10",
+      "label": "Probabilidade."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-11",
+      "code": "11",
+      "label": "Análise combinatória."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-12",
+      "code": "12",
+      "label": "Estatística descritiva."
+     }
+    ]
+   },
+   {
+    "type": "group",
+    "id": "rlm-logica",
+    "title": "Raciocínio lógico",
+    "ref": "Itens 13–19",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "rlm-13",
+      "code": "13",
+      "label": "Proposições lógicas."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-14",
+      "code": "14",
+      "label": "Conectivos."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-15",
+      "code": "15",
+      "label": "Tabelas-verdade."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-16",
+      "code": "16",
+      "label": "Equivalências e negações."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-17",
+      "code": "17",
+      "label": "Argumentação lógica."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-18",
+      "code": "18",
+      "label": "Diagramas lógicos."
+     },
+     {
+      "type": "leaf",
+      "id": "rlm-19",
+      "code": "19",
+      "label": "Resolução de problemas envolvendo raciocínio lógico-matemático."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ti",
+  "title": "Conhecimentos Específicos de TI",
+  "subtitle": "Analista de TI · Desenvolvimento de Sistemas · conteúdo comum de TI + Cargo 5",
+  "questionCount": 40,
+  "children": [
+   {
+    "type": "group",
+    "id": "ti-comum",
+    "title": "Fundamentos de TI — comum a todas as especialidades de TI",
+    "ref": "Módulo II · comum a todas as especialidades de TI",
+    "children": [
+     {
+      "type": "leaf",
+      "id": "ti-common-architecture",
+      "code": "Comum",
+      "label": "Arquitetura de computadores."
+     },
+     {
+      "type": "leaf",
+      "id": "ti-common-os",
+      "code": "Comum",
+      "label": "Sistemas operacionais."
+     },
+     {
+      "type": "leaf",
+      "id": "ti-common-network",
+      "code": "Comum",
+      "label": "Redes de computadores e protocolos TCP/IP."
+     },
+     {
+      "type": "leaf",
+      "id": "ti-common-db",
+      "code": "Comum",
+      "label": "Bancos de dados."
+     },
+     {
+      "type": "leaf",
+      "id": "ti-common-cloud",
+      "code": "Comum",
+      "label": "Computação em nuvem."
+     },
+     {
+      "type": "group",
+      "id": "ti-common-software",
+      "title": "Engenharia de Software",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-common-sdlc",
+        "code": "Comum",
+        "label": "Ciclo de vida de sistemas."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-req",
+        "code": "Comum",
+        "label": "Engenharia de requisitos."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-architecture-integration",
+        "code": "Comum",
+        "label": "Arquitetura e integração de sistemas."
+       },
+       {
+        "type": "group",
+        "id": "ti-common-agile",
+        "title": "Metodologias ágeis (Scrum e Kanban)",
+        "ref": "",
+        "children": [
+         {
+          "type": "leaf",
+          "id": "ti-common-scrum",
+          "code": "Comum",
+          "label": "Scrum."
+         },
+         {
+          "type": "leaf",
+          "id": "ti-common-kanban",
+          "code": "Comum",
+          "label": "Kanban."
+         }
+        ]
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-quality-tests",
+        "code": "Comum",
+        "label": "Qualidade e testes de software."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-common-security",
+      "title": "Segurança da Informação",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-common-cia",
+        "code": "Comum",
+        "label": "Confidencialidade, integridade e disponibilidade."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-access",
+        "code": "Comum",
+        "label": "Controle de acesso."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-risk",
+        "code": "Comum",
+        "label": "Gestão de riscos e incidentes."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-continuity",
+        "code": "Comum",
+        "label": "Continuidade de negócios."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-lgpd",
+        "code": "Comum",
+        "label": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-iso",
+        "code": "Comum",
+        "label": "Normas ISO/IEC 27001, 27002 e 27005."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-common-governance",
+      "title": "Governança e Gestão de TI",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-common-cobit-itil",
+        "code": "Comum",
+        "label": "COBIT 2019 e ITIL 4."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-planning",
+        "code": "Comum",
+        "label": "Planejamento estratégico."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-project-process-service",
+        "code": "Comum",
+        "label": "Gestão de projetos, processos e serviços de TI."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-indicators",
+        "code": "Comum",
+        "label": "Indicadores de desempenho."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-procurement",
+        "code": "Comum",
+        "label": "Contratações de soluções de TIC."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-common-data-ai",
+      "title": "Gestão de Dados e Inteligência Artificial",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-common-data-model",
+        "code": "Comum",
+        "label": "Modelagem e governança de dados."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-sql",
+        "code": "Comum",
+        "label": "SQL."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-bi",
+        "code": "Comum",
+        "label": "Business Intelligence (BI)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-ai",
+        "code": "Comum",
+        "label": "Fundamentos de inteligência artificial, aprendizado de máquina e IA generativa."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-common-judiciary",
+      "title": "Transformação Digital no Poder Judiciário",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-common-government",
+        "code": "Comum",
+        "label": "Governo digital."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-automation",
+        "code": "Comum",
+        "label": "Automação de processos."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-interoperability",
+        "code": "Comum",
+        "label": "Interoperabilidade."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-pje",
+        "code": "Comum",
+        "label": "Processo Judicial Eletrônico (PJe)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-pdpj",
+        "code": "Comum",
+        "label": "Plataforma Digital do Poder Judiciário (PDPJ-Br)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-accessibility",
+        "code": "Comum",
+        "label": "Acessibilidade digital."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-common-cnj",
+      "title": "Normas de TIC, gestão documental e planejamento do TJPB",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-common-cnj-res",
+        "code": "Comum",
+        "label": "Resoluções CNJ nº 370/2021, nº 396/2021, nº 468/2022 e nº 615/2025, com suas alterações."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-moreq",
+        "code": "Comum",
+        "label": "Gestão de Processos e Documentos do Poder Judiciário (MoReq-Jus)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-records",
+        "code": "Comum",
+        "label": "Gestão documental arquivística digital: metadados, ciclo de vida, preservação e RDC-Arq."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-cnj522",
+        "code": "Comum",
+        "label": "Resolução CNJ nº 522/2023, com suas alterações."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-common-pdti",
+        "code": "Comum",
+        "label": "Plano Diretor de Tecnologia da Informação do TJPB (PDTI 2024–2026)."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "group",
+    "id": "ti-dev",
+    "title": "Cargo 5 — Desenvolvimento de Sistemas",
+    "ref": "Módulo II · especialidade Desenvolvimento de Sistemas",
+    "children": [
+     {
+      "type": "group",
+      "id": "ti-dev-software",
+      "title": "Engenharia de Software e Práticas Ágeis",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-sdlc",
+        "code": "Cargo 5",
+        "label": "Ciclo de vida de desenvolvimento de software (SDLC): fases e modelos tradicionais (cascata e iterativo)."
+       },
+       {
+        "type": "group",
+        "id": "ti-dev-agile",
+        "title": "Métodos ágeis e escala",
+        "ref": "",
+        "children": [
+         {
+          "type": "leaf",
+          "id": "ti-dev-scrum",
+          "code": "Cargo 5",
+          "label": "Scrum: papéis, eventos e artefatos."
+         },
+         {
+          "type": "leaf",
+          "id": "ti-dev-kanban-lean",
+          "code": "Cargo 5",
+          "label": "Kanban e Lean."
+         },
+         {
+          "type": "leaf",
+          "id": "ti-dev-safe",
+          "code": "Cargo 5",
+          "label": "Scaled Agile Framework (SAFe) e práticas de agilidade organizacional."
+         }
+        ]
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-elicitation",
+        "code": "Cargo 5",
+        "label": "Engenharia de requisitos: técnicas de elicitação, análise, especificação e validação."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-req-types",
+        "code": "Cargo 5",
+        "label": "Requisitos funcionais, requisitos não funcionais e regras de negócio."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-stories",
+        "code": "Cargo 5",
+        "label": "Histórias de usuário, critérios de aceitação e gerenciamento de backlog."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-function-points",
+        "code": "Cargo 5",
+        "label": "Métricas de dimensionamento de software: Análise de Pontos de Função (APF/IFPUG), conceitos, contagem e aplicações; métodos ágeis de estimativa."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-sdd",
+        "code": "Cargo 5",
+        "label": "Desenvolvimento orientado a especificações (SDD): especificação executável e harness de engenharia assistida por IA."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-system-design",
+      "title": "Design de Sistemas (System Design)",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-abstraction",
+        "code": "Cargo 5",
+        "label": "Abstração e modelagem de componentes de sistemas de grande escala."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-tradeoffs",
+        "code": "Cargo 5",
+        "label": "Trade-offs de arquitetura em sistemas distribuídos: latência vs. throughput, Teorema CAP, PACELC e modelo BASE vs. ACID."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-communication",
+        "code": "Cargo 5",
+        "label": "Padrões de comunicação síncrona (HTTP/REST, gRPC) e assíncrona (mensageria, WebSockets)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-scaling",
+        "code": "Cargo 5",
+        "label": "Escalabilidade horizontal e vertical."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-ha",
+        "code": "Cargo 5",
+        "label": "Alta disponibilidade em sistemas distribuídos: tolerância a falhas, failover, clustering, balanceamento de carga, replicação e particionamento de dados (sharding)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-cache",
+        "code": "Cargo 5",
+        "label": "Cache em camadas: client-side, CDN e aplicação; bancos de dados em memória e cache distribuído (Redis): casos de uso e políticas de expiração."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-resilience",
+        "code": "Cargo 5",
+        "label": "Resiliência e controle de tráfego: circuit breaker e graceful degradation; balanceadores de carga de aplicação e proxies reversos (NGINX e HAProxy)."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-architecture",
+      "title": "Arquitetura de Software e Padrões",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-gof",
+        "code": "Cargo 5",
+        "label": "Padrões de projeto GoF: criacionais, estruturais e comportamentais."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-ioc-di",
+        "code": "Cargo 5",
+        "label": "Padrões de arquitetura corporativa, inversão de controle e injeção de dependência."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-soa",
+        "code": "Cargo 5",
+        "label": "Arquitetura orientada a serviços (SOA): web services (RESTful e SOAP) e APIs."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-microservices",
+        "code": "Cargo 5",
+        "label": "Microsserviços: conceitos, decomposição, API gateway, service mesh e serverless."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-eda",
+        "code": "Cargo 5",
+        "label": "Arquitetura orientada a eventos (EDA): mensageria e publicação/assinatura (Kafka e RabbitMQ)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-clean-ddd",
+        "code": "Cargo 5",
+        "label": "Arquitetura Limpa (Clean Architecture) e Domain-Driven Design (DDD)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-quality-metrics",
+        "code": "Cargo 5",
+        "label": "Métricas de qualidade de software e qualidade arquitetural: qualidade do código, cobertura de testes, densidade de defeitos, tempo médio de recuperação (MTTR), prazo de antecedência para alterações, frequência de liberação, bugs relatados pelos clientes e satisfação do usuário."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-programming",
+      "title": "Algoritmos e Programação",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-bigo",
+        "code": "Cargo 5",
+        "label": "Complexidade de algoritmos (notação Big-O)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-data-structures",
+        "code": "Cargo 5",
+        "label": "Estruturas de dados: listas, pilhas, filas, árvores e tabelas hash."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-search-sort",
+        "code": "Cargo 5",
+        "label": "Algoritmos de busca e de ordenação."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-oop",
+        "code": "Cargo 5",
+        "label": "Programação orientada a objetos: classes, objetos, herança, polimorfismo, encapsulamento e abstração."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-solid",
+        "code": "Cargo 5",
+        "label": "Princípios SOLID."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-java-modern",
+        "code": "Cargo 5",
+        "label": "Java: Collections, Streams e recursos modernos (lambdas, records, sealed classes, pattern matching, switch expressions e virtual threads)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-java-frameworks",
+        "code": "Cargo 5",
+        "label": "Java: frameworks Java EE/Jakarta EE, Spring Framework, Spring Boot e Hibernate/JPA."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-js-ts-node",
+        "code": "Cargo 5",
+        "label": "JavaScript/TypeScript e Node.js."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-frontend",
+        "code": "Cargo 5",
+        "label": "Frameworks frontend: Angular e React."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-python",
+        "code": "Cargo 5",
+        "label": "Python: sintaxe, tipos e estruturas de dados básicas; desenvolvimento web com Python (FastAPI e Django)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-dart",
+        "code": "Cargo 5",
+        "label": "Dart: sintaxe, tipos de dados, estruturas de controle, tratamento de erros e programação assíncrona."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-flutter-widgets",
+        "code": "Cargo 5",
+        "label": "Flutter: “tudo é um widget”; Stateless e Stateful Widgets e seu ciclo de vida."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-flutter-state",
+        "code": "Cargo 5",
+        "label": "Flutter: gerenciamento de estado e reatividade (Provider, BLoC, Riverpod e Cubit)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-flutter-layout",
+        "code": "Cargo 5",
+        "label": "Flutter: layout e interfaces responsivas com Material Design e Cupertino."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-flutter-navigation",
+        "code": "Cargo 5",
+        "label": "Flutter: navegação, roteamento, passagem de parâmetros e rotas nomeadas."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-mobile",
+      "title": "Desenvolvimento Mobile",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-mobile-lifecycle",
+        "code": "Cargo 5",
+        "label": "Ciclo de vida de aplicações móveis (Android e iOS)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-mobile-persistence",
+        "code": "Cargo 5",
+        "label": "Persistência local: armazenamento seguro, bancos embarcados (SQLite, Room, Hive/Isar) e preferências do usuário (SharedPreferences/NSUserDefaults)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-mobile-security",
+        "code": "Cargo 5",
+        "label": "Segurança em dispositivos móveis: armazenamento seguro de credenciais, SSL Pinning e proteção contra engenharia reversa; protocolos TLS/SSL e proteção de dados em repouso e em trânsito."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-mobile-api",
+        "code": "Cargo 5",
+        "label": "Consumo de APIs RESTful: serialização e desserialização de dados (JSON)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-mobile-push",
+        "code": "Cargo 5",
+        "label": "Notificações push (Firebase Cloud Messaging)."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-databases",
+      "title": "Banco de Dados e Persistência",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-relational",
+        "code": "Cargo 5",
+        "label": "Modelo relacional e álgebra relacional: relações, chaves, restrições de integridade e operações (seleção, projeção, junção e operações de conjuntos)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-normalization",
+        "code": "Cargo 5",
+        "label": "Normalização: dependências funcionais e formas normais (1FN, 2FN e 3FN)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-sql-commands",
+        "code": "Cargo 5",
+        "label": "Linguagem SQL (ANSI): DML (SELECT, INSERT, UPDATE e DELETE); DDL (CREATE, ALTER e DROP); DCL (GRANT e REVOKE) e TCL (COMMIT, ROLLBACK e SAVEPOINT)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-sql-advanced",
+        "code": "Cargo 5",
+        "label": "SQL: subconsultas e funções de agregação (GROUP BY e HAVING); objetos de banco de dados: views, triggers e stored procedures."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-query-tuning",
+        "code": "Cargo 5",
+        "label": "Otimização de consultas (query tuning): planos de execução, indexação, estatísticas e particionamento."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-rdbms",
+        "code": "Cargo 5",
+        "label": "SGBDs relacionais de mercado: PostgreSQL, Oracle, MySQL/MariaDB e Microsoft SQL Server."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-nosql",
+        "code": "Cargo 5",
+        "label": "Bancos de dados NoSQL: modelos chave-valor, documentos (MongoDB), colunares e grafos; bancos de dados vetoriais."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-vector-search",
+        "code": "Cargo 5",
+        "label": "Busca vetorial: embeddings, similaridade e índice vetorial."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-devops",
+      "title": "DevOps, Infraestrutura como Código e Nuvem",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-cicd",
+        "code": "Cargo 5",
+        "label": "Integração e entrega contínua (CI/CD): pipelines de automação (Jenkins, GitLab CI/CD e GitHub Actions)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-git",
+        "code": "Cargo 5",
+        "label": "Controle de versão com Git: branches, merge, fluxos Gitflow e Trunk-Based; GitOps."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-docker",
+        "code": "Cargo 5",
+        "label": "Docker: imagens, Dockerfile, Docker Compose, volumes e redes."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-kubernetes",
+        "code": "Cargo 5",
+        "label": "Kubernetes: Pods, Deployments, Services, Ingress, ConfigMaps e Secrets."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-cloud",
+        "code": "Cargo 5",
+        "label": "Computação em nuvem: modelos de serviço (IaaS, PaaS e SaaS) e modelos de implantação (pública, privada e híbrida)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-terraform",
+        "code": "Cargo 5",
+        "label": "Infraestrutura como Código (IaC) com Terraform: providers, módulos reutilizáveis e gerenciamento de estado (state)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-observability",
+        "code": "Cargo 5",
+        "label": "Observabilidade: monitoramento de ativos, disponibilidade e desempenho, métricas e alertas (Zabbix, Prometheus e Grafana); gerenciamento de logs: coleta, retenção, centralização, indexação, correlação e análise (ELK Stack/OpenSearch); tracing distribuído e APM."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-ai",
+      "title": "Inteligência Artificial",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-nlp",
+        "code": "Cargo 5",
+        "label": "Processamento de linguagem natural: pré-processamento de texto (tokenização, stemming, lematização e remoção de stop words)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-text-representation",
+        "code": "Cargo 5",
+        "label": "Representação de texto: TF-IDF e word embeddings."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-transformer",
+        "code": "Cargo 5",
+        "label": "Arquitetura Transformer e modelos de linguagem grandes (LLMs)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-prompt-engineering",
+        "code": "Cargo 5",
+        "label": "Engenharia de prompt para desenvolvimento de software."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-ai-apis",
+        "code": "Cargo 5",
+        "label": "Integração com APIs de IA (OpenAI, Hugging Face) e frameworks de orquestração (LangChain)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-rag",
+        "code": "Cargo 5",
+        "label": "Geração aumentada por recuperação (RAG)."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-security-quality",
+      "title": "Segurança da Informação e Qualidade de Software",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-secure-development",
+        "code": "Cargo 5",
+        "label": "Desenvolvimento seguro: práticas de codificação segura e modelagem de ameaças; DevSecOps; OWASP Top 10: principais riscos de segurança em aplicações web."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-crypto",
+        "code": "Cargo 5",
+        "label": "Criptografia simétrica e assimétrica: conceitos, principais algoritmos (AES, RSA e curvas elípticas) e aplicações; certificados digitais, infraestrutura de chaves públicas (PKI) e ICP-Brasil; assinatura digital."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-web-api-security",
+        "code": "Cargo 5",
+        "label": "Segurança de aplicações web e APIs: autenticação, autorização, controle de acesso e limitação de taxa (rate limiting); protocolos de autenticação e autorização: SAML 2.0, OAuth 2.0, OpenID Connect e JWT."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-ai-security",
+        "code": "Cargo 5",
+        "label": "Segurança de aplicações de inteligência artificial: prompt injection, jailbreak e ataques adversariais; validação e sanitização da saída de LLMs."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-ai-data-leak",
+        "code": "Cargo 5",
+        "label": "Vazamento de dados e de contexto em aplicações de IA; postura de retenção zero."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-test-types",
+        "code": "Cargo 5",
+        "label": "Tipos de testes: unitários, de integração, funcionais, de sistema, de aceitação e de desempenho/carga."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-test-automation",
+        "code": "Cargo 5",
+        "label": "Automação de testes e TDD (Test-Driven Development)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-security-testing",
+        "code": "Cargo 5",
+        "label": "Testes de segurança de aplicações: análise estática (SAST), dinâmica (DAST) e interativa (IAST); análise estática de código com SonarQube."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-contract-mutation",
+        "code": "Cargo 5",
+        "label": "Contract testing e noções de mutation testing."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-judiciary",
+      "title": "Governança e Regulação do Poder Judiciário",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-pdpj",
+        "code": "Cargo 5",
+        "label": "Plataforma Digital do Poder Judiciário (PDPJ-Br, Resolução CNJ nº 335/2020): arquitetura de microsserviços, marketplace do CNJ e proteção dos serviços digitais."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-interoperability",
+        "code": "Cargo 5",
+        "label": "Interoperabilidade: Modelo Nacional de Interoperabilidade (MNI, Resolução CNJ nº 91/2009) e Modelo de Interoperabilidade do Poder Judiciário (MInG)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-lgpd",
+        "code": "Cargo 5",
+        "label": "Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018): princípios, dados pessoais e sensíveis, bases legais, direitos do titular e controles técnicos; impacto no design de sistemas e privacidade por padrão."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-marco-civil",
+        "code": "Cargo 5",
+        "label": "Marco Civil da Internet (Lei nº 12.965/2014): princípios, guarda de registros de conexão e de acesso a aplicações e responsabilidade dos provedores."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-algorithmic-governance",
+        "code": "Cargo 5",
+        "label": "Governança algorítmica: avaliação de impacto algorítmico, transparência, explicabilidade, auditabilidade e supervisão humana."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-cnj-ai",
+        "code": "Cargo 5",
+        "label": "Normas do CNJ sobre IA no Judiciário: vedações e limites de uso de IA em atos decisórios."
+       }
+      ]
+     },
+     {
+      "type": "group",
+      "id": "ti-dev-ux",
+      "title": "Design de Interface (UI) e Experiência do Usuário (UX)",
+      "ref": "",
+      "children": [
+       {
+        "type": "leaf",
+        "id": "ti-dev-ui-principles",
+        "code": "Cargo 5",
+        "label": "Princípios de design de interface: clareza, flexibilidade, eficiência, consistência e feedback visual."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-prototypes",
+        "code": "Cargo 5",
+        "label": "Fluxos de usuário (user flows), wireframes e protótipos de baixa, média e alta fidelidade."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-design-systems",
+        "code": "Cargo 5",
+        "label": "Design systems, componentes reutilizáveis e guias de estilo (style guides)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-responsive",
+        "code": "Cargo 5",
+        "label": "Design responsivo e adaptativo (mobile-first)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-emag",
+        "code": "Cargo 5",
+        "label": "Modelo de Acessibilidade em Governo Eletrônico (eMAG)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-wcag",
+        "code": "Cargo 5",
+        "label": "WCAG 2.1 e 2.2: princípios (perceptível, operável, compreensível e robusto) e níveis de conformidade (A, AA e AAA)."
+       },
+       {
+        "type": "leaf",
+        "id": "ti-dev-accessible-web",
+        "code": "Cargo 5",
+        "label": "Desenvolvimento acessível: semântica HTML5, atributos ARIA e leitores de tela."
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+]

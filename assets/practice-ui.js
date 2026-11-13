@@ -94,6 +94,7 @@ async function checkCurrentUser() {
 }
 
 function updateUserUI(user) {
+  window.dispatchEvent(new CustomEvent("map-account",{detail:user?.username||null}));
   const disp = byId('user-display');
   const btnAuth = byId('btn-open-auth');
   const btnLogout = byId('btn-logout');
@@ -335,7 +336,7 @@ renderPracticeOverview();
 if(practiceStore.attempts.length)practiceProgress();
 setPracticePanel('setup');
 if(practiceSession)renderPracticeQuestion();
-const initialViews={apoio:'support-view',anki:'anki-view',inicio:'start-view',ciclo:'planner-view',questoes:'questions-view',gran:'gran-view',cursos:'courses-view',banca:'data-view'};
+const initialViews={jogos:'games-view',apoio:'support-view',anki:'anki-view',inicio:'start-view',ciclo:'planner-view',questoes:'questions-view',gran:'gran-view',cursos:'courses-view',banca:'data-view'};
 showView(initialViews[new URLSearchParams(location.search).get('view')]||'map-view');
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname.startsWith('192.168.') || location.hostname === '127.0.0.1')) {

@@ -29,3 +29,10 @@ import {ExamAssistant} from './ExamAssistant.jsx';
 const examAssistant=document.getElementById('exam-ai-root');if(examAssistant)createRoot(examAssistant).render(<ExamAssistant/>);
 
 import './tutorial.js';
+
+import {GameLab} from './GameLab.jsx';
+const games=document.getElementById('games-root');if(games)createRoot(games).render(<GameLab/>);
+
+import {PersonalMap} from './PersonalMap.jsx';
+const personalMap=document.getElementById('personal-map');
+if(personalMap)createRoot(personalMap).render(<PersonalMap/>);

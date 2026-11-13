@@ -24,7 +24,7 @@ if [[ $MODE == deploy ]]; then
 from pathlib import Path
 import tarfile,sys,shutil
 s=Path(sys.argv[1]);names=(s/'files.txt').read_text().splitlines()
-allowed={'servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','assets/pdf-reader.js','assets/pdf-worker.mjs','dados/drive_catalog.json','dados/drive_tree.json','dados/anki_catalog.json'}
+allowed={'servir.py','auth_db.py','library_service.py','ai_service.py','tjpb-mapa-estudo.html','relatorio_visual_fgv_ti_tribunais.html','tjpb_desenvolvimento_sistemas_relatorio.html','privacidade.html','termos.html','manifest.json','service-worker.js','assets/icon-192.png','assets/icon-512.png','assets/pdf-reader.js','assets/pdf-worker.mjs','dados/drive_catalog.json','dados/drive_tree.json','dados/anki_catalog.json'}
 if len(names)!=len(allowed) or set(names)!=allowed: raise SystemExit('Lista de arquivos inesperada')
 with tarfile.open(s/'app.tar.gz') as t:
  if len(t.getmembers())!=len(allowed) or any(not m.isfile() or m.name not in allowed for m in t.getmembers()): raise SystemExit('Pacote inválido')
@@ -48,7 +48,7 @@ mkdir "$BACKUP"
 mkdir "$BACKUP/code"
 cp "$FILES" "$BACKUP/files.txt"
 while IFS= read -r name; do
- [[ $name =~ ^(servir.py|auth_db.py|library_service.py|ai_service.py|tjpb-mapa-estudo.html|relatorio_visual_fgv_ti_tribunais.html|tjpb_desenvolvimento_sistemas_relatorio.html|manifest.json|service-worker.js|assets/icon-192.png|assets/icon-512.png|assets/pdf-reader.js|assets/pdf-worker.mjs|dados/drive_catalog.json|dados/drive_tree.json|dados/anki_catalog.json)$ ]] || exit 1
+ [[ $name =~ ^(servir.py|auth_db.py|library_service.py|ai_service.py|tjpb-mapa-estudo.html|relatorio_visual_fgv_ti_tribunais.html|tjpb_desenvolvimento_sistemas_relatorio.html|privacidade.html|termos.html|manifest.json|service-worker.js|assets/icon-192.png|assets/icon-512.png|assets/pdf-reader.js|assets/pdf-worker.mjs|dados/drive_catalog.json|dados/drive_tree.json|dados/anki_catalog.json)$ ]] || exit 1
  [[ ! -L "$APP/$name" ]] || exit 1
  if [[ -f $APP/$name ]]; then mkdir -p "$BACKUP/code/$(dirname "$name")"; cp -p "$APP/$name" "$BACKUP/code/$name"; fi
  if [[ -f $SOURCE/$name ]]; then python3 - "$SOURCE/$name" <<'PY'
@@ -106,7 +106,7 @@ done
 systemctl is-active --quiet "$SERVICE"
 curl -fsS --max-time 15 "https://$DOMAIN/" -o "$STAGE/public.html"
 cmp "$APP/tjpb-mapa-estudo.html" "$STAGE/public.html"
-for file in assets/pdf-reader.js assets/pdf-worker.mjs tjpb_desenvolvimento_sistemas_relatorio.html; do
+for file in assets/pdf-reader.js assets/pdf-worker.mjs tjpb_desenvolvimento_sistemas_relatorio.html privacidade.html termos.html; do
  curl -fsS --max-time 15 "https://$DOMAIN/$file" -o "$STAGE/$(basename "$file")"
  cmp "$APP/$file" "$STAGE/$(basename "$file")"
 done
